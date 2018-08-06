@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+{% block title %} Game levels {% endblock %}
+
+
+{% block content %}
+<h1>welcome to the game, {{ username }}!</h1>
+<p>Score Board</p>
+<p>data = {{ data }}</p>
+<p>{{username }} score = {{ scores[username] }}</p>
+<p>seq = {{ seq }}</p>
+
+
+<div class="console">
+    {% for string in StrScore %}
+    <p>{{ string }}</p>
+    {% endfor %}
+</div>
+<form method="POST">
+    <input type="submit" class="btn btn-warning" value="PASS!">
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

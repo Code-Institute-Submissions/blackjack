@@ -83,6 +83,7 @@ form {
   height: 200px;
   color: yellow;
   font-weight: bold;
-  font-size: 20px; }
+  font-size: 20px;
+  border-radius: 5%; }
 
 /*# sourceMappingURL=main.css.map */

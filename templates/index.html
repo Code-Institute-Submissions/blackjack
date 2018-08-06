@@ -1,9 +1,35 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %} Welcome page {% endblock %} 
+
+
 {% block content %}
+<h1>rock, paper, scissor</h1>
+<div class="intro">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem sit sint velit at aliquid odit adipisci reprehenderit maxime, nam obcaecati, aspernatur ipsum. Debitis enim aut dicta in repellendus, id natus accusamus quidem qui suscipit atque quas reprehenderit,
+        ullam perferendis, velit quia sequi. Ea illo fugiat ducimus! Minus nulla eaque dignissimos magni quibusdam facilis eos ratione labore tempora nobis dicta vitae possimus sapiente vel esse ab, molestias nemo repellendus. Assumenda dolorem recusandae
+        fuga aliquam perferendis repellat voluptatum nisi illo veniam, totam, mollitia ipsum modi hic! Iste dicta excepturi officiis aliquid veniam, ea nobis qui adipisci magnam vero commodi, quae ullam repudiandae quod fuga, perspiciatis vel assumenda unde
+        eum dolorem cum fugiat nostrum corporis? Temporibus deserunt perspiciatis, libero repellat quo. Mollitia, rem. Recusandae ratione architecto sit libero magnam fugiat labore alias, ullam! Animi mollitia minima facere, voluptatibus, molestiae temporibus
+        laboriosam autem. Excepturi optio officiis corporis ipsam cum nostrum maxime nihil rerum error, nulla unde repellendus qui. Officiis mollitia natus ipsam perspiciatis dolorum est ullam asperiores itaque modi esse laudantium quibusdam dolor exercitationem
+        saepe sit veritati excepturi quaerat, deleniti laudantium architecto nam doloribus voluptatibus accusamus, debitis ex iusto!
+    </p>
+    <img src="http://via.placeholder.com/200x280"></img>
+</div>
+<form method="POST">
+    <label>Number of players:    
+        <select id="players" name="players">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+    </label>
 
-<h1>This is the main page</h1>
-
-<button type="button" class="btn btn-primary">testing</button>
+    <input type="button" class="adjust_players" value="Apply!">
+    <br>
+    <label>Player 1: <input type="text" name="username" placeholder=" John"/></label><br>
+    <label>Player 2: <input type="text" name="username" placeholder=" Jacob"/></label><br>
+    <div class="extend"></div>
+    <input type="submit" class="btn btn-warning" value="Start!">
+</form>
 
 
 

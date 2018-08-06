@@ -3,3 +3,28 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 @import "colors";
 @import "layout";
+
+
+
+.intro {
+    display: flex;
+    align-items: flex-start;
+    img {
+        padding: 0 20px;
+    }
+}
+
+form {
+    text-align: center;
+}
+
+.console {
+    background-color: black;
+    width: 200px;
+    height: 200px;
+    color: yellow;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5%;
+    
+}

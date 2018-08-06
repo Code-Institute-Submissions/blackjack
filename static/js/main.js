@@ -1,20 +1,33 @@
 
 $(document).ready(function() {
 
-    // seems to be functional
-    $("h1").click(function() {
-        // console.log($(this).css("color"))
-        if ($(this).css("color") === "rgb(255, 0, 0)") {
-            // console.log("YES the value matches")
-            $(this).css("color", "black")
-        }
-        else {
-            $(this).css("color", "red")
-        }
+    $(".adjust_players").click(function() {
+        set_players();
     })
 
-
-
-
-
 })
+
+
+function log(...args) {
+    console.log(...args)
+}
+
+function set_players() {
+    
+    // var htmlString = $("#players").html();
+    var count = $("#players").val();
+    log(count, typeof count)
+
+    if (count === "3") {
+       $(".extend").html(`<label>Player 3: <input type="text" name="username" placeholder=" Yoni"/></label><br>`)
+    } else if (count === "4") {
+        $(".extend").html(`<label>Player 3: <input type="text" name="username" placeholder=" Yoni"/></label><br><label>Player 4: <input type="text" name="username" placeholder=" Damian"/></label><br>`)
+    } else {
+        $(".extend").html(``)
+    }
+}
+
+ $('.enableOnInput').prop('disabled', true);
+ 
+ 
+ 
