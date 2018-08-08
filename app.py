@@ -5,80 +5,26 @@ from flask import Flask, render_template, request, redirect, flash, url_for, ren
 import itertools
 import random
 import io
+from game import Deck
 
 # from werkzeug.datastructures import ImmutableMultiDict
 
 app = Flask(__name__)
 app.debug = True
 
-#     # ============= functions ===================
-#     def create_deck(num=1):
-#         """ ready deck(s) where num is number of decks """
-#         
-#         jdebug = 0
-#         if jdebug > 0:  print('>> create_deck() : called by',sys._getframe(1).f_code.co_name)
-#         
-#         suits = ["spade", "clubs", "hearts", "diamonds"]
-#         ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-#         deck = list(itertools.product(suits,ranks)) * num
-#         
-#         if jdebug > 0:
-#             if num == 1:
-#                 print("\tdeck = ", deck)
-#         
-#         return deck
-#     
-#     
-#     def shuffle(deck):
-#         """ get rid of function, just use random.shuffle(deck) """
-#         
-#         jdebug = 0
-#         if jdebug > 0:  print('>> shuffle() : called by',sys._getframe(1).f_code.co_name)
-#         
-#         random.shuffle(deck)
-#         
-#         if jdebug > 0:  print("\tdeck = ", deck)
-#         
-#         return deck
-#     
-#     
-#     def draw_card(deck):
-#         """ draw a card """
-#         
-#         jdebug = 1
-#         if jdebug > 0:  print('>> draw_card() : called by',sys._getframe(1).f_code.co_name)
-#         
-#         # card = sorted(random.choice(deck), reverse=True)
-#         card = random.choice(deck)
-#         if jdebug > 0:  print("\tcard = ", card)
-#         
-#         return card
-#     
-#     
-#     def burn_card(deck, card):
-#         """ remove played card from the deck, remove parameter and use self.deck """
-#         
-#         jdebug = 0
-#         if jdebug > 0:  print('>> burn_card() : called by',sys._getframe(1).f_code.co_name)
-#     
-#         indexNum = deck.index(tuple(card))
-#         deck.pop(indexNum)
-#         
-#         return deck
 
+# where the entire data is held
+game_state = dict()
 
-raw_data = dict()
+house = Deck(2) # number of players going in
+# print(house.deck)
+# print(len(house.deck))
+# print(house.deal())
+# print(house.deal())
+# print(house.deal())
+# print(house.deal())
+# print(len(house.deck))
 
-
-def cyclePlayer(data):
-
-  # reseting mechanism - simulating a full cycle
-  if data["seq"] >= len(data["username"]):
-    data["seq"] = 0  
-  k = data["seq"]
-  print("k, seq, usernames[k] = ", k, data["seq"], data["username"][k])
-
-  return data["seq"], data["username"][k]
 
 # def trackScore(usernames):
 #     score = io.StringIO()
@@ -86,8 +32,23 @@ def cyclePlayer(data):
 #     for username in usernames:
 #         pass
 
-#  ================= routes =====================
 
+# to ASK!
+# how to stop it submiting when enter is pressed on text inputs on the index page
+# the string on the console couldnt break lines so i had to resort to splitting them
+# apparently heroku doesnt perform as well with files being editted? should i switch to "io.StringIO()" ?
+
+# game idea
+# a bastardised version of blackjack, where players take turn to play against the house,
+# every time each players wins agasint the house, they're awarded a point which can be tracked
+# via the console (scoreboard).
+# has to be tested: only the house is to hold a collection of (2-4) decks depending on the number 
+# of players set. 2 decks by default
+# how to add images of cards on the screen?
+# how link the images to the format used to contruct the deck ("suit", "")
+
+
+#  ================= routes =====================
 @app.route("/base")
 def base():
     return render_template("base.html")
@@ -97,22 +58,28 @@ def base():
 def index():
 
     if request.method == "POST":
-
-        # data = dict((key, request.form.getlist(key)) for key in request.form.keys())
+    
+        # the data extracted from the form was coming in as an "ImmutableMultiDict", which made it absolutely impossible to
+        # to use the same names (name = username) on the form inputs as it was only capable getting the first value out,
+        # it simply fetched the first value with the key "username" and it ignored the rest. However, i wished to use the
+        # same names for the inputs within my form however unconventional it might be. so with the use of ".getlist()" the 
+        #"ImmutableMultiDict" was changed to a normal dictionary which stores the values for my username key (name input on the form) 
+        # as a list containing all the given names as shown in the example below.
+        # {'username': [u'damian', u'yoni', u'michael', u'james'] }
+        # please refer to the readme.md for more information on this
         for key in request.form.keys():
-            # print("key = ", key, request.form.getlist(key))
-            raw_data[key] = request.form.getlist(key)
+            game_state[key] = request.form.getlist(key)
             if key == "username":
-                temp = {}
-                for username in raw_data["username"]:
-                    temp[username] = 0
-                raw_data["score"] = temp
-        raw_data["seq"] = 0
+                # decided to go with a dictionary here with the usernames stored as keys which makes 
+                # the data handling alot easier and the format easier to read.
+                game_state["score"] = {username: 0 for username in game_state["username"]}
+                
+        game_state["seq"] = 0 # initialising user scores
         
-        print("raw_data = ", raw_data)
-        # print("raw_data = ", raw_data["score"]["damian"])
-        seq = raw_data["seq"] 
-        username = raw_data["username"][seq]
+        print("game_state = ", game_state)
+
+        seq = game_state["seq"] # assigned to a variable only for readability purposes
+        username = game_state["username"][seq]
         return redirect( url_for('game', username=username) ) # targets the view(function)
         
     return render_template("index.html")
@@ -121,33 +88,31 @@ def index():
 @app.route("/game/<username>", methods=["POST","GET"])
 def game(username):
 
-    scores = raw_data["score"]
-    usernames = raw_data["username"]
-    seq = raw_data["seq"]
-
-    StrScore = ""
-    for user in usernames:
-        StrScore += " {}:    {} -".format(user.title(), scores[user])
-        # StrScore += render_template_string(" {{userG}}:  {{scoreG}} \n", userG=user.title(), scoreG=scores[user])
-    StrScore = StrScore.split("-") # cant seem to be able to add \n to the strings so splitting instead
+    scores = game_state["score"]
+    usernames = game_state["username"]
+    seq = game_state["seq"]
 
     if request.method == "POST":
-        scores[username] += 1
         
+
+        for key in request.form.keys():
+            if key == "win":
+                scores[username] += 1
+
         # reseting mechanism - simulating a full cycle
-        if raw_data["seq"] >= len(raw_data["username"]):
-            raw_data["seq"] = 0 
+        if game_state["seq"] >= len(game_state["username"]):
+            game_state["seq"] = 0 
             
-        k = raw_data["seq"]
-        username = raw_data["username"][k]
+        k = game_state["seq"]
+        username = game_state["username"][k]
         
         return redirect( url_for('game', username=username) )
-    
-    raw_data["seq"] += 1
+
+    game_state["seq"] += 1
 
     
-    print("NO POST: username, seq = ", username, raw_data["seq"])
-    return render_template("game.html", username=username, usernames=usernames, data=raw_data, scores=scores, StrScore=StrScore, seq=raw_data["seq"])
+    print("NO POST: username, seq = ", username, game_state["seq"])
+    return render_template("game.html", username=username, usernames=usernames, data=game_state, scores=scores, seq=game_state["seq"])
     
 
 if __name__ == "__main__":

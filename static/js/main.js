@@ -27,7 +27,6 @@ function set_players() {
     }
 }
 
- $('.enableOnInput').prop('disabled', true);
  
  
  
