@@ -16,11 +16,14 @@
 
 form {
     text-align: center;
+    .rounds {
+        width: 50px;
+    }
 }
 
 .console {
     background-color: black;
-    width: 200px;
+    width: 230px;
     height: 150px;
     color: yellow;
     font-weight: bold;
@@ -33,9 +36,11 @@ form {
     
     h3 {
         text-decoration: underline;
+        text-align: center;
     }
     
     .score {
         padding-left: 70px;
     }
 }
+

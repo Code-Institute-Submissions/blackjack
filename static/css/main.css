@@ -76,10 +76,12 @@ footer a {
 
 form {
   text-align: center; }
+  form .rounds {
+    width: 50px; }
 
 .console {
   background-color: black;
-  width: 200px;
+  width: 230px;
   height: 150px;
   color: yellow;
   font-weight: bold;
@@ -90,7 +92,8 @@ form {
   white-space: nowrap;
   padding: 10px 20px 20px 20px; }
   .console h3 {
-    text-decoration: underline; }
+    text-decoration: underline;
+    text-align: center; }
   .console .score {
     padding-left: 70px; }
 
