@@ -7,7 +7,7 @@ class Deck:
 
     def __init__(self, nop):
         
-        self.suits = ["spade", "clubs", "hearts", "diamonds"]
+        self.suits = ["spades", "clubs", "hearts", "diamonds"]
         self.ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
         self.nop = nop    # Number Of Players cgange to num_of_players
         self.deck = list(itertools.product(self.suits, self.ranks)) * self.nop

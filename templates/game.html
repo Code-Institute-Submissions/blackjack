@@ -3,8 +3,8 @@
 
 
 {% block content %}
-<h1>welcome to the game, {{ username.title() }}!</h1>
-<p>data = {{ data }}</p>
+<h1>welcome to the game, {{ usernames[seq].title() }}!</h1>
+<p>round = {{ round }}</p>
 <!--<p>{{username }} score = {{ scores[username] }}</p>-->
 
 <p>Score Board</p>
@@ -14,7 +14,7 @@
         <!--  pulling the names out of the original list rather than the 
         score dictionary to keep the order the same - an OrderedDict could be used for score dictionary
         but it's unnecessary as the there's already an ordered list with the data-->
-        {% for username in data["username"] %}
+        {% for username in usernames %}
         <tr>
             <td>{{ username.title() }}</td>
             <td class="score">{{ scores[username] }}</td>
