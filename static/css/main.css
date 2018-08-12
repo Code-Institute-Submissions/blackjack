@@ -74,6 +74,10 @@ footer a {
   .intro img {
     padding: 0 20px; }
 
+.wrapper {
+  display: flex;
+  justify-content: space-between; }
+
 form {
   text-align: center; }
   form .rounds {
@@ -82,7 +86,7 @@ form {
 .console {
   background-color: black;
   width: 230px;
-  height: 150px;
+  height: 250px;
   color: yellow;
   font-weight: bold;
   font-size: 20px;
@@ -94,6 +98,9 @@ form {
   .console h3 {
     text-decoration: underline;
     text-align: center; }
+  .console p {
+    text-align: center;
+    font-size: medium; }
   .console .score {
     padding-left: 70px; }
 

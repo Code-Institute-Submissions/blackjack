@@ -4,28 +4,53 @@
 
 {% block content %}
 <h1>welcome to the game, {{ usernames[seq].title() }}!</h1>
-<p>round = {{ round }}</p>
 <!--<p>{{username }} score = {{ scores[username] }}</p>-->
-
-<p>Score Board</p>
-<div class="console">
-    <h3>Scoreboard</h3>
-    <table>
-        <!--  pulling the names out of the original list rather than the 
-        score dictionary to keep the order the same - an OrderedDict could be used for score dictionary
-        but it's unnecessary as the there's already an ordered list with the data-->
-        {% for username in usernames %}
-        <tr>
-            <td>{{ username.title() }}</td>
-            <td class="score">{{ scores[username] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+<div class="wrapper">
+    <section>
+        <div class="console">
+            <h3>Scoreboard</h3>
+            <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
+            <table>
+                <!--  pulling the names out of the original list rather than the 
+                score dictionary to keep the order the same - an OrderedDict could be used for score dictionary
+                but it's unnecessary as the there's already an ordered list with the data-->
+                {% for username in usernames %}
+                <tr>
+                    <td>{{ username.title() }}:</td>
+                    <td class="score">{{ scores[username] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+    
+    <section>
+        <div class="house">
+            <!--<p>Count: {{ house["value"] }}</p>-->
+            {% for card in house["hand"] %}
+            <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
+            {% endfor %}
+        </div>
+    </section>
 </div>
+<div>
+    <section>
+        <h3> {{ usernames[seq].title() }} playing</h3>
+        <div class="player">
+            <p>Count: {{ player["value"] }}</p>
+            <p>Count: {{ verdict }}</p>
+            {% for card in player["hand"] %}
+            <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
 <form method="POST">
-    <input type="submit" class="btn btn-warning" name="" value="PASS!">
+    <input type="submit" class="btn btn-warning" name="hit" value="HIT!">
     <input type="submit" class="btn btn-warning" name="win" value="win!">
     <input type="submit" class="btn btn-warning" name="lose" value="lose!">
+    <input type="submit" class="btn btn-warning" name="reset" value="reset game!">
 </form>
 
 {% endblock %}

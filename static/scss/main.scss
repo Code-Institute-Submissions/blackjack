@@ -14,6 +14,13 @@
     }
 }
 
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
 form {
     text-align: center;
     .rounds {
@@ -24,7 +31,7 @@ form {
 .console {
     background-color: black;
     width: 230px;
-    height: 150px;
+    height: 250px;
     color: yellow;
     font-weight: bold;
     font-size: 20px;
@@ -39,8 +46,14 @@ form {
         text-align: center;
     }
     
+    p {
+       text-align: center;
+       font-size: medium;
+    }
+    
     .score {
         padding-left: 70px;
     }
+
 }
 
