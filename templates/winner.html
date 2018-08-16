@@ -2,14 +2,36 @@
 {% block title %} Winner Page {% endblock %} 
 
 {% block content %}
-<p> </p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam accusamus hic ad dignissimos dolorem eaque optio, placeat doloremque nihil magni corporis commodi tempore ratione, atque quod! Nam quos corporis officia, molestias quaerat harum eaque iusto
-    odio dolor hic sed, doloremque vel voluptates est odit qui assumenda vitae dolores, repellat asperiores quisquam dignissimos. Incidunt sed deleniti dolorum, amet numquam deserunt porro. Nesciunt totam veritatis error inventore ipsa nam, nihil, id
-    unde necessitatibus laudantium maiores vero eveniet voluptatibus! Quos reprehenderit tempore facilis totam consectetur voluptatem assumenda quaerat eos, sapiente aperiam ullam laboriosam consequuntur aspernatur quia consequatur iste dicta quasi necessitatibus
-    earum id ut distinctio incidunt amet rem. Impedit maiores ad animi aut voluptatum nisi quibusdam, repellendus minus commodi eius obcaecati, aperiam hic, a cumque blanditiis. Debitis atque blanditiis ab adipisci aspernatur! Cupiditate nihil ipsam rem
-    reiciendis neque, veniam tempore odio repudiandae labore similique sed eaque, et sunt commodi iure! Delectus deleniti vitae accusamus doloremque unde dolorum, similique tenetur autem tempora, earum corrupti repudiandae maxime excepturi possimus sequi
-    odit corporis illo consequuntur voluptate, fugit, ad ex debitis suscipit. Nihil consectetur blanditiis, maiores quo atque suscipit sunt odio illo explicabo sed, modi id reiciendis reprehenderit inventore molestiae ut, similique sit aspernatur animi!
-    Cumque, nemo.</p>
-<h1>{{ winner }} has won!</h1>
-
+<div class="container">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam accusamus hic ad dignissimos dolorem eaque optio, placeat doloremque nihil magni corporis commodi tempore ratione, atque quod! Nam quos corporis officia, molestias quaerat harum eaque iusto
+        odio dolor hic sed, doloremque vel voluptates est odit qui assumenda vitae dolores, repellat asperiores quisquam dignissimos. Incidunt sed deleniti dolorum, amet numquam deserunt porro. Nesciunt totam veritatis error inventore ipsa nam, nihil, id
+        unde necessitatibus laudantium maiores vero eveniet voluptatibus! Quos reprehenderit tempore facilis totam consectetur voluptatem assumenda quaerat eos, sapiente aperiam ullam laboriosam consequuntur aspernatur quia consequatur iste dicta quasi necessitatibus
+        earum id ut distinctio incidunt amet rem. Impedit maiores ad animi aut voluptatum nisi quibusdam, repellendus minus commodi eius obcaecati, aperiam hic, a cumque blanditiis. Debitis atque blanditiis ab adipisci aspernatur! Cupiditate nihil ipsam rem
+        reiciendis neque, veniam tempore odio repudiandae labore similique sed eaque, et sunt commodi iure! Delectus deleniti vitae accusamus doloremque unde dolorum, similique tenetur autem tempora, earum corrupti repudiandae maxime excepturi possimus sequi
+        odit corporis illo consequuntur voluptate, fugit, ad ex debitis suscipit. Nihil consectetur blanditiis, maiores quo atque suscipit sunt odio illo explicabo sed, modi id reiciendis reprehenderit inventore molestiae ut, similique sit aspernatur animi!
+        Cumque, nemo.</p>
+    <h3>{{ winner.title() }} is the winner with the score of {{ scores[winner] }}!</h3>
+    
+    <section>
+        <div class="console">
+            <h3>Scoreboard</h3>
+            <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
+            <table>
+                {% for player in scores %}
+                <tr>
+                    <td>{{ player.title() }}:</td>
+                    <td class="score">{{ scores[player] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+    
+    
+    
+    
+    <form method="POST" class="player_selections">
+        <input type="submit" class="btn btn-warning" name="reset" value="play again">
+    </form>
+</div>
 {% endblock %}

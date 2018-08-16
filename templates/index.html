@@ -2,35 +2,33 @@
 
 
 {% block content %}
-<h1>need a title here!</h1>
-<div class="intro">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem sit sint velit at aliquid odit adipisci reprehenderit maxime, nam obcaecati, aspernatur ipsum. Debitis enim aut dicta in repellendus, id natus accusamus quidem qui suscipit atque quas reprehenderit,
-        ullam perferendis, velit quia sequi. Ea illo fugiat ducimus! Minus nulla eaque dignissimos magni quibusdam facilis eos ratione labore tempora nobis dicta vitae possimus sapiente vel esse ab, molestias nemo repellendus. Assumenda dolorem recusandae
-        fuga aliquam perferendis repellat voluptatum nisi illo veniam, totam, mollitia ipsum modi hic! Iste dicta excepturi officiis aliquid veniam, ea nobis qui adipisci magnam vero commodi, quae ullam repudiandae quod fuga, perspiciatis vel assumenda unde
-        eum dolorem cum fugiat nostrum corporis? Temporibus deserunt perspiciatis, libero repellat quo. Mollitia, rem. Recusandae ratione architecto sit libero magnam fugiat labore alias, ullam! Animi mollitia minima facere, voluptatibus, molestiae temporibus
-        laboriosam autem. Excepturi optio officiis corporis ipsam cum nostrum maxime nihil rerum error, nulla unde repellendus qui. Officiis mollitia natus ipsam perspiciatis dolorum est ullam asperiores itaque modi esse laudantium quibusdam dolor exercitationem
-        saepe sit veritati excepturi quaerat, deleniti laudantium architecto nam doloribus voluptatibus accusamus, debitis ex iusto!
-    </p>
-    <img src="http://via.placeholder.com/200x280"></img>
+<div class="jumbotron jumbotron-fluid pb-4 m-0">
+  <!--<div class="container">-->
+    <div>
+        <h1 class="display-4">BlackJack</h1>
+        <p class="lead">A blackjack game based on points rather than actual money - created by Damian Rodbar.</p>
+    </div>
+    <form method="POST" class="index mx-4">
+        <div class="mb-2">
+        <label>Number of players:    
+            <select id="players" name="players">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </label>
+        <input type="button" class="adjust_players btn btn-warning btn-sm" value="Apply!">
+        </div>
+        <!--<br>-->
+        <label>Difficulty: <input class="rounds" type="number" name="difficulty" value="2" min="2" max="5"/></label>
+         &nbsp
+        <label>Rounds: <input class="rounds" type="number" name="rounds" value="2" min="2"/></label><br>
+        <label>Player 1: <input type="text" name="username" placeholder=" John" value="damian"/></label><br>
+        <label>Player 2: <input type="text" name="username" placeholder=" Jacob" value="yoni"/></label><br>
+        <div class="extend"></div>
+        <input type="submit" class="btn btn-warning btn-block mt-3" value="Start!">
+    </form>
 </div>
-<form method="POST">
-    <label>Number of players:    
-        <select id="players" name="players">
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
-    </label>
-
-    <input type="button" class="adjust_players" value="Apply!">
-    <br>
-    <label>Rounds: <input class="rounds" type="number" name="rounds" value="2" min="2"/></label><br>
-    <label>Player 1: <input type="text" name="username" placeholder=" John" value="damian"/></label><br>
-    <label>Player 2: <input type="text" name="username" placeholder=" Jacob" value="yoni"/></label><br>
-    <div class="extend"></div>
-    <input type="submit" class="btn btn-warning" value="Start!">
-</form>
 
 
 

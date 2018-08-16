@@ -118,25 +118,3 @@ def getHandValue(hand):
         
     return val, status
 
-
-def getVerdict(*hands):
-    
-    """
-    decides who wins
-    hand[0] = player
-    hand[1] = house
-    """
-    
-    verdict = "undecided"
-    
-    # if player goes bust or house gets blackjack decale house as winner
-    if hands[0] == "BUST" or hands[1] == "BLACKJACK":
-        verdict = "house"
-        
-    # if house goes bust or player gets blackjack decale player as winner
-    elif hands[1] == "BUST" or hands[0] == "BLACKJACK":
-        verdict = "player"
-    
-    # if both player and house get black jack then PUSH
-    if hands[0] == "BLACKJACK" and hands[1] == "BLACKJACK":
-        verdict = "PUSH"

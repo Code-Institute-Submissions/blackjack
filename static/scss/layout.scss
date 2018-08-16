@@ -7,7 +7,7 @@ html, body {
 
 nav {
     height: pix2Rem(50);
-    background-color: map-get($color, yankee-blue);
+    background-color: map-get($color, mustard);
     
     padding: 0px !important;  // needed to resolve a bug persistent bug on firefox and edge.
     
@@ -17,7 +17,7 @@ nav {
 
     h2,
     .nav-items {
-        color: map-get($color, peach) !important;
+        color: map-get($color, black) !important;
     }
 
     .nav-items {
@@ -25,9 +25,13 @@ nav {
         flex-direction: row;
 
         a {
-            color: map-get($color, peach);
+            color: map-get($color, black);
+            // font-weight: bold;
             &:hover {
-                color: map-get($color, tomato);
+                color: map-get($color, mustard);
+                font-weight: bold;
+                background-color: map-get($color, black);
+                border-radius: 10px;
             }
         }
     }
@@ -40,7 +44,7 @@ nav {
 
 // -------------------------------------------------------- Footer
 .footer-container {
-    background-color: map-get($color, yankee-blue);
+    background-color: map-get($color, red2);
 }
 
 .footer-social div ul {
@@ -70,7 +74,7 @@ nav {
     text-align: center;
     color: #fafafa;
     position: relative;
-    background-color: map-get($color, peach);
+    background-color: map-get($color, mustard);
     color: map-get($color, black);
     transition: all 0.35s ease-in-out;
     -moz-transition: all 0.35s ease-in-out;
@@ -79,8 +83,8 @@ nav {
 }
 
 .footer-social .social-links li a i:hover {
-    background: map-get($color, red);
-    color: map-get($color, black);
+    background: map-get($color, black);
+    color: map-get($color, mustard);
 }
 
 .footer-copyright {
@@ -89,7 +93,7 @@ nav {
 }
 
 footer a {
-    color: map-get($color, tomato);
+    color: map-get($color, mustard);
 }
 
 

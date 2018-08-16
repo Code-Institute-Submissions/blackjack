@@ -26,7 +26,35 @@ form {
     .rounds {
         width: 50px;
     }
+    &.index {
+        align-self: flex-end;
+        background-color: map-get($color, red2);
+        padding: 10px;
+        border-radius: 20px;
+        color: map-get($color, mustard);
+        font-weight: 500;
+    }
 }
+
+    
+.player_selections {
+        margin: 20px 0;
+}
+
+.jumbotron-fluid {
+    background-image: url(../img/theming/blackjack.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: map-get($color, white);
+    // margin: 0;
+    height: calc(100vh - 168px);
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+
 
 .console {
     background-color: black;

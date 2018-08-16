@@ -6,26 +6,29 @@ html, body {
 
 nav {
   height: pix2Rem(50);
-  background-color: #19283D;
+  background-color: #ffc107;
   padding: 0px !important; }
   nav .navbar-brand {
     padding-left: 20px; }
   nav h2,
   nav .nav-items {
-    color: #F2CC8F !important; }
+    color: #000000 !important; }
   nav .nav-items {
     display: flex;
     flex-direction: row; }
     nav .nav-items a {
-      color: #F2CC8F; }
+      color: #000000; }
       nav .nav-items a:hover {
-        color: #E55934; }
+        color: #ffc107;
+        font-weight: bold;
+        background-color: #000000;
+        border-radius: 10px; }
 
 #main-content {
   min-height: calc(100% - 168px); }
 
 .footer-container {
-  background-color: #19283D; }
+  background-color: #790712; }
 
 .footer-social div ul {
   margin: 0px; }
@@ -50,7 +53,7 @@ nav {
   text-align: center;
   color: #fafafa;
   position: relative;
-  background-color: #F2CC8F;
+  background-color: #ffc107;
   color: #000000;
   transition: all 0.35s ease-in-out;
   -moz-transition: all 0.35s ease-in-out;
@@ -58,15 +61,15 @@ nav {
   -o-transition: all 0.35s ease-in-out; }
 
 .footer-social .social-links li a i:hover {
-  background: #ff0000;
-  color: #000000; }
+  background: #000000;
+  color: #ffc107; }
 
 .footer-copyright {
   padding-bottom: 1rem;
   color: #F2CC8F; }
 
 footer a {
-  color: #E55934; }
+  color: #ffc107; }
 
 .intro {
   display: flex;
@@ -82,6 +85,27 @@ form {
   text-align: center; }
   form .rounds {
     width: 50px; }
+  form.index {
+    align-self: flex-end;
+    background-color: #790712;
+    padding: 10px;
+    border-radius: 20px;
+    color: #ffc107;
+    font-weight: 500; }
+
+.player_selections {
+  margin: 20px 0; }
+
+.jumbotron-fluid {
+  background-image: url(../img/theming/blackjack.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #ffffff;
+  height: calc(100vh - 168px);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between; }
 
 .console {
   background-color: black;

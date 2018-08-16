@@ -24,20 +24,20 @@
     <!--header-->
     <header>
         <nav class="navbar">
-            <a class="navbar-brand" href="index.html">
-                <h2>BlackJack</h2>
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <h2>Damianism</h2>
             </a>
             <div class="nav-items navigation">
-                <a class="nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Simon_(game)">Rules <span class="sr-only">(current)</span></a>
-                <a class="nav-link" target="_blank" href="https://www.amazon.co.uk/Hasbro-Gaming-Classic-Simon-b7962eu4/dp/B0719JFC2X">Buy <span class="sr-only">(current)</span></a>
+                <a class="nav-link" target="_blank" href="{{ url_for('index') }}k">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Blackjack">History <span class="sr-only">(current)</span></a>
+                <a class="nav-link" target="_blank" href="#">Briefing <span class="sr-only"></span></a>
+                <a class="nav-link" target="_blank" href="#">Resources<span class="sr-only"></span></a>
             </div>
         </nav>
     </header>
 
     <section id="main-content">
-        <div class="container">
-            {% block content %} {% endblock %}
-        </div>
+        {% block content %} {% endblock %}
     </section>
 
     <!--footer-->
