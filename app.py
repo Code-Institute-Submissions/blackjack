@@ -81,6 +81,7 @@ def get_verdict(player_only=False):
             #   - now house has to play its turn 
             house_plays() # simulate house play
             get_verdict()  # decide who won!
+            
     else:
         # check both player and house
         
@@ -177,10 +178,11 @@ deck = Deck() # create deck initially with only 1 deck of cards
     # players
     # if player.hand value is greater than 18, the STAND button should pulsate
 # to ask
-# couldnt deploy!
+# couldnt deploy to heroku, i mean i did but it cant find app.py
 # it's all happening too fast, cant see the player going BUST or getting blackjack
 # the house plays all its cards in one go and we're not able to see what's happening 
 # how do we get it pull its card one by one?
+# unittesting?
 
 # how do i start with the card faced down?
 
@@ -260,16 +262,26 @@ def game():
         
         if "hit" in request.form.keys():
             # deals one card to the player
+            session["status"] = "hit"
             session["playerHand"].append(deck.deal())
         
         # check the progress of the player ONLY.
         #   - if the player goes BUST, then there is no need for the house to play.
         #   - if the players gets BLACKJACK, then house has to player.
         get_verdict(player_only=True)
-
+        
+        
+        # if results pending then session["seq"] -+ 1 
+        # if the player has finished playing, BlackJack or hand value must be shown on the player side
+        # once the house starts to play - for every card drawn the page needs to reload. until it goes BUST
+        # gets BLACKJACK or ends with a higher hand value than the player. once the game has finished playing
+        # another 2-3 seconds pause is needed before it moves on to the next player.
+        
+        
         if "stand" in request.form.keys():
             # house gets cards until one of the below conditions is met.
             # BLACKJACK, BUST or hand value higher than player
+            session["status"] = "stand"
             house_plays() # simulate house play
             get_verdict()  # decide who won!
 
@@ -289,7 +301,7 @@ def game():
                 # select the player with the heighest score at the end of the final "pre-defined" round.
                 session["won"] = max(scores, key= lambda x: scores[x])
                 return redirect( url_for('winner') ) 
-    
+
 
     player_dict = {"hand": convert_card_names( session["playerHand"] ), "value" : get_hand_value( session["playerHand"] ) }
     house_dict = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ),"folded": ["back.jpg","back.jpg"] }
