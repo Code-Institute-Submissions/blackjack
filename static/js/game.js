@@ -3,3 +3,4 @@ $(document).ready(function() {
     //     $( ".house" ).load(window.location.href + ".house" );
     // }, 5000)
 })
+

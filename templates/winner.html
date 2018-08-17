@@ -10,26 +10,30 @@
         reiciendis neque, veniam tempore odio repudiandae labore similique sed eaque, et sunt commodi iure! Delectus deleniti vitae accusamus doloremque unde dolorum, similique tenetur autem tempora, earum corrupti repudiandae maxime excepturi possimus sequi
         odit corporis illo consequuntur voluptate, fugit, ad ex debitis suscipit. Nihil consectetur blanditiis, maiores quo atque suscipit sunt odio illo explicabo sed, modi id reiciendis reprehenderit inventore molestiae ut, similique sit aspernatur animi!
         Cumque, nemo.</p>
-    <h3>{{ winner.title() }} is the winner with the score of {{ scores[winner] }}!</h3>
-    
+    <div class="my-4">
+        {% if winner == "house" %}
+              <h4> {{ winner.title() }} has beaten all the players.</h4>
+        {% elif "and" in winner %}
+            <h4>No winners appointed since {{ winner }} have scored the same highest point.</h4>
+        {% else %}
+            <h4>{{ winner.title() }} has won the game with the score of {{ scores[winner] }}.</h4>
+        {% endif %}
+    </div>   
     <section>
         <div class="console">
             <h3>Scoreboard</h3>
             <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
             <table>
-                {% for player in scores %}
+                {% for username in usernames %}
                 <tr>
-                    <td>{{ player.title() }}:</td>
-                    <td class="score">{{ scores[player] }}</td>
+                    <td>{{ username.title() }}:</td>
+                    <td class="score">{{ scores[username] }}</td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
     </section>
-    
-    
-    
-    
+
     <form method="POST" class="player_selections">
         <input type="submit" class="btn btn-warning" name="reset" value="play again">
     </form>

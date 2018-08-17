@@ -9,25 +9,25 @@
         <p class="lead">A blackjack game based on points rather than actual money - created by Damian Rodbari.</p>
     </div>
     <form method="POST" class="index mx-4">
-        <div class="mb-2">
-        <label>Number of players: &nbsp
-            <select id="players" name="players">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </label>
-        &nbsp
-        <input type="button" class="adjust_players btn btn-warning btn-sm" value="Apply!">
+        <div class="form-group">
+            <div class="mb-2">
+                <label>Number of players: &nbsp
+                    <select class="form-control-sm" id="players" name="players">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </label>
+            </div>
+            <!--<br>-->
+            <label>Decks: &nbsp<input class="rounds form-control-sm" type="number" name="decks" value="1" min="1" max="5"/></label>
+             &nbsp
+            <label>Rounds: &nbsp<input class="rounds form-control-sm" type="number" name="rounds" value="2" min="2"/></label><br>
+            <label>Player 1: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" John" value="damian"/></label><br>
+            <label>Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni"/></label><br>
+            <div class="extend"></div>
+            <input type="submit" class="btn btn-warning btn-block mt-3" value="Start!">
         </div>
-        <!--<br>-->
-        <label>Decks: &nbsp<input class="rounds" type="number" name="decks" value="1" min="1" max="5"/></label>
-         &nbsp
-        <label>Rounds: &nbsp<input class="rounds" type="number" name="rounds" value="2" min="2"/></label><br>
-        <label>Player 1: &nbsp<input type="text" name="username" placeholder=" John" value="damian"/></label><br>
-        <label>Player 2: &nbsp<input type="text" name="username" placeholder=" Jacob" value="yoni"/></label><br>
-        <div class="extend"></div>
-        <input type="submit" class="btn btn-warning btn-block mt-3" value="Start!">
     </form>
 </div>
 

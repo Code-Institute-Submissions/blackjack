@@ -7,12 +7,9 @@ from wtforms import StringField, IntegerField, IntegerField, SubmitField, Select
 from wtforms.validators import DataRequired
 from game import *
 
-# from werkzeug.datastructures import ImmutableMultiDict
-
 app = Flask(__name__)
 app.debug = True
 app.secret_key = os.urandom(24)
-
 
 
 def reset_table(restart=False, increment_seq=False, increment_core=False):
@@ -24,11 +21,12 @@ def reset_table(restart=False, increment_seq=False, increment_core=False):
         session.clear()     # gets rid of the lingering data by clearing the session
     
     if increment_core:
-        session["score"][session["current_player"]] += 1
+        session["score"][ session["current_player"] ] += 1
     
     if increment_seq:
         session["seq"] += 1
     
+    session["house_plays"] = False
     deck.reset()    # restores a full deck of cards
     session["houseHand"]  = deck.deal(2)  # deal 2 new cards to house
     session["playerHand"] = deck.deal(2)  # deal 2 new cards to player
@@ -151,7 +149,7 @@ def house_plays():
     
     # fetch player hand value out to compare with house's
     player_hand_val , _ = get_hand_value( session["playerHand"])
-    
+    session["house_plays"] = True
     while True:
         
         # fetch house data everytime a card is pulled - the first time it gets here, there are 
@@ -175,16 +173,25 @@ def house_plays():
 # defining globals
 deck = Deck() # create deck initially with only 1 deck of cards
 
-    # players
-    # if player.hand value is greater than 18, the STAND button should pulsate
+    # left to do:
+    #   if player.hand value is greater than 18, the STAND button should pulsate
+    #   unittests
+    #   responsiveness
+    #   theming and layout
+    #   expanding on sass
+    #   readme file
+    #   leave more comments
+
 # to ask
-# couldnt deploy to heroku, i mean i did but it cant find app.py
+# couldnt deploy to heroku, app.py  could not be located --- RESOLVED!!!!!!!
+# how do i start with the card faced down? --- RESOLVED!!!
+# how do i address multiple winners, house win, no winners and a winner --- RESOLVED!!!
+# what to do if the same name was entered repeatedly?
+# MAIN ISSUE!
 # it's all happening too fast, cant see the player going BUST or getting blackjack
 # the house plays all its cards in one go and we're not able to see what's happening 
 # how do we get it pull its card one by one?
 # unittesting?
-
-# how do i start with the card faced down?
 
 #  ================= routes =====================
 @app.route("/base")
@@ -229,8 +236,8 @@ def index():
         # expanding on the uses data held in session
         session["seq"] = 0              # player turn tracker
         session["rounds_played"] = 0    # round tacker
-        session["won"] = "TBC"          # winner to be declared
-        session["status"] = "TBC"       # bust, push, blackjack - need two? for player and house
+        session["won"] = "TBC"             # winner(s) to be declared
+        session["house_plays"] = False  # house is granted permission to play
         
         # by this point all the basic player data is now stored in the session.
         print("session = ", session)
@@ -246,7 +253,6 @@ def index():
 def game():
     
     scores = session["score"]               # holds all the scores
-    usernames = session["username"]         # holds all the usernames 
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play
     session["current_player"]= username     # current player
@@ -256,13 +262,12 @@ def game():
         print("request.form.keys() = ", request.form.keys())
         
         if "reset" in request.form.keys():
-            # reseting mechanism - triggered if reset button is pressed during an action session of the game
+            # reseting mechanism - triggered via the reset button
             reset_table(restart=True)   # clearing the session as well as resetting the table 
             return redirect( url_for("index")) 
         
         if "hit" in request.form.keys():
             # deals one card to the player
-            session["status"] = "hit"
             session["playerHand"].append(deck.deal())
         
         # check the progress of the player ONLY.
@@ -271,7 +276,6 @@ def game():
         get_verdict(player_only=True)
         
         
-        # if results pending then session["seq"] -+ 1 
         # if the player has finished playing, BlackJack or hand value must be shown on the player side
         # once the house starts to play - for every card drawn the page needs to reload. until it goes BUST
         # gets BLACKJACK or ends with a higher hand value than the player. once the game has finished playing
@@ -281,7 +285,6 @@ def game():
         if "stand" in request.form.keys():
             # house gets cards until one of the below conditions is met.
             # BLACKJACK, BUST or hand value higher than player
-            session["status"] = "stand"
             house_plays() # simulate house play
             get_verdict()  # decide who won!
 
@@ -295,19 +298,36 @@ def game():
             
             print("rounds played = ", session["rounds_played"])
             
-            # declare the winner
+            # game has eneded, declare the winner if there is one
             if session["rounds_played"] == session["rounds"]:
                 
-                # select the player with the heighest score at the end of the final "pre-defined" round.
-                session["won"] = max(scores, key= lambda x: scores[x])
+
+                # get maximum score attained by the players
+                maxScore = max(list( scores.values() ) )     
+                
+                # noone has won a single game - declare house as the winner
+                if maxScore == 0:       
+                    session["won"] = "house"
+                
+                # check to see if there is anybody else with the same max score
+                elif list( scores.values() ).count(maxScore) > 1:     
+                    winners_list     = [key for key, value in scores.items() if value == maxScore]      # save all the players with the same max score into a list
+                    winners_list_str = ", ".join(str(winner).title() for winner in winners_list)    # convert the list into a string
+                    lastComma        = winners_list_str.rfind(",")     # locate the character "," within the string
+                    session["won"]   = winners_list_str[:lastComma] + " and" + winners_list_str[lastComma+1:]     # replace lace occurance of "," with "and"
+                    
+                else:   # only one person scored the max score!
+                    session["won"] = max(scores, key= lambda x: scores[x]) # get the player with the highest score
+                
                 return redirect( url_for('winner') ) 
 
 
     player_dict = {"hand": convert_card_names( session["playerHand"] ), "value" : get_hand_value( session["playerHand"] ) }
-    house_dict = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ),"folded": ["back.jpg","back.jpg"] }
-    round_dict = {"total": session["rounds"], "played": session["rounds_played"]+1}
+    house_dict  = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ),
+                    "folded": ["back.jpg","back.jpg"], "house_plays": session["house_plays"] }
+    round_dict  = {"total": session["rounds"], "played": session["rounds_played"]+1}
 
-    return render_template("game.html", usernames=usernames, scores=scores, seq=session["seq"], 
+    return render_template("game.html", usernames=session["username"], scores=scores, seq=session["seq"], 
         rounds=round_dict, player=player_dict, house=house_dict)
     
 
@@ -315,24 +335,18 @@ def game():
 @app.route("/winner", methods=["POST","GET"])
 def winner():
     
-    # note:
-    # the scenario at which two players have the same score at the end 
-    # of the final round needs to be address
-    #   decalre both as winners? raise the the rounds by 3?
-    
-    
     if request.method == "POST":
+    
         if "reset" in request.form.keys():
-            # reseting mechanism - triggered if reset button is pressed during an action session of the game
+            # reseting mechanism - triggered via the reset button
             reset_table(restart=True)   # clearing the session as well as resetting the table 
             return redirect( url_for("index")) 
-    
-    
-    
+
     # being passed in for the completeness of the 
     round_dict = {"total": session["rounds"], "played": session["rounds_played"]}
     
-    return render_template("winner.html", winner=session["won"], scores=session["score"], rounds=round_dict)
+    return render_template("winner.html", usernames=session["username"], winner=session["won"], 
+        scores=session["score"], rounds=round_dict)
 
 if __name__ == "__main__":
     # host = os.getenv("IP", "0.0.0.0")

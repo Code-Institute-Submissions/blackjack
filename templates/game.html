@@ -5,7 +5,6 @@
 {% block content %}
 <div class="container">
     <h1>welcome to the game, {{ usernames[seq].title() }}!</h1>
-    <!--<p>{{username }} score = {{ scores[username] }}</p>-->
     <div class="wrapper">
         <section>
             <div class="console">
@@ -26,12 +25,18 @@
         </section>
         
         <section>
-            <div class="house">
+            <div class="house" id="house" data-house="{{ house|tojson }}">
                 <p>Count: {{ house["value"] }}</p>
-    
+                <p>show cards =  {{ house["house_plays"] }}</p>
+                {% if house["house_plays"] %}
                 {% for card in house["hand"] %}
                 <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
                 {% endfor %}
+                {% else %}
+                {% for card in house["folded"] %}
+                <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
+                {% endfor %}
+                {% endif %}
             </div>
         </section>
     </div>
@@ -57,7 +62,9 @@
 
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
-
+<script>
+    var house_dict = {{ house|tojson }};
+</script>
 
 
 {% endblock %}
