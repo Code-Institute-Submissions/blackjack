@@ -190,22 +190,19 @@ def base():
     return render_template("base.html")
 
 
-# Welcome view
+# Welcome view - add more comments
 @app.route("/", methods=["POST","GET"])
 def index():
     
     reset_table() # start fresh by clearing the session, resetting the deck
     
     if request.method == "POST":
-    
-        # the data extracted from the form was coming in as an "ImmutableMultiDict", which made it absolutely impossible to
-        # to use the same names (name = username) on the form inputs, as it was only capable getting the first value out,
-        # it simply fetched the first value with the key "username" and it ignored the rest. However, i wished to use the
-        # same names for the inputs within my form however unconventional it might be. so with the use of ".getlist()" the 
-        #"ImmutableMultiDict" was changed to a normal dictionary which stores the values for my username key (name input on the form) 
-        # as a list containing all the given names as shown in the example below.
-        # {'username': [u'damian', u'yoni', u'michael', u'james'] }
-        # please refer to the readme.md for more information on this
+        
+        # with the use of a ".getlist()", the "ImmutableMultiDict" object is changed to a normal normal dictionary, allowing 
+        # me to use the same input names (name = "John", name="Logan", ...) on my the form, which was impossible to do with an
+        # "ImmutableMultiDict" object since it simply fetched the last value with the key "name" and ignored the rest.
+        # all the values of the key "name" is stored as a list within the dictionary which was then stored in the session
+        # using a key "username", {'username': [u'damian', u'yoni', u'michael', u'james'] }.
         for key in request.form.keys():
             
             # fetching the initital user data out of the from and putting it in a normal dictionary
@@ -242,7 +239,7 @@ def index():
     return render_template("index.html")
     
 
-# game page
+# game page - add more comments
 @app.route("/game", methods=["POST","GET"])
 def game():
     
@@ -302,7 +299,7 @@ def game():
         rounds=round_dict, player=player_dict, house=house_dict)
     
 
-
+# show the winner if there is any - add more comments
 @app.route("/winner", methods=["POST","GET"])
 def winner():
     
