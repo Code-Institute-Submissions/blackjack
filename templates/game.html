@@ -40,7 +40,6 @@
             <h3> {{ usernames[seq].title() }} playing</h3>
             <div class="player">
                 <p>Count: {{ player["value"] }}</p>
-                <p>Count: {{ verdict }}</p>
                 {% for card in player["hand"] %}
                 <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
                 {% endfor %}

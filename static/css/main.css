@@ -28,7 +28,7 @@ nav {
   min-height: calc(100% - 168px); }
 
 .footer-container {
-  background-color: #790712; }
+  background-color: #ffc107; }
 
 .footer-social div ul {
   margin: 0px; }
@@ -53,23 +53,23 @@ nav {
   text-align: center;
   color: #fafafa;
   position: relative;
-  background-color: #ffc107;
-  color: #000000;
+  background-color: #000000;
+  color: #ffc107;
   transition: all 0.35s ease-in-out;
   -moz-transition: all 0.35s ease-in-out;
   -webkit-transition: all 0.35s ease-in-out;
   -o-transition: all 0.35s ease-in-out; }
 
 .footer-social .social-links li a i:hover {
-  background: #000000;
+  background: #790712;
   color: #ffc107; }
 
 .footer-copyright {
   padding-bottom: 1rem;
-  color: #F2CC8F; }
+  color: #790712; }
 
 footer a {
-  color: #ffc107; }
+  color: #000000; }
 
 .intro {
   display: flex;

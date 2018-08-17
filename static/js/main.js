@@ -19,9 +19,9 @@ function set_players() {
     log(count, typeof count)
 
     if (count === "3") {
-       $(".extend").html(`<label>Player 3: <input type="text" name="username" placeholder=" Yoni" value="logan"/></label><br>`)
+       $(".extend").html(`<label>Player 3: &nbsp<input type="text" name="username" placeholder=" Yoni" value="logan"/></label><br>`)
     } else if (count === "4") {
-        $(".extend").html(`<label>Player 3: <input type="text" name="username" placeholder=" Yoni" value="logan"/></label><br><label>Player 4: <input type="text" name="username" placeholder=" Damian" value="joe"/></label><br>`)
+        $(".extend").html(`<label>Player 3: &nbsp<input type="text" name="username" placeholder=" Yoni" value="logan"/></label><br><label>Player 4: &nbsp<input type="text" name="username" placeholder=" Damian" value="joe"/></label><br>`)
     } else {
         $(".extend").html(``)
     }

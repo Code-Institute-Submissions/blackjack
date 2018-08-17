@@ -44,7 +44,7 @@ nav {
 
 // -------------------------------------------------------- Footer
 .footer-container {
-    background-color: map-get($color, red2);
+    background-color: map-get($color, mustard);
 }
 
 .footer-social div ul {
@@ -74,8 +74,8 @@ nav {
     text-align: center;
     color: #fafafa;
     position: relative;
-    background-color: map-get($color, mustard);
-    color: map-get($color, black);
+    background-color: map-get($color, black);
+    color: map-get($color, mustard);
     transition: all 0.35s ease-in-out;
     -moz-transition: all 0.35s ease-in-out;
     -webkit-transition: all 0.35s ease-in-out;
@@ -83,17 +83,17 @@ nav {
 }
 
 .footer-social .social-links li a i:hover {
-    background: map-get($color, black);
+    background: map-get($color, red2);
     color: map-get($color, mustard);
 }
 
 .footer-copyright {
     padding-bottom: 1rem;
-    color: map-get($color, peach);
+    color: map-get($color, red2);
 }
 
 footer a {
-    color: map-get($color, mustard);
+    color: map-get($color, black);
 }
 
 

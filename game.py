@@ -6,13 +6,14 @@ class Deck:
     """ Deck of playing cards """
 
 
-    def __init__(self):
+    def __init__(self, number_of_decks=1):
         
         self.suits = ["spades", "clubs", "hearts", "diamonds"]
         self.ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-        self.deck = list(itertools.product(self.suits, self.ranks))
+        self.number_of_decks = number_of_decks
+        self.deck = list(itertools.product(self.suits, self.ranks)) * self.number_of_decks
         random.shuffle(self.deck)
-    
+        print("len of deck =", len(self.deck))
 
     def deal(self, num=1):
         """ deal a card and remove that card from the deck, 
@@ -32,7 +33,7 @@ class Deck:
     def reset(self):
         """ restore the deck to its original state "52" cards """        
         
-        self.deck = list(itertools.product(self.suits, self.ranks))
+        self.deck = list(itertools.product(self.suits, self.ranks)) * self.number_of_decks
         random.shuffle(self.deck)
         print("deck is now reset to {} cards".format( len(self.deck) ))
 
@@ -52,14 +53,13 @@ class Player:
         return "Player" 
     
 
-def convertCardNames(cards):
-    
+def convert_card_names(cards):
     
     """ 
-    convert the name of the cards in the deck to the names of 
+    convert the name of the cards in the deck to match the names of 
     the individual PNGs.
-    card names in deck: ('spades', 'Q') 
-    target name: Q_of_spades.png
+    format of card names in deck =  ('spades', 'Q') 
+                   target format =  Q_of_spades.png
     """
     name = list(card[1] + "_of_" + card[0] + ".png" for card in cards)
         
@@ -67,13 +67,14 @@ def convertCardNames(cards):
     
     
     
-def getHandValue(hand):
+def get_hand_value(hand):
     
+    """
     # K,Q,J are worth 10 points each
     # A is worth either 1 or 11 depending on the hand
     # 2-10 = face value
     # format = ('spades', 'K')
-    
+    """
     jdebug = 0
     if jdebug > 0:  print( "count_hand() called by: {}".format(sys._getframe(1).f_code.co_name) )
     

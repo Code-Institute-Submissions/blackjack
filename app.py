@@ -15,93 +15,170 @@ app.secret_key = os.urandom(24)
 
 
 
-def reset_table(restart=False, increment_seq=False, incrementScore=False):
-    
-    """ if the game was reset during the game then clear cash, 
+def reset_table(restart=False, increment_seq=False, increment_core=False):
+    """ if the game was reset during the game then clear session, 
         otherwise just re-set the table and deal new cards to
         both player and house """
         
     if restart:
-        session.clear()     # gets rid of the lingering data but clearing the session
+        session.clear()     # gets rid of the lingering data by clearing the session
     
-    if incrementScore:
+    if increment_core:
         session["score"][session["current_player"]] += 1
     
     if increment_seq:
         session["seq"] += 1
     
-    deck.reset()                                    # restores a full deck of cards (52)
-    session["houseHand"] = deck.deal(2)             # deal 2 new cards to house
-    session["playerHand"] = deck.deal(2)            # deal 2 new cards to player
+    deck.reset()    # restores a full deck of cards
+    session["houseHand"]  = deck.deal(2)  # deal 2 new cards to house
+    session["playerHand"] = deck.deal(2)  # deal 2 new cards to player
 
 
 
 
-def getVerdict():
+def get_verdict(player_only=False):
+    """
+    Analyse both player and house states, then pass final verdict as to which side has won. 
+    
+    After both player and house play their turns, this function uses the "status" of 
+    the "get_hand_value()" function to select the winner of the played sequence
+    (player or house). 
+    
+    Additionally, it awards points and changes players accordingly, using the reset_table()
+    function!
+
+    player_only: 
+    if the this parameter is set true, function analyses player ONLY!
+    in doing so, the fucntion will:
+    
+    - check to see if the player has gone BUST
+        - there's no need for the house to play. the table is then reset using reset_table()
+          function and sequence incremented to move to the next player
+          
+    - check to see if the player has achieved BLACKJACK
+        - house has to play its turn and the results will be assessed by
+        the get_verdict() function 
     
     """
-    decides who wins
-    hand[0] = player
-    hand[1] = house
-    """
     
-    player_Val , player = getHandValue( session["playerHand"] )
-    house_Val , house = getHandValue( session["houseHand"] )
-
-    verdict = "undecided"
-    if player == "active" and house == "active":
-                    
-        if player_Val == house_Val:
-            verdict = "PUSH"
-            reset_table(increment_seq=True )  
+    # fetching house/player data from session
+    player_Val , player = get_hand_value( session["playerHand"] )
+    house_Val , house = get_hand_value( session["houseHand"] )
+    verdict = "undecided"  
+    
+    # only check player - skip house
+    if player_only:
+        if player == "BUST":
+            # player has lost - BUST occured
+            #   - reset table and move to the next player
+            reset_table(increment_seq=True)
+            print("Player went BUST with {}".format(player_Val))
             
-        elif player_Val > house_Val:
-            verdict = "player"
-            reset_table(increment_seq=True, incrementScore=True ) 
+        if player == "BLACKJACK":
             
-        elif player_Val < house_Val:
-            verdict = "house"
-            reset_table(increment_seq=True )
+            print("Player gets BLACKJACK")
+            # player scores blackjack
+            #   - now house has to play its turn 
+            house_plays() # simulate house play
+            get_verdict()  # decide who won!
     else:
-        # if player goes bust or house gets blackjack decale house as winner
-        if player == "BUST" or house == "BLACKJACK":
-            verdict = "house"
-            reset_table(increment_seq=True )
-            
-        # if house goes bust or player gets blackjack decale player as winner
-        elif house == "BUST" or player == "BLACKJACK":
-            verdict = "player"
-            reset_table(increment_seq=True, incrementScore=True )
-    
-        # if both player and house get black jack then PUSH
-        elif player == "BLACKJACK" and house == "BLACKJACK":
-            verdict = "PUSH"
-            reset_table(increment_seq=True )
-        else:
-            print("Shouldnt get here")
+        # check both player and house
         
-    print("{} wins".format(verdict.title()))
-    
-    return verdict
+        # player stands or no bust/blackjack occurs
+        if player == "active" and house == "active":
+            
+            # house matches the player hand
+            if player_Val == house_Val:
+                verdict = "PUSH"
+                
+            # player ends up with a higher hand value
+            elif player_Val > house_Val:
+                verdict = "player"
+            
+            # house ends up with a higher hand value
+            elif player_Val < house_Val:
+                verdict = "house"
+        else:
+            # if both player and house get black jack then PUSH
+            if player == "BLACKJACK" and house == "BLACKJACK":
+                verdict = "PUSH"
+                
+            # if player goes bust or house gets blackjack declare house as winner
+            elif player == "BUST" or house == "BLACKJACK":
+                verdict = "house"
+                
+            # if house goes bust or player gets blackjack declare player as winner
+            elif house == "BUST" or player == "BLACKJACK":
+                verdict = "player"
+        
+            else:
+                print("Shouldnt get here")
+        
+        # collect the verdict and make changes accordingly
+        if verdict == "player":
+            # player has won
+            #   - award a point, reset table and move to the next player
+            reset_table(increment_seq=True, increment_core=True )
+        else:
+            # player has lost or PUSH has occured
+            #   - reset table and move to the next player
+            reset_table(increment_seq=True)
+        
+        print("verdict = {}".format(verdict.title()))
+        
 
 
 def house_plays():
-    player_hand_val , _ = getHandValue( session["playerHand"])
+    
+    """ 
+        Simulate house playing its turn
+        the house will stop pulling cards if one of the 
+        conditions given below is met:
+        
+        - house BUST
+        - house gets BLACKJACK
+        - house_hand_val is greater than player_hand_value
+        - house_hand_val is greater than 18 and player_hand_val is less than 18
+        
+        house is smart enough to stop pulling when it gets a value higher than what the player 
+        has achieved, However, if the player somehow ends up with a higher value than the house, 
+        knowing that it has already lost the game, it will risk going bust in efforts of beating the player.
+        lets assume the player ends up with "20" and the house with a high "18", now since the house
+        has already lost the game, it will pull another card just for the sake of beating the player, 
+        in the hopes of pulling a BLACKJACK or PUSH.
+    """
+    
+    # fetch player hand value out to compare with house's
+    player_hand_val , _ = get_hand_value( session["playerHand"])
+    
     while True:
-        house_hand_val , house_game_outcome = getHandValue( session["houseHand"])
+        
+        # fetch house data everytime a card is pulled - the first time it gets here, there are 
+        # already two cards in house's deck
+        house_hand_val , house_game_outcome = get_hand_value( session["houseHand"])
         print("house_hand = {}, player_hand={}, house_game_outcome= {} ".format(house_hand_val, player_hand_val, house_game_outcome) )
-        if house_game_outcome == "BUST" or house_game_outcome == "BLACKJACK" or house_hand_val >= player_hand_val or (house_hand_val > 18 and player_hand_val < 18):
+        
+        # break out of loop if the ny of these conditions are met
+        if ( house_game_outcome == "BUST" or 
+            house_game_outcome == "BLACKJACK" or 
+                house_hand_val >= player_hand_val or 
+                    (house_hand_val > 18 and player_hand_val < 18) ):
+                        
             print("house_game_outcome = ", house_hand_val, house_game_outcome)
             break
+        
+        # pull the next card
         session["houseHand"].append(deck.deal())
 
+
 # defining globals
-deck = Deck() # number of players going in
+deck = Deck() # create deck initially with only 1 deck of cards
 
     # players
     # if player.hand value is greater than 18, the STAND button should pulsate
 # to ask
-
+# couldnt deploy!
+# it's all happening too fast, cant see the player going BUST or getting blackjack
 # the house plays all its cards in one go and we're not able to see what's happening 
 # how do we get it pull its card one by one?
 
@@ -134,13 +211,19 @@ def index():
             # fetching the initital user data out of the from and putting it in a normal dictionary
             session[key] = request.form.getlist(key)
             
+            if key == "decks":
+                # comes in as a list with only ONE value
+                # set how many how many decks to use
+                global deck
+                deck = Deck(int(session[key][0]))
+            
             if key == "username":
-                # decided to go with a dictionary here with the usernames stored as keys which makes 
+                # with the usernames stored as keys in a dictionary, it makes 
                 # the data handling alot easier and the format easier to read.
                 session["score"] = {username: 0 for username in session["username"]}
             
             if key == "rounds":
-                # sets how many rounds a single game would last.
+                # sets how many rounds a single session would last.
                 # will be used as an integer from this point onwards
                 session["rounds"] = int(session["rounds"][0]) 
         
@@ -168,7 +251,6 @@ def game():
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play
     session["current_player"]= username     # current player
-    
 
     if request.method == "POST":
         
@@ -183,28 +265,16 @@ def game():
             # deals one card to the player
             session["playerHand"].append(deck.deal())
         
-        # if player goes "BUST" - increment seq key to move on the next player
-        if getHandValue( session["playerHand"] )[1] == "BUST":
-            print("BUUUUUUUUUUSSSSSTTT = ", getHandValue(session["playerHand"] )[0] )
-            reset_table(increment_seq=True)
-            
-        # if the player gets "blackjack"
-        if getHandValue( session["playerHand"] )[1] == "BLACKJACK":
-            print("BLACKJACKKKKKKKKKKKKKKKKKKKK")
-            
-            # house has to play after the player so this bit of code needs to move!
-                # if house goes bust:       Decalre "BLACKJACK" - increment score and seq
-                # if house get blackjack:   declare "PUSH" - increment seq ONLY!  
-                
-            house_plays()
-            verdict = getVerdict()
-            
-        
-        # if player stands or gets blackjack it's house's turn to play
+        # check the progress of the player ONLY.
+        #   - if the player goes BUST, then there is no need for the house to play.
+        #   - if the players gets BLACKJACK, then house has to player.
+        get_verdict(player_only=True)
+
         if "stand" in request.form.keys():
-            # house gets cards until it has blackjack or goes bust or has value higher than player
-            house_plays()
-            verdict = getVerdict()
+            # house gets cards until one of the below conditions is met.
+            # BLACKJACK, BUST or hand value higher than player
+            house_plays() # simulate house play
+            get_verdict()  # decide who won!
 
         # session["score"] = scores   # Aliased since session resets the content of the list to zero
         print("scores = ", scores)
@@ -224,8 +294,8 @@ def game():
                 return redirect( url_for('winner') ) 
     
 
-    player_dict = {"hand": convertCardNames( session["playerHand"] ), "value" : getHandValue( session["playerHand"] ) }
-    house_dict = {"hand": convertCardNames( session["houseHand"] ), "value" : getHandValue( session["houseHand"] ),"folded": ["back.jpg","back.jpg"] }
+    player_dict = {"hand": convert_card_names( session["playerHand"] ), "value" : get_hand_value( session["playerHand"] ) }
+    house_dict = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ),"folded": ["back.jpg","back.jpg"] }
     round_dict = {"total": session["rounds"], "played": session["rounds_played"]+1}
 
     return render_template("game.html", usernames=usernames, scores=scores, seq=session["seq"], 
@@ -233,7 +303,7 @@ def game():
     
 
 
-@app.route("/winner")
+@app.route("/winner", methods=["POST","GET"])
 def winner():
     
     # note:
@@ -241,8 +311,17 @@ def winner():
     # of the final round needs to be address
     #   decalre both as winners? raise the the rounds by 3?
     
+    
+    if request.method == "POST":
+        if "reset" in request.form.keys():
+            # reseting mechanism - triggered if reset button is pressed during an action session of the game
+            reset_table(restart=True)   # clearing the session as well as resetting the table 
+            return redirect( url_for("index")) 
+    
+    
+    
     # being passed in for the completeness of the 
-    round_dict = {"total": session["rounds"], "played": session["rounds_played"]+1}
+    round_dict = {"total": session["rounds"], "played": session["rounds_played"]}
     
     return render_template("winner.html", winner=session["won"], scores=session["score"], rounds=round_dict)
 
