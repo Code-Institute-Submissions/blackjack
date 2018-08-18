@@ -9,6 +9,7 @@
         <section>
             <div class="console">
                 <h3>Scoreboard</h3>
+
                 <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
                 <table>
                     <!--  pulling the names out of the original list rather than the 
@@ -26,7 +27,7 @@
         
         <section>
             <div class="house" id="house" data-house="{{ house|tojson }}">
-                <p>Count: {{ house["value"] }}</p>
+                <p>Count: {{ house["value"] }}  outcome= {{ verdict }}</p>
                 <p>show cards =  {{ house["house_plays"] }}</p>
                 {% if house["house_plays"] %}
                 {% for card in house["hand"] %}

@@ -12,7 +12,7 @@ app.debug = True
 app.secret_key = os.urandom(24)
 
 
-def reset_table(restart=False, increment_seq=False, increment_core=False):
+def reset_table(restart=False, increment_seq=False, increment_score=False):
     """ if the game was reset during the game then clear session, 
         otherwise just re-set the table and deal new cards to
         both player and house """
@@ -20,7 +20,7 @@ def reset_table(restart=False, increment_seq=False, increment_core=False):
     if restart:
         session.clear()     # gets rid of the lingering data by clearing the session
     
-    if increment_core:
+    if increment_score:
         session["score"][ session["current_player"] ] += 1
     
     if increment_seq:
@@ -30,6 +30,20 @@ def reset_table(restart=False, increment_seq=False, increment_core=False):
     deck.reset()    # restores a full deck of cards
     session["houseHand"]  = deck.deal(2)  # deal 2 new cards to house
     session["playerHand"] = deck.deal(2)  # deal 2 new cards to player
+
+
+    
+def apply_verdict(verdict):
+    """ APPLY points based on the passed verdict! """
+
+    # collect the verdict and make changes accordingly
+    if verdict == "PLAYER":
+        # player has won - award a point, reset table and move to the next player
+        reset_table(increment_seq=True, increment_score=True )
+    else:
+        # player has lost or PUSH has occured - reset table and move to the next player
+        reset_table(increment_seq=True)
+            
 
 
 
@@ -62,7 +76,7 @@ def get_verdict(player_only=False):
     # fetching house/player data from session
     player_Val , player = get_hand_value( session["playerHand"] )
     house_Val , house = get_hand_value( session["houseHand"] )
-    verdict = "undecided"  
+
     
     # only check player - skip house
     if player_only:
@@ -71,15 +85,23 @@ def get_verdict(player_only=False):
             #   - reset table and move to the next player
             reset_table(increment_seq=True)
             print("Player went BUST with {}".format(player_Val))
+
+            return "BUST"
             
         if player == "BLACKJACK":
             
             print("Player gets BLACKJACK")
             # player scores blackjack
             #   - now house has to play its turn 
-            house_plays() # simulate house play
-            get_verdict()  # decide who won!
+            # house_plays() # simulate house play
+            session["house_plays"] = True
+            house_hand = house_plays(deck, session["playerHand"], session["houseHand"]) 
+            session["houseHand"] = house_hand
+            return get_verdict()  # decide who won!
             
+        
+        return "active"
+             
     else:
         # check both player and house
         
@@ -111,63 +133,21 @@ def get_verdict(player_only=False):
                 verdict = "player"
         
             else:
+                # assert 
                 print("Shouldnt get here")
         
         # collect the verdict and make changes accordingly
         if verdict == "player":
             # player has won
             #   - award a point, reset table and move to the next player
-            reset_table(increment_seq=True, increment_core=True )
+            reset_table(increment_seq=True, increment_score=True )
         else:
             # player has lost or PUSH has occured
             #   - reset table and move to the next player
             reset_table(increment_seq=True)
         
         print("verdict = {}".format(verdict.title()))
-        
-
-
-def house_plays():
-    
-    """ 
-        Simulate house playing its turn
-        the house will stop pulling cards if one of the 
-        conditions given below is met:
-        
-        - house BUST
-        - house gets BLACKJACK
-        - house_hand_val is greater than player_hand_value
-        - house_hand_val is greater than 18 and player_hand_val is less than 18
-        
-        house is smart enough to stop pulling when it gets a value higher than what the player 
-        has achieved, However, if the player somehow ends up with a higher value than the house, 
-        knowing that it has already lost the game, it will risk going bust in efforts of beating the player.
-        lets assume the player ends up with "20" and the house with a high "18", now since the house
-        has already lost the game, it will pull another card just for the sake of beating the player, 
-        in the hopes of pulling a BLACKJACK or PUSH.
-    """
-    
-    # fetch player hand value out to compare with house's
-    player_hand_val , _ = get_hand_value( session["playerHand"])
-    session["house_plays"] = True
-    while True:
-        
-        # fetch house data everytime a card is pulled - the first time it gets here, there are 
-        # already two cards in house's deck
-        house_hand_val , house_game_outcome = get_hand_value( session["houseHand"])
-        print("house_hand = {}, player_hand={}, house_game_outcome= {} ".format(house_hand_val, player_hand_val, house_game_outcome) )
-        
-        # break out of loop if the ny of these conditions are met
-        if ( house_game_outcome == "BUST" or 
-            house_game_outcome == "BLACKJACK" or 
-                house_hand_val >= player_hand_val or 
-                    (house_hand_val > 18 and player_hand_val < 18) ):
-                        
-            print("house_game_outcome = ", house_hand_val, house_game_outcome)
-            break
-        
-        # pull the next card
-        session["houseHand"].append(deck.deal())
+        return verdict
 
 
 # defining globals
@@ -186,11 +166,15 @@ deck = Deck() # create deck initially with only 1 deck of cards
 # couldnt deploy to heroku, app.py  could not be located --- RESOLVED!!!!!!!
 # how do i start with the card faced down? --- RESOLVED!!!
 # how do i address multiple winners, house win, no winners and a winner --- RESOLVED!!!
-# what to do if the same name was entered repeatedly?
+# what to do if the same name was entered repeatedly? should i switch to wtforms? jquery validate?
+# fall back 
+
+# the house div shoudl show all the cards played for the previous player
+
 # MAIN ISSUE!
 # it's all happening too fast, cant see the player going BUST or getting blackjack
 # the house plays all its cards in one go and we're not able to see what's happening 
-# how do we get it pull its card one by one?
+# how do we get it to pull its cards one by one?
 # unittesting?
 
 #  ================= routes =====================
@@ -248,7 +232,7 @@ def index():
     return render_template("index.html")
     
 
-# game page - add more comments
+# game page - add more comments - docstring
 @app.route("/game", methods=["POST","GET"])
 def game():
     
@@ -256,7 +240,8 @@ def game():
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play
     session["current_player"]= username     # current player
-
+    verdict = "undecided" 
+    
     if request.method == "POST":
         
         print("request.form.keys() = ", request.form.keys())
@@ -273,8 +258,8 @@ def game():
         # check the progress of the player ONLY.
         #   - if the player goes BUST, then there is no need for the house to play.
         #   - if the players gets BLACKJACK, then house has to player.
-        get_verdict(player_only=True)
-        
+        verdict = get_verdict(player_only=True)
+
         
         # if the player has finished playing, BlackJack or hand value must be shown on the player side
         # once the house starts to play - for every card drawn the page needs to reload. until it goes BUST
@@ -285,8 +270,10 @@ def game():
         if "stand" in request.form.keys():
             # house gets cards until one of the below conditions is met.
             # BLACKJACK, BUST or hand value higher than player
-            house_plays() # simulate house play
-            get_verdict()  # decide who won!
+            session["house_plays"] = True
+            house_hand = house_plays(deck, session["playerHand"], session["houseHand"]) # simulate house play
+            session["houseHand"] = house_hand
+            verdict = get_verdict()  # decide who won!
 
         # session["score"] = scores   # Aliased since session resets the content of the list to zero
         print("scores = ", scores)
@@ -303,7 +290,7 @@ def game():
                 
 
                 # get maximum score attained by the players
-                maxScore = max(list( scores.values() ) )     
+                maxScore = max( scores.values()  )     
                 
                 # noone has won a single game - declare house as the winner
                 if maxScore == 0:       
@@ -328,7 +315,7 @@ def game():
     round_dict  = {"total": session["rounds"], "played": session["rounds_played"]+1}
 
     return render_template("game.html", usernames=session["username"], scores=scores, seq=session["seq"], 
-        rounds=round_dict, player=player_dict, house=house_dict)
+        rounds=round_dict, player=player_dict, house=house_dict, verdict=verdict)
     
 
 # show the winner if there is any - add more comments

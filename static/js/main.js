@@ -6,6 +6,25 @@ $(document).ready(function() {
         set_players($("#players")); // passing in item $("#players") into the function
     })
     
+    
+    
+        
+    // $("input:text").change(function(){
+    //     var x=$(this).val();
+    //     var z=0;
+    //     $("input:text").each(function(){
+    //         var y=$(this).val();
+    //         if(x==y){
+    //             z=z+1;
+    //         }
+    //     });
+    //     if(z>1){
+    //         alert(x);
+    //     }
+    //  })
+    
+    
+    
 })
 
 // console.log turned into a function for cleaner/shorter codes,  

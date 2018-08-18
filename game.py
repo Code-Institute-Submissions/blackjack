@@ -5,7 +5,6 @@ import itertools
 class Deck:
     """ Deck of playing cards """
 
-
     def __init__(self, number_of_decks=1):
         
         self.suits = ["spades", "clubs", "hearts", "diamonds"]
@@ -38,20 +37,6 @@ class Deck:
         print("deck is now reset to {} cards".format( len(self.deck) ))
 
 
-class Player:
-    """ Simulate a player """
-    
-    def __init__(self,name, score, hand=None):
-        if hand is None:
-            self.hand = []
-        else:
-            self.hand = hand
-        self.name = name
-        self.score = score
-        
-    def __str__(self):
-        return "Player" 
-    
 
 def convert_card_names(cards):
     
@@ -119,3 +104,113 @@ def get_hand_value(hand):
         
     return val, status
 
+
+
+def house_plays(deck, player_hand, house_hand):
+    
+    """ 
+        Simulate house playing its turn
+        the house will stop pulling cards if one of the 
+        conditions given below is met:
+        
+        - house BUST
+        - house gets BLACKJACK
+        - house_hand_val is greater than player_hand_value
+        - house_hand_val is greater than 18 and player_hand_val is less than 18
+        
+        house is smart enough to stop pulling when it gets a value higher than what the player 
+        has achieved, However, if the player somehow ends up with a higher value than the house, 
+        knowing that it has already lost the game, it will risk going bust in efforts of beating the player.
+        lets assume the player ends up with "20" and the house with a high "18", now since the house
+        has already lost the game, it will pull another card just for the sake of beating the player, 
+        in the hopes of pulling a BLACKJACK or PUSH.
+    """
+    
+    # fetch player hand value out to compare with house's
+    player_hand_val , _ = get_hand_value( player_hand )
+    
+    
+    while True:
+        
+        # fetch house data everytime a card is pulled - the first time it gets here, there are 
+        # already two cards in house's deck
+        house_hand_val , house_game_outcome = get_hand_value( house_hand)
+        print("house_hand = {}, player_hand={}, house_game_outcome= {} ".format(house_hand_val, player_hand_val, house_game_outcome) )
+        
+        # break out of loop if the ny of these conditions are met
+        if (house_game_outcome == "BUST" or 
+            house_game_outcome == "BLACKJACK" or 
+            house_hand_val >= player_hand_val or 
+            (house_hand_val > 18 and player_hand_val < 18) ):
+                        
+            print("house_game_outcome = ", house_hand_val, house_game_outcome)
+            
+            break
+        
+        house_hand.append(deck.deal())  
+        
+
+    return house_hand  
+
+
+
+
+def get_player_verdict(player_hand, house_hand):
+    """ 
+    when both player/house have played
+    player ->  get_hand_value(player_hand) ->  player_hand_val, player_stat
+    house  ->  get_hand_value(house_hand)  ->  house_val, house_stat
+    
+    possible scenarios:
+        player BUST - game over
+            verdict house
+        player BJ - house BJ
+            verdict push
+        player BJ - house BUST
+            verdict player
+
+    """
+    verdict = "undecided"
+    
+    
+    # fetching house/player data from session
+    player_hand_val , player_status = get_hand_value( player_hand )
+    house_hand_val , house_status = get_hand_value( house_hand )
+        
+    # player stands or no bust/blackjack occurs
+    if player_status == "active" and house_status == "active":
+        
+        # house matches the player hand
+        if player_hand_val == house_hand_val:
+            verdict = "PUSH"
+            
+        # player ends up with a higher hand value
+        elif player_hand_val > house_hand_val:
+            verdict = "player"
+        
+        # house ends up with a higher hand value
+        elif player_hand_val < house_hand_val:
+            verdict = "house"
+        else:
+            print("it shouldnt get here")
+            assert False
+            
+    else:
+        # if player goes bust or house gets blackjack declare house as winner
+        if player_status == "BUST":
+            verdict = "house"
+            
+        # if both player and house get black jack then PUSH
+        elif player_status == "BLACKJACK" and house_status == "BLACKJACK":
+            verdict = "PUSH"
+            
+        # if house goes bust or player gets blackjack declare player as winner
+        elif player_status == "BLACKJACK" or house_status == "BUST":
+            verdict = "player"
+        else:
+            print("it shouldnt get here")
+            assert False
+
+    return verdict.upper()
+    
+    
