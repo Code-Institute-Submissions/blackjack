@@ -26,7 +26,6 @@ def reset_table(restart=False, increment_seq=False, increment_score=False):
     if increment_seq:
         session["seq"] += 1
     
-    session["house_plays"] = False
     deck.reset()    # restores a full deck of cards
     session["houseHand"]  = [] # deck.deal(2)  # deal 2 new cards to house
     session["playerHand"] = deck.deal(2)  # deal 2 new cards to player
@@ -185,8 +184,7 @@ def game():
 
 
     player_dict = {"hand": convert_card_names( session["playerHand"] ), "value" : get_hand_value( session["playerHand"] ) }
-    house_dict  = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ),
-                    "folded": ["back.jpg","back.jpg"], "house_plays": session["house_plays"] }
+    house_dict  = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ) }
     round_dict  = {"total": session["rounds"], "played": session["rounds_played"]+1}
 
     return render_template("game.html", usernames=session["username"], scores=scores, seq=session["seq"], 

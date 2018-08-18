@@ -28,7 +28,6 @@
         <section>
             <div class="house" id="house" data-house="{{ house|tojson }}">
                 <p>Count: {{ house["value"] }}  outcome= {{ verdict }}</p>
-                <p>show cards =  {{ house["house_plays"] }}</p>
                 {% for card in house["hand"] %}
                 <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
                 {% endfor %}
