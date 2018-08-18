@@ -2,6 +2,7 @@ import sys
 import random 
 import itertools
 
+
 class Deck:
     """ Deck of playing cards """
 
@@ -55,8 +56,8 @@ def convert_card_names(cards):
     print("convert_card_names():    conversions = ", conversions)
     return conversions
     
-    
-    
+
+
 def get_hand_value(hand):
     
     """
@@ -106,10 +107,8 @@ def get_hand_value(hand):
             status = "BUST"
         else:
             status = "active"
-        
-        
-    return val, status
 
+    return val, status
 
 
 
@@ -166,7 +165,6 @@ def get_verdict(player_hand, house_hand):
         if player_status != "BUST" and house_status == "empty":
             # at this point house hasnt played its turn yet
             # if player goes BUST, house win period!
-            # print('UNDECIDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD!!!!')
             verdict = "undecided" 
             
         # if player goes bust or house gets blackjack declare house as winner
@@ -198,9 +196,6 @@ def get_verdict(player_hand, house_hand):
     
     return verdict.upper()
     
-    
-
-
 
 
 def house_plays(deck, player_hand, house_hand):
@@ -245,6 +240,32 @@ def house_plays(deck, player_hand, house_hand):
         
         house_hand.append(deck.deal())  
         
-
     return house_hand  
 
+
+
+def pick_winner(scores):
+    """ at the end of the final rounds, pick the winner.
+        if noone scores any points, house wins
+        if a player scores the highest point, player wins
+        if several players score the same highest point, no-one wins """
+
+    # get maximum score attained by the players
+    maxScore = max( scores.values()  )     
+    winner = ""
+    
+    # noone has won a single game - declare house as the winner
+    if maxScore == 0:       
+        winner = "house"
+    
+    # check to see if there is anybody else with the same max score
+    elif list( scores.values() ).count(maxScore) > 1:     
+        winners_list     = [key for key, value in scores.items() if value == maxScore]      # save all the players with the same max score into a list
+        winners_list_str = ", ".join(str(winner).title() for winner in winners_list)        # convert the list into a string
+        lastComma        = winners_list_str.rfind(",")                                      # locate the character "," within the string
+        winner   = winners_list_str[:lastComma] + " and" + winners_list_str[lastComma+1:]   # replace lace occurance of "," with "and"
+        
+    else:   # only one person scored the max score!
+        winner = max(scores, key= lambda x: scores[x]) # get the player with the highest score
+        
+    return winner

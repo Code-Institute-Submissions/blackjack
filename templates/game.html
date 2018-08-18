@@ -51,7 +51,7 @@
         <input type="submit" class="btn btn-warning" id="hit" name="hit" value="HIT">
         <input type="submit" class="btn btn-warning" id="stand" name="stand" value="STAND">
         <input type="submit" class="btn btn-warning" id="reset" name="reset" value="reset game!">
-        <input type="submit" class="btn btn-warning" id="next" name="next" value="next player">
+        <input type="submit" class="btn btn-success btn-lg" id="next" name="next" value="next player">
     </form>
 </div>
 {% endblock %}
@@ -60,7 +60,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
 <script>
     // var house_dict = {{ house|tojson }};
-    var player_status = {{ player["value"][1]|tojson }};
+
     var game_verdict = {{ verdict|tojson }};
     console.log("game_verdict = ", game_verdict)
 
@@ -68,11 +68,15 @@
         console.log("BUST")
         $("#hit").prop('disabled', true);
         $("#stand").prop('disabled', true);
-        
+        $('#next').removeAttr('disabled');
+
     } else {
         console.log("not BUST yet!")
         $('#hit').removeAttr('disabled');
         $('#stand').removeAttr('disabled');
+        $("#next").prop('disabled', true);
+        $('#next').css("background-color", "grey");
+        // $('#next').css("color", "grey");
     }
 
 </script>

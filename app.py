@@ -34,11 +34,8 @@ def reset_table(restart=False, increment_seq=False, increment_score=False):
 
     
 def apply_verdict(verdict):
-    """ APPLY points based on the passed verdict!
-        bind to the next player button!
-        """
+    """ APPLY points based on the passed verdict """
 
-    # collect the verdict and make changes accordingly
     if verdict == "PLAYER":
         # player has won - award a point, reset table and move to the next player
         reset_table(increment_seq=True, increment_score=True )
@@ -134,7 +131,7 @@ def game():
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play
     session["current_player"]= username     # current player
-    test_verdict = "UNDECIDED" 
+    verdict = "UNDECIDED" 
     
     if request.method == "POST":
         
@@ -146,21 +143,16 @@ def game():
             return redirect( url_for("index")) 
         
         if "next" in request.form.keys(): 
-            test_verdict = get_verdict(session["playerHand"], session["houseHand"])
-            print("NEXT!!!!!!  test_verdict = ", test_verdict)
-            apply_verdict(test_verdict)
-                
-            
-            # pass
-        
-        
+            verdict = get_verdict(session["playerHand"], session["houseHand"])
+            apply_verdict(verdict)
+
+
         if "hit" in request.form.keys():
             # deals one card to the player
-            # session["playerHand"].append( ('clubs', 'K') )
             session["playerHand"].append(deck.deal())
         
         
-        test_verdict = get_verdict(session["playerHand"], session["houseHand"])
+        verdict = get_verdict(session["playerHand"], session["houseHand"])
 
         
         if "stand" in request.form.keys():
@@ -170,8 +162,8 @@ def game():
             house_hand = house_plays(deck, session["playerHand"], session["houseHand"]) # simulate house play
             session["houseHand"] = house_hand
             
-            test_verdict = get_verdict(session["playerHand"], session["houseHand"])
-            print("test_verdict = ", test_verdict)
+            verdict = get_verdict(session["playerHand"], session["houseHand"])
+
             
 
         print("scores = ", scores)
@@ -186,24 +178,9 @@ def game():
             # game has eneded, declare the winner if there is one
             if session["rounds_played"] == session["rounds"]:
                 
+                # pick the winner
+                session["won"] = pick_winner(scores)
 
-                # get maximum score attained by the players
-                maxScore = max( scores.values()  )     
-                
-                # noone has won a single game - declare house as the winner
-                if maxScore == 0:       
-                    session["won"] = "house"
-                
-                # check to see if there is anybody else with the same max score
-                elif list( scores.values() ).count(maxScore) > 1:     
-                    winners_list     = [key for key, value in scores.items() if value == maxScore]      # save all the players with the same max score into a list
-                    winners_list_str = ", ".join(str(winner).title() for winner in winners_list)    # convert the list into a string
-                    lastComma        = winners_list_str.rfind(",")     # locate the character "," within the string
-                    session["won"]   = winners_list_str[:lastComma] + " and" + winners_list_str[lastComma+1:]     # replace lace occurance of "," with "and"
-                    
-                else:   # only one person scored the max score!
-                    session["won"] = max(scores, key= lambda x: scores[x]) # get the player with the highest score
-                
                 return redirect( url_for('winner') ) 
 
 
@@ -213,7 +190,7 @@ def game():
     round_dict  = {"total": session["rounds"], "played": session["rounds_played"]+1}
 
     return render_template("game.html", usernames=session["username"], scores=scores, seq=session["seq"], 
-        rounds=round_dict, player=player_dict, house=house_dict, verdict=test_verdict)
+        rounds=round_dict, player=player_dict, house=house_dict, verdict=verdict)
     
 
 # show the winner if there is any - add more comments
