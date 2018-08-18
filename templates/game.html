@@ -29,15 +29,9 @@
             <div class="house" id="house" data-house="{{ house|tojson }}">
                 <p>Count: {{ house["value"] }}  outcome= {{ verdict }}</p>
                 <p>show cards =  {{ house["house_plays"] }}</p>
-                {% if house["house_plays"] %}
                 {% for card in house["hand"] %}
                 <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
                 {% endfor %}
-                {% else %}
-                {% for card in house["folded"] %}
-                <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
-                {% endfor %}
-                {% endif %}
             </div>
         </section>
     </div>
@@ -54,9 +48,10 @@
     </div>
     
     <form method="POST" class="player_selections">
-        <input type="submit" class="btn btn-warning" name="hit" value="HIT">
-        <input type="submit" class="btn btn-warning" name="stand" value="STAND">
-        <input type="submit" class="btn btn-warning" name="reset" value="reset game!">
+        <input type="submit" class="btn btn-warning" id="hit" name="hit" value="HIT">
+        <input type="submit" class="btn btn-warning" id="stand" name="stand" value="STAND">
+        <input type="submit" class="btn btn-warning" id="reset" name="reset" value="reset game!">
+        <input type="submit" class="btn btn-warning" id="next" name="next" value="next player">
     </form>
 </div>
 {% endblock %}
@@ -64,7 +59,22 @@
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
 <script>
-    var house_dict = {{ house|tojson }};
+    // var house_dict = {{ house|tojson }};
+    var player_status = {{ player["value"][1]|tojson }};
+    var game_verdict = {{ verdict|tojson }};
+    console.log("game_verdict = ", game_verdict)
+
+    if (game_verdict !== "UNDECIDED") { 
+        console.log("BUST")
+        $("#hit").prop('disabled', true);
+        $("#stand").prop('disabled', true);
+        
+    } else {
+        console.log("not BUST yet!")
+        $('#hit').removeAttr('disabled');
+        $('#stand').removeAttr('disabled');
+    }
+
 </script>
 
 
