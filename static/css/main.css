@@ -83,15 +83,18 @@ footer a {
 
 form {
   text-align: center; }
-  form .rounds {
-    width: 50px; }
   form.index {
-    align-self: flex-end;
+    align-self: center;
     background-color: #790712;
     padding: 10px;
     border-radius: 20px;
     color: #ffc107;
-    font-weight: 500; }
+    font-weight: 500;
+    width: 420px; }
+    form.index .select-input {
+      width: 50px; }
+    form.index input[type="text"] {
+      width: 90px; }
 
 .player_selections {
   margin: 20px 0; }
@@ -105,7 +108,8 @@ form {
   height: calc(100vh - 168px);
   display: flex;
   flex-flow: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  justify-content: center; }
 
 .console {
   background-color: black;

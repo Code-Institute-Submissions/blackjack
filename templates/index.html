@@ -4,28 +4,29 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid pb-4 m-0">
   <!--<div class="container">-->
-    <div>
-        <h1 class="display-4">BlackJack</h1>
-        <p class="lead">A blackjack game based on points rather than actual money - created by Damian Rodbari.</p>
-    </div>
+    <!--<div>-->
+    <!--    <h1 class="display-4">BlackJack</h1>-->
+    <!--    <p class="lead">A blackjack game based on points rather than actual money - created by Damian Rodbari.</p>-->
+    <!--</div>-->
     <form method="POST" class="index mx-4">
         <div class="form-group">
-            <div class="mb-2">
-                <label>Number of players: &nbsp
-                    <select class="form-control-sm" id="players" name="players">
+            <div class="row justify-content-between">
+                <label class="ml-3">Players: &nbsp
+                    <select class="form-control-sm select-input" id="players" name="players">
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
                 </label>
+                <label class="">Decks: &nbsp<input class="form-control-sm select-input" type="number" name="decks" value="1" min="1" max="5"/></label>
+                 <!--&nbsp-->
+                <label class="">Rounds: &nbsp<input class="form-control-sm select-input" type="number" name="rounds" value="2" min="2"/></label><br>
             </div>
-            <!--<br>-->
-            <label>Decks: &nbsp<input class="rounds form-control-sm" type="number" name="decks" value="1" min="1" max="5"/></label>
-             &nbsp
-            <label>Rounds: &nbsp<input class="rounds form-control-sm" type="number" name="rounds" value="2" min="2"/></label><br>
-            <label>Player 1: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" John" value="damian" minlength="4"/></label><br>
-            <label>Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni" minlength="4"/></label><br>
-            <div class="extend"></div>
+            <div class="row justify-content-between">
+                <label class="ml-3">Player 1: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" John" value="damian" minlength="4" required/></label><br>
+                <label class="ml-3">Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni" minlength="4" required/></label><br>
+            </div>
+            <div class="row extend justify-content-between"></div>
             <input type="submit" class="btn btn-warning btn-block mt-3" value="Start!">
         </div>
     </form>

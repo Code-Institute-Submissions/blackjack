@@ -56,16 +56,15 @@ deck = Deck() # create deck initially with only 1 deck of cards
     #   readme file
     #   leave more comments
 
-# to ask
+# to ask/DO
 # couldnt deploy to heroku, app.py  could not be located --- RESOLVED!!!!!!!
 # how do i start with the card faced down? --- RESOLVED!!!
 # how do i address multiple winners, house win, no winners and a winner --- RESOLVED!!!
 # what to do if the same name was entered repeatedly? should i switch to wtforms? jquery validate?
-# create fall back for session if expired 
-
-# the house div shoudl show all the cards played for the previous player
-
-# MAIN ISSUE!
+# create fall back for session if expired ???
+# stop submission when enter is pressed or at least check to see if everything was entered
+# center the main input area on the index
+# add a button to extra options
 # unittesting?
 
 #  ================= routes =====================

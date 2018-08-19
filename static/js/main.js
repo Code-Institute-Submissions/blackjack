@@ -42,9 +42,9 @@ function set_players(item) {
     
     // logic to change number of text input based on the selection made by the user.
     if (count === "3") {
-       $(".extend").html(`<label>Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br>`)
+       $(".extend").html(`<label class="ml-3">Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br>`)
     } else if (count === "4") {
-        $(".extend").html(`<label>Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br><label>Player 4: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Damian" value="joe"/></label><br>`)
+        $(".extend").html(`<label class="ml-3">Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br><label class="ml-3">Player 4: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Damian" value="joe"/></label><br>`)
     } else {
         $(".extend").html(``)
     }
