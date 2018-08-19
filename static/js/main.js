@@ -5,25 +5,37 @@ $(document).ready(function() {
     $( "#players" ).change(function() {
         set_players($("#players")); // passing in item $("#players") into the function
     })
-    
-    
-    
-        
-    // $("input:text").change(function(){
-    //     var x=$(this).val();
-    //     var z=0;
-    //     $("input:text").each(function(){
-    //         var y=$(this).val();
-    //         if(x==y){
-    //             z=z+1;
-    //         }
-    //     });
-    //     if(z>1){
-    //         alert(x);
-    //     }
-    //  })
 
+
+
+    $(document).ready(function(){
+      // Add smooth scrolling to all links
+      $("a").on('click', function(event) {
     
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+    
+          // Store hash
+          var hash = this.hash;
+    
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function(){
+       
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        } // End if
+      });
+    });
+
+
+
+
 })
 
 // console.log turned into a function for cleaner/shorter codes,  
@@ -44,7 +56,7 @@ function set_players(item) {
     if (count === "3") {
        $(".extend").html(`<label class="ml-3">Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br>`)
     } else if (count === "4") {
-        $(".extend").html(`<label class="ml-3">Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br><label class="ml-3">Player 4: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Damian" value="joe"/></label><br>`)
+        $(".extend").html(`<label class="ml-3">Player 3: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Yoni" value="logan"/></label><br><label class="ml-4">Player 4: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Damian" value="joe"/></label><br>`)
     } else {
         $(".extend").html(``)
     }

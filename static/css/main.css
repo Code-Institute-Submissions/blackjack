@@ -5,7 +5,7 @@ html, body {
   width: 100%; }
 
 nav {
-  height: pix2Rem(50);
+  height: 3.125rem;
   background-color: #ffc107;
   padding: 0px !important; }
   nav .navbar-brand {
@@ -81,20 +81,83 @@ footer a {
   display: flex;
   justify-content: space-between; }
 
+.wrapper-index {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  justify-content: center;
+  height: calc(100vh - 56px);
+  background-image: url(../img/theming/bj.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .wrapper-index a {
+    font-size: 25px;
+    align-self: center;
+    color: #ffc107; }
+
+.index-div {
+  width: 100%;
+  min-height: 700px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 10px 30px; }
+  .index-div h2 {
+    font-size: 60px; }
+  .index-div h3 {
+    text-align: center; }
+  .index-div p {
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 20px; }
+
+.index-2 {
+  background-color: #800000;
+  color: white; }
+
+.index-3 {
+  background-image: url(../img/theming/bj2.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px; }
+
+.index-4 {
+  background-color: #ff6600; }
+
 form {
   text-align: center; }
   form.index {
     align-self: center;
-    background-color: #790712;
+    background-color: rgba(128, 0, 0, 0.9);
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     color: #ffc107;
     font-weight: 500;
-    width: 420px; }
+    width: 420px;
+    -webkit-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75); }
     form.index .select-input {
       width: 50px; }
+    form.index .select-round {
+      width: 55px; }
     form.index input[type="text"] {
       width: 90px; }
+    form.index input[type="submit"] {
+      width: 200px; }
+    @media screen and (max-width: 500px) {
+      form.index {
+        width: 200px; }
+        form.index label {
+          margin-left: 20px !important; }
+        form.index input[type="submit"] {
+          width: 150px; }
+        form.index #extras {
+          flex-flow: column nowrap;
+          align-items: flex-end; }
+          form.index #extras label {
+            margin-right: 30px; } }
 
 .player_selections {
   margin: 20px 0; }

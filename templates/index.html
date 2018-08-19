@@ -1,16 +1,9 @@
-{% extends "base.html" %} {% block title %} Welcome Page {% endblock %} 
+{% extends "base.html" %} {% block title %} Welcome Page {% endblock %} {% block content %}
+<div class="wrapper-index">
 
-
-{% block content %}
-<div class="jumbotron jumbotron-fluid pb-4 m-0">
-  <!--<div class="container">-->
-    <!--<div>-->
-    <!--    <h1 class="display-4">BlackJack</h1>-->
-    <!--    <p class="lead">A blackjack game based on points rather than actual money - created by Damian Rodbari.</p>-->
-    <!--</div>-->
     <form method="POST" class="index mx-4">
         <div class="form-group">
-            <div class="row justify-content-between">
+            <div class="row justify-content-between" id="extras">
                 <label class="ml-3">Players: &nbsp
                     <select class="form-control-sm select-input" id="players" name="players">
                         <option value="2">2</option>
@@ -19,19 +12,68 @@
                     </select>
                 </label>
                 <label class="">Decks: &nbsp<input class="form-control-sm select-input" type="number" name="decks" value="1" min="1" max="5"/></label>
-                 <!--&nbsp-->
-                <label class="">Rounds: &nbsp<input class="form-control-sm select-input" type="number" name="rounds" value="2" min="2"/></label><br>
+                <!--&nbsp-->
+                <label class="">Rounds: &nbsp<input class="form-control-sm select-round" type="number" name="rounds" value="2" min="2"/></label><br>
             </div>
             <div class="row justify-content-between">
                 <label class="ml-3">Player 1: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" John" value="damian" minlength="4" required/></label><br>
-                <label class="ml-3">Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni" minlength="4" required/></label><br>
+                <label class="ml-4">Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni" minlength="4" required/></label><br>
             </div>
             <div class="row extend justify-content-between"></div>
-            <input type="submit" class="btn btn-warning btn-block mt-3" value="Start!">
+            <input type="submit" class="btn btn-warning mt-2" value="Start!">
         </div>
     </form>
+
+    <a class="mt-3" href="#guide"><i class="fas fa-angle-double-down"></i></a>
+
 </div>
 
+<div class="index-div index-2">
+
+    <h2 class="mx-auto mt-3 mb-4">BLACKJACK</h2>
+
+    <div class="my-auto">
+        <p>
+            This is a Blackjack game made by using Flask, Python, JavaScript, jQueries, HTML, CSS, and SASS. The game is entirely based on points rather than actual money. Players will take turns to play against the house. If the player wins, he/she will be awarded
+            a point, otherwise the next player in line will take his/her turn. The scores can be tracked live on the dedicated scoreboard. By the end of the final round, the scores are counted and the player with the highest score will be declared as
+            the winner. 
+        </p>
+        <p>Before starting the game, please take a glance at the quick guide to this particular game found <a href="#guide">here</a> to familiarise yourself with how the functions.</p>
+        
+        <h3 class="mt-5">Quick Guide to the interface</h3>
+        <p> 
+            <strong>Players </strong>sets the numbers of players. Up to four people can play at the same time. <strong>Decks </strong>sets the number of the decks in each play. 
+            Increasing the number of decks will make it fairly difficult to count cards. The highest number of decks allowed is 5.
+            <strong>Rounds </strong>sets the numbers of rounds per session. The lower the rounds the shorter the game and vice versa. There is no limit for number of rounds to be played.
+        </p>
+        
+        
+    </div>
+
+    <p class="ml-auto lead">created by Damian Rodbari</p>
+</div>
+
+<div class="index-div index-3">
+</div>
+
+<div class="index-div index-4" id="guide">
+
+    <h2 class="mx-auto mt-3">Quick Guide</h2>
+    <div class="my-auto">
+    <p >
+        Blackjack may be played with one to eight decks of 52-card decks. The cards 2 through 10 are worth their face value. Kings, queens, and jacks are each worth 10, and aces may be used as either 1 or 11. The object for the player is to draw cards totalling
+        closer to 21, without going over, than the dealer's cards. The best total of all is a two-card 21, or a blackjack.
+    </p>
+    
+    <p> HIT </p>
+    <p> STAND </p>
+    <p> BUST </p>
+    <p> BLACKJACK </p>
+    <p> NEXT PLAYER </p>
+    <p> SCOREBOARD </p>
+    <p> RESET GAME </p>
+    </div>
+</div>
 
 
 {% endblock %}
