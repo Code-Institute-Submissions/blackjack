@@ -87,6 +87,9 @@ footer a {
     font-size: 25px;
     align-self: center;
     color: #ffc107; }
+  @media screen and (max-width: 500px) {
+    .wrapper-index {
+      background-image: url(../img/theming/bj-sm.jpg); } }
 
 .index-div {
   width: 100%;
@@ -113,6 +116,9 @@ footer a {
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px; }
+  @media screen and (max-width: 500px) {
+    .index-3 {
+      background-image: url(../img/theming/bj2-sm.jpg); } }
 
 .index-4 {
   background-color: #ff6600; }

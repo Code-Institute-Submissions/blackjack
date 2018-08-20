@@ -32,12 +32,17 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+
     a {
         font-size: 25px;
         align-self: center;
         color: map-get($color, mustard);
     }
 
+    @include mQ("maxW",
+    500px) {
+        background-image: url(../img/theming/bj-sm.jpg);
+    }
 
 }
 
@@ -75,6 +80,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 400px;
+
+    @include mQ("maxW",
+    500px) {
+        background-image: url(../img/theming/bj2-sm.jpg);
+    }
 }
 
 .index-4 {
@@ -122,8 +132,8 @@ form {
                 align-items: flex-end; // label {
                 label {
                     margin-right: 30px;
-                }  
-                
+                }
+
             }
         }
     }
