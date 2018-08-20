@@ -6,8 +6,15 @@ $(document).ready(function() {
         set_players($("#players")); // passing in item $("#players") into the function
     })
 
+    // disable enter on the form, this will stop incomplete form submissions,  
+    $(document).on('keyup keypress', 'form input[type="text"]', function(event) {
+      if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
 
-
+    // jQuery smooth scroll
     $(document).ready(function(){
       // Add smooth scrolling to all links
       $("a").on('click', function(event) {
@@ -24,19 +31,13 @@ $(document).ready(function() {
           // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
           $('html, body').animate({
             scrollTop: $(hash).offset().top
-          }, 800, function(){
-       
-            // Add hash (#) to URL when done scrolling (default click behavior)
-            window.location.hash = hash;
-          });
+          }, 1500);
         } // End if
       });
     });
 
-
-
-
 })
+
 
 // console.log turned into a function for cleaner/shorter codes,  
 // ease of use and faster progress.

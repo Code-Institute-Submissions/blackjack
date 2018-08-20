@@ -57,9 +57,9 @@ deck = Deck() # create deck initially with only 1 deck of cards
     #   leave more comments
 
 # to ask/DO
-# couldnt deploy to heroku, app.py  could not be located --- RESOLVED!!!!!!!
-# how do i start with the card faced down? --- RESOLVED!!!
-# how do i address multiple winners, house win, no winners and a winner --- RESOLVED!!!
+# couldnt deploy to heroku, app.py  could not be located --- DONE!!!!!!!
+# how do i start with the card faced down? --- DONE!!!!
+# how do i address multiple winners, house win, no winners and a winner --- DONE!!
 # what to do if the same name was entered repeatedly? should i switch to wtforms? jquery validate?
 # create fall back for session if expired ???
 # index:    
@@ -68,7 +68,8 @@ deck = Deck() # create deck initially with only 1 deck of cards
 #           add more content if they scrol down 
 #           make it responsive
 #           animate scroll effects on all links https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll
-#           make the navbar collapse with the hamburger
+#                   Add hash (#) to URL when done scrolling (default click behavior) WHY??????
+#           make the navbar collapse with the hamburger-- DONE!!
 
 # unittesting?
 
@@ -134,8 +135,8 @@ def game():
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play
     session["current_player"]= username     # current player
-    verdict = "UNDECIDED" 
-    
+    verdict = "UNDECIDED"                   # is this really needed now? YES, if nothing's been posted we want UNDECIDED to be passed through to the template
+
     if request.method == "POST":
         
         print("request.form.keys() = ", request.form.keys())
@@ -166,8 +167,6 @@ def game():
             session["houseHand"] = house_hand
             
             verdict = get_verdict(session["playerHand"], session["houseHand"])
-
-            
 
         print("scores = ", scores)
 

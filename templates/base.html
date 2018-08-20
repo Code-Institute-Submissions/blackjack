@@ -23,15 +23,19 @@
 
     <!--header-->
     <header>
-        <nav class="navbar">
+        <nav class="navbar navbar-expand-sm navbar-light bg-warning ">
             <a class="navbar-brand" href="{{ url_for('index') }}">
                 <h2>Damianism</h2>
             </a>
-            <div class="nav-items navigation ">
-                <a class="nav-link" target="_blank" href="{{ url_for('index') }}k">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Blackjack">History <span class="sr-only">(current)</span></a>
-                <a class="nav-link" target="_blank" href="#">Briefing <span class="sr-only"></span></a>
-                <a class="nav-link" target="_blank" href="#">Resources<span class="sr-only"></span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link active" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" target="_blank" href="https://en.wikipedia.org/wiki/Blackjack">History</a>
+                    <!--<a class="nav-item nav-link" href="contact.html">Contact</a>-->
+                </div>
             </div>
         </nav>
     </header>

@@ -4,34 +4,23 @@ html, body {
 }
 
 // -------------------------------------------------------- Nav
-
-nav {
-    height: pix2Rem(50);
-    background-color: map-get($color, mustard);
+.navbar {
+    padding: 0 1rem;
     
-    padding: 0px !important;  // needed to resolve a bug persistent bug on firefox and edge.
-    
-    .navbar-brand {
-        padding-left: 20px;
-    }
+    .navbar-nav {
 
-    h2,
-    .nav-items {
-        color: map-get($color, black) !important;
-    }
-
-    .nav-items {
-        display: flex;
-        flex-direction: row;
-
-        a {
-            color: map-get($color, black);
-            // font-weight: bold;
-            &:hover {
+        .nav-link {
+            text-align: center;
+            margin: 0.2rem 0;
+            
+            &.active {
+                font-weight: 500;
+            }
+            
+            &:hover, &:focus {
                 color: map-get($color, mustard);
-                font-weight: bold;
                 background-color: map-get($color, black);
-                border-radius: 10px;
+                border-radius: 5px;
             }
         }
     }
