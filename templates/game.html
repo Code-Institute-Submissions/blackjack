@@ -4,14 +4,7 @@
 
 {% block content %}
 <div class="wrapper-game">
-    
-    <!--<section class="house-container"></section>-->
-    <!--<section class="scoreboard-container"></section>-->
-    <!--<section class="player-container"></section>-->
-    
-    
-    
-    
+
     <h1 class="text-center mt-3 mb-4">Welcome to the game, {{ usernames[seq].title() }}!</h1>
     <div class="wrapper">
         <section>
@@ -25,12 +18,13 @@
                         but it's unnecessary as the there's already an ordered list with the data-->
                         {% for username in usernames %}
                         <tr>
-                            <td>{{ username.title() }}:</td>
                             {% if username == usernames[seq] %}
-                                <td class="score">{{ scores[username] }} &nbsp &#8678; </td>
+                                <td> &#8680; &nbsp</td>
                             {% else %}
-                                <td class="score">{{ scores[username] }}</td>
+                                <td> &nbsp &nbsp</td>
                             {% endif %}
+                            <td>{{ username.title() }}:</td>
+                            <td class="score">{{ scores[username] }}</td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -73,7 +67,7 @@
             {% endif %}
             <div class="deck_player">
                 {% for card in player["hand"] %}
-                <img src="../static/img/cards/{{ card }}" width="150" alt="{{ card }}"></img>
+                <img src="../static/img/cards/{{ card }}" alt="{{ card }}"></img>
                 {% endfor %}
             </div>
         </section>

@@ -181,16 +181,18 @@ form {
   position: absolute;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7); }
   .player_banner p {
     font-size: 120px;
     font-weight: 700;
-    color: black;
+    color: #ffc107;
     padding: 0px;
     margin: 0px; }
 
 .deck_player img {
-  margin: 5px 0px; }
+  margin: 5px 0px;
+  width: 150px; }
 
 .player_selections {
   margin: 20px 0; }
@@ -271,8 +273,8 @@ form {
     background: linear-gradient(to bottom, #07931c, #096109); }
 
 .scoreboard {
-  width: 16.25rem;
-  height: 25rem;
+  width: 18.75rem;
+  height: 28.125rem;
   background-color: #000000;
   color: #eeff00;
   font-weight: bold;
@@ -284,7 +286,8 @@ form {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  border: 5px double yellow; }
   .scoreboard h3 {
     text-decoration: underline;
     text-align: center; }
@@ -306,7 +309,7 @@ form {
     justify-content: space-between; }
     .scoreboard .verdict p {
       margin-bottom: 0;
-      font-size: 50px;
+      font-size: 40px;
       font-weight: bold; }
     .scoreboard .verdict .pCounter {
       font-size: 100px; }

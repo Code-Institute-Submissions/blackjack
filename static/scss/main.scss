@@ -185,10 +185,11 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0,0,0,0.7);
     p {
         font-size: 120px;
         font-weight: 700;
-        color: black;
+        color: map-get($color, mustard);
         padding: 0px;
         margin: 0px;
     }
@@ -197,6 +198,7 @@ form {
 .deck_player {
     img {
         margin: 5px 0px;
+        width: 150px;
     }
 }
 
@@ -284,8 +286,8 @@ form {
 
 // ===============================
 .scoreboard {
-    @include scoreBoard(260,
-    400,
+    @include scoreBoard(300,
+    450,
     black,
     yellow,
     bold,
@@ -297,6 +299,7 @@ form {
         flex-flow: column nowrap;
         align-items: center;
         justify-content: space-between;
+        border: 5px double yellow;
     }
 
     h3 {
@@ -327,7 +330,7 @@ form {
         
         p {
             margin-bottom: 0;
-            font-size: 50px;
+            font-size: 40px;
             font-weight: bold;
         }
         .pCounter{
