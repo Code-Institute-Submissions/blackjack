@@ -1,56 +1,94 @@
 {% extends "base.html" %} 
-{% block title %} Game levels {% endblock %}
+{% block title %} {{ usernames[seq].title() }} playing ... {% endblock %}
 
 
 {% block content %}
-<div class="container">
-    <h1>welcome to the game, {{ usernames[seq].title() }}!</h1>
+<div class="wrapper-game">
+    
+    <!--<section class="house-container"></section>-->
+    <!--<section class="scoreboard-container"></section>-->
+    <!--<section class="player-container"></section>-->
+    
+    
+    
+    
+    <h1 class="text-center mt-3 mb-4">Welcome to the game, {{ usernames[seq].title() }}!</h1>
     <div class="wrapper">
         <section>
-            <div class="console">
-                <h3>Scoreboard</h3>
-
-                <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
-                <table>
-                    <!--  pulling the names out of the original list rather than the 
-                    score dictionary to keep the order the same - an OrderedDict could be used for score dictionary
-                    but it's unnecessary as the there's already an ordered list with the data-->
-                    {% for username in usernames %}
-                    <tr>
-                        <td>{{ username.title() }}:</td>
-                        <td class="score">{{ scores[username] }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
+            <div class="scoreboard">
+                <div>
+                    <h3>Scoreboard</h3>
+                    <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
+                    <table>
+                        <!--  pulling the names out of the original list rather than the 
+                        score dictionary to keep the order the same - an OrderedDict could be used for score dictionary
+                        but it's unnecessary as the there's already an ordered list with the data-->
+                        {% for username in usernames %}
+                        <tr>
+                            <td>{{ username.title() }}:</td>
+                            {% if username == usernames[seq] %}
+                                <td class="score">{{ scores[username] }} &nbsp &#8678; </td>
+                            {% else %}
+                                <td class="score">{{ scores[username] }}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="verdict">
+                    <h4> {{ usernames[seq].title() }} playing</h4>
+                    {% if verdict == "PLAYER" %}
+                        <p>{{ usernames[seq].title()  }} WINS!</p>
+                    {% elif verdict == "HOUSE" %}
+                        <p>{{ verdict  }} WINS!</p>
+                    {% elif verdict == "PUSH" %}
+                        <p>{{ verdict  }}!</p>
+                    {% else %}
+                        <p class="pCounter">{{ player["value"][0] }}</p>
+                    {% endif %}
+                </div>
+                
             </div>
         </section>
         
         <section>
             <div class="house" id="house" data-house="{{ house|tojson }}">
-                <p>Count: {{ house["value"] }}  outcome= {{ verdict }}</p>
+                <p>Count: {{ house["value"] }} {{ verdict  }}</p>
                 {% for card in house["hand"] %}
-                <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
+                <img src="../static/img/cards/{{ card }}" width="150" alt="{{ card }}"></img>
                 {% endfor %}
             </div>
         </section>
     </div>
     <div>
-        <section>
-            <h3> {{ usernames[seq].title() }} playing</h3>
-            <div class="player">
-                <p>Count: {{ player["value"] }}</p>
+        <section class="player">
+            {% if player["value"][1] == "BUST" %}
+                <div class="player_banner"><p>BUST</p></div>
+            {% elif verdict == "PLAYER" %}
+                <div class="player_banner"><p>WINNER!</p></div>
+            {% elif verdict == "HOUSE" %}
+                <div class="player_banner"><p>LOST!</p></div>
+            {% elif verdict == "PUSH" %}
+                <div class="player_banner"><p>PUSH!</p></div>
+            {% endif %}
+            <div class="deck_player">
                 {% for card in player["hand"] %}
-                <img src="../static/img/cards/{{ card }}" width="200" alt="{{ card }}"></img>
+                <img src="../static/img/cards/{{ card }}" width="150" alt="{{ card }}"></img>
                 {% endfor %}
             </div>
         </section>
     </div>
     
     <form method="POST" class="player_selections">
-        <input type="submit" class="btn btn-warning" id="hit" name="hit" value="HIT">
-        <input type="submit" class="btn btn-warning" id="stand" name="stand" value="STAND">
-        <input type="submit" class="btn btn-warning" id="reset" name="reset" value="reset game!">
-        <input type="submit" class="btn btn-success btn-lg" id="next" name="next" value="next player">
+        <input type="submit" class="console-btn" id="reset" name="reset" value="RESET GAME">
+        <div class="console">
+            <input type="submit" class="console-btn btn" id="stand" name="stand" value="STAND">
+            <div class="mini_counter">
+                <p>{{ player["value"][0] }}</p>
+            </div> 
+            <input type="submit" class="console-btn btn" id="hit" name="hit" value="HIT">
+        </div>
+        <input type="submit" class="console-btn-next" id="next" name="next" value="NEXT PLAYER">
     </form>
 </div>
 {% endblock %}
@@ -58,26 +96,32 @@
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
 <script>
-    // var house_dict = {{ house|tojson }};
 
     var game_verdict = {{ verdict|tojson }};
-    console.log("game_verdict = ", game_verdict)
+    var player_verdict = {{ player["value"][1]|tojson }};
+
 
     if (game_verdict !== "UNDECIDED") { 
-        console.log("BUST")
+
         $("#hit").prop('disabled', true);
         $("#stand").prop('disabled', true);
         $('#next').removeAttr('disabled');
 
     } else {
-        console.log("not BUST yet!")
         $('#hit').removeAttr('disabled');
         $('#stand').removeAttr('disabled');
         $("#next").prop('disabled', true);
-        $('#next').css("background-color", "grey");
-        // $('#next').css("color", "grey");
+        $("#next").css('visibility', 'hidden')
     }
-
+    
+    if (player_verdict === "BLACKJACK") {
+        $(".mini_counter").css("background-color", "green")
+        $(".mini_counter").css("border", "3px solid #000000")
+        $(".mini_counter").css("border-radius", "5px")
+        $(".mini_counter > p").css("color", "black")
+    }
+    
+    
 </script>
 
 

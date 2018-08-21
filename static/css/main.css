@@ -16,9 +16,6 @@ html, body {
       background-color: #000000;
       border-radius: 5px; }
 
-#main-content {
-  min-height: calc(100% - 168px); }
-
 .footer-container {
   background-color: #ffc107; }
 
@@ -157,40 +154,161 @@ form {
           form.index #extras label {
             margin-right: 30px; } }
 
+.wrapper-game {
+  margin: 0.625rem 1.25rem; }
+  .wrapper-game .player_selections {
+    display: flex;
+    justify-content: space-between; }
+
+.player {
+  margin: 10px auto;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-image: url(../img/theming/carpet.png);
+  background-repeat: repeat;
+  background-size: cover;
+  border-radius: 10px;
+  border: 5px black solid; }
+
+.player_banner {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .player_banner p {
+    font-size: 120px;
+    font-weight: 700;
+    color: black;
+    padding: 0px;
+    margin: 0px; }
+
+.deck_player img {
+  margin: 5px 0px; }
+
 .player_selections {
   margin: 20px 0; }
+  .player_selections .btn {
+    padding: 0 !important; }
+  .player_selections .console {
+    display: flex; }
+    .player_selections .console .mini_counter {
+      background: black;
+      color: yellow;
+      width: 60px;
+      margin: 0 5px;
+      border-radius: 5px;
+      border: 3px solid black; }
+      .player_selections .console .mini_counter p {
+        margin-bottom: 0;
+        font-size: 30px;
+        font-weight: bold; }
 
-.jumbotron-fluid {
-  background-image: url(../img/theming/blackjack.jpg);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #ffffff;
-  height: calc(100vh - 168px);
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  justify-content: center; }
+#reset,
+#next {
+  width: 200px; }
 
-.console {
-  background-color: black;
-  width: 230px;
-  height: 250px;
-  color: yellow;
+.console-btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  color: #000000;
+  text-decoration: none;
+  -webkit-box-shadow: #000000 0px 0px 18px 0px;
+  -moz-box-shadow: #000000 0px 0px 18px 0px;
+  box-shadow: #000000 0px 0px 18px 0px;
+  text-shadow: #0a0101 0px 0px 1px;
+  font: normal normal bold 22px verdana;
+  background: #fad900;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fad900), to(#f5a316));
+  background: -moz-linear-gradient(top, #fad900, #f5a316);
+  background: linear-gradient(to bottom, #fad900, #f5a316);
+  width: 100px; }
+  .console-btn:hover, .console-btn:focus {
+    background: #ffff00;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffff00), to(#ffc41a));
+    background: -moz-linear-gradient(top, #ffff00, #ffc41a);
+    background: linear-gradient(to bottom, #ffff00, #ffc41a);
+    color: #000000;
+    text-decoration: none; }
+
+.console-btn-next {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  color: #000000;
+  text-decoration: none;
+  -webkit-box-shadow: #000000 0px 0px 18px 0px;
+  -moz-box-shadow: #000000 0px 0px 18px 0px;
+  box-shadow: #000000 0px 0px 18px 0px;
+  text-shadow: #0a0101 0px 0px 1px;
+  font: normal normal bold 22px verdana;
+  background: #0cf52f;
+  background: -webkit-gradient(linear, left top, left bottom, from(#0cf52f), to(#096109));
+  background: -moz-linear-gradient(top, #0cf52f, #096109);
+  background: linear-gradient(to bottom, #0cf52f, #096109); }
+  .console-btn-next:hover, .console-btn-next:focus {
+    background: #0eff38;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0eff38), to(#0b740b));
+    background: -moz-linear-gradient(top, #0eff38, #0b740b);
+    background: linear-gradient(to bottom, #0eff38, #0b740b);
+    color: #000000;
+    text-decoration: none; }
+  .console-btn-next:active {
+    background: #07931c;
+    background: -webkit-gradient(linear, left top, left bottom, from(#07931c), to(#096109));
+    background: -moz-linear-gradient(top, #07931c, #096109);
+    background: linear-gradient(to bottom, #07931c, #096109); }
+
+.scoreboard {
+  width: 16.25rem;
+  height: 25rem;
+  background-color: #000000;
+  color: #eeff00;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1;
   border-radius: 5%;
-  line-height: 1.0;
-  text-align: left;
   white-space: nowrap;
-  padding: 10px 20px 20px 20px; }
-  .console h3 {
+  padding: 5px 20px 20px 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between; }
+  .scoreboard h3 {
     text-decoration: underline;
     text-align: center; }
-  .console p {
+  .scoreboard p {
     text-align: center;
     font-size: medium; }
-  .console .score {
+  .scoreboard .score {
     padding-left: 70px; }
+  .scoreboard .verdict {
+    border-style: double;
+    height: 200px;
+    border-radius: 10px;
+    padding: 8px 8px 20px 8px;
+    text-align: center;
+    width: 200px;
+    white-space: normal;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between; }
+    .scoreboard .verdict p {
+      margin-bottom: 0;
+      font-size: 50px;
+      font-weight: bold; }
+    .scoreboard .verdict .pCounter {
+      font-size: 100px; }
 
 /*# sourceMappingURL=main.css.map */
