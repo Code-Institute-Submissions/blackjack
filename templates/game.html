@@ -5,10 +5,10 @@
 {% block content %}
 <div class="wrapper-game">
 
-    <h1 class="text-center mt-3 mb-4">Welcome to the game, {{ usernames[seq].title() }}!</h1>
+    <h1 class="text-center mt-3 mb-4 welcome">Welcome to the game, {{ usernames[seq].title() }}!</h1>
     <div class="wrapper">
-        <section>
-            <div class="scoreboard">
+        <section class="scoreboard">
+            <!--<div class="scoreboard">-->
                 <div>
                     <h3>Scoreboard</h3>
                     <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
@@ -42,15 +42,24 @@
                     {% endif %}
                 </div>
                 
-            </div>
+            <!--</div>-->
         </section>
         
-        <section>
-            <div class="house" id="house" data-house="{{ house|tojson }}">
-                <p>Count: {{ house["value"] }} {{ verdict  }}</p>
+        <section class="house">
+            <div  id="house">
+                {% if house["value"][1] == "BUST" %}
+                    <div class="house_banner"><p>BUST</p></div>
+                {% elif house["value"][1] == "BLACKJACK" %}
+                    <div class="house_banner"><p>BLACKJACK</p></div>
+                {% endif %}
                 {% for card in house["hand"] %}
                 <img src="../static/img/cards/{{ card }}" width="150" alt="{{ card }}"></img>
                 {% endfor %}
+            </div>
+            <div>
+                {% if house["value"][1] != "empty" %}
+                    <div class="house_counter"><p>{{ house["value"][0] }} </p></div>
+                {% endif %}
             </div>
         </section>
     </div>

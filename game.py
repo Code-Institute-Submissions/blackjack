@@ -51,7 +51,7 @@ def convert_card_names(cards):
     if cards:
         conversions = list(card[1] + "_of_" + card[0] + ".png" for card in cards)
     else:
-        conversions = ["back.jpg","back.jpg"]
+        conversions = ["back.png","back.png"]
     
     print("convert_card_names():    conversions = ", conversions)
     return conversions

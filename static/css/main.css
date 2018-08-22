@@ -16,6 +16,9 @@ html, body {
       background-color: #000000;
       border-radius: 5px; }
 
+#main-content {
+  min-height: calc(100% - 168px); }
+
 .footer-container {
   background-color: #ffc107; }
 
@@ -60,6 +63,212 @@ html, body {
 footer a {
   color: #000000; }
 
+/*   scoreboard */
+.scoreboard {
+  width: 18.75rem;
+  height: 28.125rem;
+  background-color: #000000;
+  color: #eeff00;
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 10px;
+  white-space: nowrap;
+  padding: 5px 20px 20px 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  border: 5px double yellow; }
+  .scoreboard h3 {
+    text-decoration: underline;
+    text-align: center; }
+  .scoreboard p {
+    text-align: center;
+    font-size: medium; }
+  .scoreboard .score {
+    padding-left: 70px; }
+  .scoreboard .verdict {
+    border-style: double;
+    height: 200px;
+    border-radius: 10px;
+    padding: 8px 8px 20px 8px;
+    text-align: center;
+    width: 250px;
+    white-space: normal;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between; }
+    .scoreboard .verdict p {
+      margin-bottom: 0;
+      font-size: 55px;
+      font-weight: bold; }
+    .scoreboard .verdict .pCounter {
+      font-size: 120px; }
+
+/*   house */
+.house {
+  background-image: url(../img/theming/carpet.png);
+  background-repeat: repeat;
+  background-size: cover;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px double black;
+  margin-left: 10px; }
+  .house .house_counter {
+    background: black;
+    color: yellow;
+    margin: 0 5px;
+    border-radius: 5px;
+    border: 3px solid black;
+    width: 100px;
+    text-align: center; }
+    .house .house_counter p {
+      margin-bottom: 0;
+      font-size: 60px;
+      font-weight: bold;
+      text-auto: center; }
+
+#house {
+  position: relative; }
+  #house .house_banner {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.7); }
+    #house .house_banner p {
+      font-size: 120px;
+      font-weight: 700;
+      color: #ffc107;
+      padding: 0px;
+      margin: 0px; }
+
+/*   house */
+.player {
+  margin: 10px auto;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-image: url(../img/theming/carpet.png);
+  background-repeat: repeat;
+  background-size: cover;
+  border-radius: 10px;
+  border: 5px black solid; }
+
+.player_banner {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7); }
+  .player_banner p {
+    font-size: 120px;
+    font-weight: 700;
+    color: #ffc107;
+    padding: 0px;
+    margin: 0px; }
+
+.deck_player img {
+  margin: 5px 0px;
+  width: 150px; }
+
+.player_selections {
+  margin: 20px 0; }
+  .player_selections .btn {
+    padding: 0 !important; }
+  .player_selections .console {
+    display: flex; }
+    .player_selections .console .mini_counter {
+      background: black;
+      color: yellow;
+      width: 60px;
+      margin: 0 5px;
+      border-radius: 5px;
+      border: 3px solid black; }
+      .player_selections .console .mini_counter p {
+        margin-bottom: 0;
+        font-size: 30px;
+        font-weight: bold; }
+
+.results {
+  width: 50rem;
+  height: 17.5rem;
+  background-color: #000000;
+  color: #eeff00;
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 10px;
+  white-space: nowrap;
+  padding: 5px 20px 20px 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  border: 5px double yellow;
+  margin: 0px auto;
+  padding: 20px; }
+  .results .results-right {
+    align-self: center;
+    border: 5px dotted yellow;
+    border-radius: 10px;
+    padding: 35px; }
+    .results .results-right p {
+      font-size: 70px; }
+  .results h3 {
+    text-decoration: underline;
+    text-align: center; }
+  .results p {
+    text-align: center;
+    font-size: medium; }
+  .results table {
+    width: 140px; }
+
+@media screen and (max-height: 650px) {
+  /*   welcome message */
+  .welcome {
+    display: none; }
+
+  /*   scoreboard */
+  .scoreboard {
+    width: 540px;
+    height: 226px;
+    align-items: flex-start;
+    flex-flow: row nowrap; }
+
+  /*   house */
+  .house .house_counter {
+    width: 50px; }
+    .house .house_counter p {
+      margin-bottom: 0;
+      font-size: 25px;
+      font-weight: bold;
+      text-auto: center; }
+  .house img {
+    width: 70px; }
+
+  #house .house_banner {
+    background-color: rgba(0, 0, 0, 0.4); }
+    #house .house_banner p {
+      font-size: 70px; } }
 .intro {
   display: flex;
   align-items: flex-start; }
@@ -155,64 +364,16 @@ form {
             margin-right: 30px; } }
 
 .wrapper-game {
-  margin: 0.625rem 1.25rem; }
+  padding: 0.625rem 1.25rem; }
   .wrapper-game .player_selections {
     display: flex;
     justify-content: space-between; }
-
-.player {
-  margin: 10px auto;
-  position: relative;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  background-image: url(../img/theming/carpet.png);
-  background-repeat: repeat;
-  background-size: cover;
-  border-radius: 10px;
-  border: 5px black solid; }
-
-.player_banner {
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  z-index: 10;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.7); }
-  .player_banner p {
-    font-size: 120px;
-    font-weight: 700;
-    color: #ffc107;
-    padding: 0px;
-    margin: 0px; }
-
-.deck_player img {
-  margin: 5px 0px;
-  width: 150px; }
-
-.player_selections {
-  margin: 20px 0; }
-  .player_selections .btn {
-    padding: 0 !important; }
-  .player_selections .console {
-    display: flex; }
-    .player_selections .console .mini_counter {
-      background: black;
-      color: yellow;
-      width: 60px;
-      margin: 0 5px;
-      border-radius: 5px;
-      border: 3px solid black; }
-      .player_selections .console .mini_counter p {
-        margin-bottom: 0;
-        font-size: 30px;
-        font-weight: bold; }
+  @media screen and (min-height: 1300px) {
+    .wrapper-game {
+      height: calc(100vh - 194px); } }
 
 #reset,
+#reset_winner,
 #next {
   width: 200px; }
 
@@ -272,46 +433,11 @@ form {
     background: -moz-linear-gradient(top, #07931c, #096109);
     background: linear-gradient(to bottom, #07931c, #096109); }
 
-.scoreboard {
-  width: 18.75rem;
-  height: 28.125rem;
-  background-color: #000000;
-  color: #eeff00;
-  font-weight: bold;
-  font-size: 1.25rem;
-  line-height: 1;
-  border-radius: 5%;
-  white-space: nowrap;
-  padding: 5px 20px 20px 20px;
+.wrapper-winner {
+  padding: 1.25rem 6.25rem;
+  min-height: calc(100vh - 168px);
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-between;
-  border: 5px double yellow; }
-  .scoreboard h3 {
-    text-decoration: underline;
-    text-align: center; }
-  .scoreboard p {
-    text-align: center;
-    font-size: medium; }
-  .scoreboard .score {
-    padding-left: 70px; }
-  .scoreboard .verdict {
-    border-style: double;
-    height: 200px;
-    border-radius: 10px;
-    padding: 8px 8px 20px 8px;
-    text-align: center;
-    width: 200px;
-    white-space: normal;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between; }
-    .scoreboard .verdict p {
-      margin-bottom: 0;
-      font-size: 40px;
-      font-weight: bold; }
-    .scoreboard .verdict .pCounter {
-      font-size: 100px; }
+  justify-content: space-between; }
 
 /*# sourceMappingURL=main.css.map */

@@ -48,13 +48,13 @@ def apply_verdict(verdict):
 deck = Deck() # create deck initially with only 1 deck of cards
 
     # left to do:
-    #   if player.hand value is greater than 18, the STAND button should pulsate
+    #   if player.hand value is greater than 18, the STAND button should pulsate --DONE!
     #   unittests
     #   responsiveness
     #   theming and layout
-    #   expanding on sass
+    #   expanding on sass   -- DONE!
     #   readme file
-    #   leave more comments
+    #   leave more comments -- DONE!
 
 # to ask/DO
 # couldnt deploy to heroku, app.py  could not be located --- DONE!!!!!!!
@@ -63,10 +63,10 @@ deck = Deck() # create deck initially with only 1 deck of cards
 # what to do if the same name was entered repeatedly? should i switch to wtforms? jquery validate?
 # create fall back for session if expired ???
 # index:    
-#           stop submission when enter is pressed or at least check to see if everything was entered
-#           center the main input area on the index
+#           stop submission when enter is pressed or at least check to see if everything was entered --- DONE!
+#           center the main input area on the index -- DONE!
 #           add more content if they scrol down 
-#           make it responsive
+#           make it responsive -- DONE!
 #           animate scroll effects on all links https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll
 #                   Add hash (#) to URL when done scrolling (default click behavior) WHY??????
 #           make the navbar collapse with the hamburger-- DONE!!
