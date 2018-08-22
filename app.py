@@ -9,7 +9,7 @@ from game import *
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = os.urandom(24)
+app.secret_key = os.urandom(24) # generate secret key randomly and safely
 
 
 def reset_table(restart=False, increment_seq=False, increment_score=False):
@@ -31,7 +31,6 @@ def reset_table(restart=False, increment_seq=False, increment_score=False):
     session["playerHand"] = deck.deal(2)  # deal 2 new cards to player
 
 
-    
 def apply_verdict(verdict):
     """ APPLY points based on the passed verdict """
 
@@ -43,15 +42,14 @@ def apply_verdict(verdict):
         reset_table(increment_seq=True)
             
 
-
 # defining globals
 deck = Deck() # create deck initially with only 1 deck of cards
 
     # left to do:
     #   if player.hand value is greater than 18, the STAND button should pulsate --DONE!
     #   unittests
-    #   responsiveness
-    #   theming and layout
+    #   responsiveness 
+    #   theming and layout  -- DONE! still needs cleaning up
     #   expanding on sass   -- DONE!
     #   readme file
     #   leave more comments -- DONE!
@@ -79,9 +77,9 @@ def base():
     return render_template("base.html")
 
 
-# Welcome view - add more comments
 @app.route("/", methods=["POST","GET"])
 def index():
+    """ welcome view where players data is initially gathered """
     
     reset_table() # start fresh by clearing the session, resetting the deck
     
@@ -116,10 +114,10 @@ def index():
         # expanding on the uses data held in session
         session["seq"] = 0              # player turn tracker
         session["rounds_played"] = 0    # round tacker
-        session["won"] = "TBC"             # winner(s) to be declared
+        session["won"] = "TBC"          # winner(s) to be declared
         
         # by this point all the basic player data is now stored in the session.
-        print("session = ", session)
+        # print("session = ", session) # uncomment to check session data
         
         # if POST then redirect to the first player in game view
         return redirect( url_for('game') )
@@ -127,10 +125,10 @@ def index():
     return render_template("index.html")
     
 
-# game page - add more comments - docstring
+
 @app.route("/game", methods=["POST","GET"])
 def game():
-    
+
     scores = session["score"]               # holds all the scores
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play
@@ -138,8 +136,6 @@ def game():
     verdict = "UNDECIDED"                   # is this really needed now? YES, if nothing's been posted we want UNDECIDED to be passed through to the template
 
     if request.method == "POST":
-        
-        print("request.form.keys() = ", request.form.keys())
         
         if "reset" in request.form.keys():
             # reseting mechanism - triggered via the reset button
@@ -150,14 +146,11 @@ def game():
             verdict = get_verdict(session["playerHand"], session["houseHand"])
             apply_verdict(verdict)
 
-
         if "hit" in request.form.keys():
             # deals one card to the player
             session["playerHand"].append(deck.deal())
         
-        
         verdict = get_verdict(session["playerHand"], session["houseHand"])
-
         
         if "stand" in request.form.keys():
             # house gets cards until one of the below conditions is met.
@@ -168,15 +161,11 @@ def game():
             
             verdict = get_verdict(session["playerHand"], session["houseHand"])
 
-        print("scores = ", scores)
-
         # reseting mechanism - simulating a full cycle - each full cycle means 1 round
         if session["seq"] >= len( session["username"] ):
             session["seq"] = 0              # reset the sequence counter to cycle back to the first player
             session["rounds_played"] += 1   # when a cycle is complete, one found of game has been played by all the player!
-            
-            print("rounds played = ", session["rounds_played"])
-            
+
             # game has eneded, declare the winner if there is one
             if session["rounds_played"] == session["rounds"]:
                 
@@ -185,7 +174,7 @@ def game():
 
                 return redirect( url_for('winner') ) 
 
-
+    # dictionaries will be easier to handle on the template and less variables are needed to be passed.
     player_dict = {"hand": convert_card_names( session["playerHand"] ), "value" : get_hand_value( session["playerHand"] ) }
     house_dict  = {"hand": convert_card_names( session["houseHand"] ), "value" : get_hand_value( session["houseHand"] ) }
     round_dict  = {"total": session["rounds"], "played": session["rounds_played"]+1}
@@ -194,9 +183,9 @@ def game():
         rounds=round_dict, player=player_dict, house=house_dict, verdict=verdict)
     
 
-# show the winner if there is any - add more comments
 @app.route("/winner", methods=["POST","GET"])
 def winner():
+    """ select the winner if there is any """
     
     if request.method == "POST":
     
