@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Zilla+Slab+Highlight:400,700');
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+// @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Zilla+Slab+Highlight:400,700');
+// @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 @import "globals";
 @import "colors";
 @import "mixins";
@@ -90,6 +90,46 @@
 
 .index-4 {
     background-color: map-get($color, orange);
+    
+    
+    
+    
+    ul {
+        font-size: 20px;
+    }
+
+    h3 {
+        margin-top: 50px;
+    }
+    
+    img {
+        display: block;
+        margin: 5px 20px 0 0;
+    }
+
+    
+    .qg-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        // margin-left: auto;
+        // margin-right: auto;
+        margin: 20px auto;
+        // width: 90%;
+        align-items: flex-start;
+        
+        p {
+            flex-basis: 80%;
+        }
+    }
+    
+    .stack {
+        display: flex;
+        flex-flow: column wrap;
+        margin-bottom: 20px;
+    }
+    
+    
 }
 
 
@@ -143,21 +183,27 @@ form {
 // ========================================= game.html
 .wrapper-game {
     padding: pix2Rem(10) pix2Rem(20); // display: flex;
+    // height: calc(100vh - 168px);
     .player_selections {
         display: flex;
         justify-content: space-between;
     }
 
-    @include mQ("minH",
-    1300px) {
-        height: calc(100vh - 194px);
-    }
+    // @include mQ("minH",
+    // 1300px) {
+    //     height: calc(100vh - 194px);
+    // }
 }
 
 #reset,
-#reset_winner,
 #next {
     width: 200px;
+}
+
+
+#reset_winner {
+    width: 240px;
+    height: 60px;
 }
 
 
@@ -216,4 +262,32 @@ form {
     flex-flow: column nowrap;
     justify-content: space-between;
 
+}
+
+
+// ====== animation =======================
+
+
+.link-scroll {
+    color: #FF8C42;
+    font-size: 2rem;
+    -webkit-animation-name: scroll; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+    animation-name: scroll;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes scroll {
+    from {color: red;}
+    to {color: yellow;}
+}
+
+/* Standard syntax */
+@keyframes scroll {
+    from {color: red;}
+    to {color: yellow;}
 }

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Zilla+Slab+Highlight:400,700");
-@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
 html, body {
   height: 100%;
   width: 100%; }
@@ -120,6 +118,26 @@ footer a {
   border-radius: 10px;
   border: 5px double black;
   margin-left: 10px; }
+  .house .deck_house {
+    position: relative; }
+    .house .deck_house .house_banner {
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 10;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      background-color: rgba(0, 0, 0, 0.7); }
+      .house .deck_house .house_banner p {
+        font-size: 120px;
+        font-weight: 700;
+        color: #ffc107;
+        padding: 0px;
+        margin: 0px; }
   .house .house_counter {
     background: black;
     color: yellow;
@@ -133,27 +151,6 @@ footer a {
       font-size: 60px;
       font-weight: bold;
       text-auto: center; }
-
-#house {
-  position: relative; }
-  #house .house_banner {
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    z-index: 10;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.7); }
-    #house .house_banner p {
-      font-size: 120px;
-      font-weight: 700;
-      color: #ffc107;
-      padding: 0px;
-      margin: 0px; }
 
 /*   house */
 .player {
@@ -210,7 +207,7 @@ footer a {
 
 .results {
   width: 50rem;
-  height: 17.5rem;
+  height: 13.75rem;
   background-color: #000000;
   color: #eeff00;
   font-weight: bold;
@@ -242,33 +239,13 @@ footer a {
   .results table {
     width: 140px; }
 
-@media screen and (max-height: 650px) {
-  /*   welcome message */
+@media screen and (max-width: 600px) {
   .welcome {
     display: none; }
 
-  /*   scoreboard */
-  .scoreboard {
-    width: 540px;
-    height: 226px;
-    align-items: flex-start;
-    flex-flow: row nowrap; }
-
-  /*   house */
-  .house .house_counter {
-    width: 50px; }
-    .house .house_counter p {
-      margin-bottom: 0;
-      font-size: 25px;
-      font-weight: bold;
-      text-auto: center; }
-  .house img {
-    width: 70px; }
-
-  #house .house_banner {
-    background-color: rgba(0, 0, 0, 0.4); }
-    #house .house_banner p {
-      font-size: 70px; } }
+  .wrapper-game {
+    display: flex;
+    flex-flow: column nowrap; } }
 .intro {
   display: flex;
   align-items: flex-start; }
@@ -328,6 +305,25 @@ footer a {
 
 .index-4 {
   background-color: #ff6600; }
+  .index-4 ul {
+    font-size: 20px; }
+  .index-4 h3 {
+    margin-top: 50px; }
+  .index-4 img {
+    display: block;
+    margin: 5px 20px 0 0; }
+  .index-4 .qg-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    margin: 20px auto;
+    align-items: flex-start; }
+    .index-4 .qg-wrapper p {
+      flex-basis: 80%; }
+  .index-4 .stack {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 20px; }
 
 form {
   text-align: center; }
@@ -368,14 +364,14 @@ form {
   .wrapper-game .player_selections {
     display: flex;
     justify-content: space-between; }
-  @media screen and (min-height: 1300px) {
-    .wrapper-game {
-      height: calc(100vh - 194px); } }
 
 #reset,
-#reset_winner,
 #next {
   width: 200px; }
+
+#reset_winner {
+  width: 240px;
+  height: 60px; }
 
 .console-btn {
   display: inline-block;
@@ -439,5 +435,30 @@ form {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between; }
+
+.link-scroll {
+  color: #FF8C42;
+  font-size: 2rem;
+  -webkit-animation-name: scroll;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 3s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: scroll;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; }
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes scroll {
+  from {
+    color: red; }
+  to {
+    color: yellow; } }
+/* Standard syntax */
+@keyframes scroll {
+  from {
+    color: red; }
+  to {
+    color: yellow; } }
 
 /*# sourceMappingURL=main.css.map */

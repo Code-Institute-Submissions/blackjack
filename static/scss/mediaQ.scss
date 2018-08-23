@@ -1,52 +1,61 @@
-@include mQ("maxH", 650px) {
+// @include mQ("maxW", 1000px) {
 
 
-    /*   welcome message */
+//     /*   welcome message */
+//     .welcome {
+//         display: none;
+//     }
+
+//     /*   scoreboard */
+//     .scoreboard {
+//         width: 540px;
+//         height: 226px;
+//         align-items: flex-start;
+//         flex-flow: row nowrap;
+//     }
+
+//     /*   house */
+//     .house {
+
+//         .deck_house {
+
+//             .house_banner {
+//                 background-color: rgba(0, 0, 0, 0.4);
+//                 p {
+//                     font-size: 70px;
+//                 }
+//             }
+
+//         }
+//         .house_counter {
+//             width: 50px;
+//             p {
+//                 margin-bottom: 0;
+//                 font-size: 25px;
+//                 font-weight: bold;
+//                 text-auto: center;
+//             }
+//         }
+
+//         img {
+//             width: 70px;
+//         }
+//     }
+
+
+// }
+
+
+@include mQ("maxW", 600px) {
     .welcome {
         display: none;
     }
-
-    /*   scoreboard */
-    .scoreboard {
-        width: 540px;
-        height: 226px;
-        align-items: flex-start;
-        flex-flow: row nowrap;
+    .wrapper-game {
+        display: flex;
+        flex-flow: column nowrap;
     }
-
-    /*   house */
-    .house {
-        
-        .house_counter {
-            width: 50px;
-            p {
-                margin-bottom: 0;
-                font-size: 25px;
-                font-weight: bold;
-                text-auto: center;
-            }
-        }
-
-        img {
-            width: 70px;
-        }
-    }
-
-
-    #house {
-
-        .house_banner {
-             background-color: rgba(0, 0, 0, 0.4);
-            p {
-                font-size: 70px;
-            }
-        }
-
-    }
-
-
-
-
-
-
+    
+    
+    
+    
 }

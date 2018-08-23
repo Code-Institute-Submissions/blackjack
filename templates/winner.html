@@ -1,6 +1,13 @@
 {% extends "base.html" %} {% block title %} Winner Page {% endblock %} {% block content %}
 <div class="wrapper-winner">
-    <section class="results">
+    {% if winner == "house" %}
+    <h1> {{ winner.title() }} has won</h1>
+    {% elif "and" in winner %}
+    <h1>No winners</h1>
+    {% else %}
+    <h1>{{ winner.title() }} has won</h1>
+    {% endif %}
+    <section class="results mt-4">
         <div class="results-left">
             <div>
                 <h3>Scoreboard</h3>
@@ -26,18 +33,19 @@
         </div>
     </section>
     <section class="py-4">
-        <div class="py-3">
+        <div class="">
             <p>{{ rounds["total"] }} rounds were played in total by {{usernames|length}} players.</p>
+            <h4>Verdict Summary</h4>
             {% if winner == "house" %}
-            <h5> {{ winner.title() }} has beaten all the players.</h5>
+            <p> <strong>{{ winner.title() }}</strong> has beaten all the players. None of the players managed to score any points against the house.</p>
             {% elif "and" in winner %}
-            <h5>No winners were appointed since {{ winner }} have scored the same highest point.</h5>
+            <p><strong>No winners</strong> were appointed since <strong>{{ winner }}</strong> have scored the same highest point.</p>
             {% else %}
-            <h5>{{ winner.title() }} has won the game with the score of {{ scores[winner] }}.</h5>
+            <p><strong>{{ winner.title() }}</strong> has won the game with the score of {{ scores[winner] }}.</p>
             {% endif %}
         </div>
-        <div class="py-4">
-            <h5>Winning Scenarios</h5>
+        <div class="py-3">
+            <h4>Winning Scenarios</h4>
             <ul>
                 <li>HOUSE WON</li>
                 <ul>
