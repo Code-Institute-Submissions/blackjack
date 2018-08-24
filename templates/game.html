@@ -6,16 +6,12 @@
 <div class="wrapper-game">
 
     <h1 class="text-center mt-3 mb-4 welcome">Welcome to the game, {{ usernames[seq].title() }}!</h1>
-    <div class="wrapper">
+    <div class="upper-half">
         <section class="scoreboard">
-            <!--<div class="scoreboard">-->
-                <div>
+                <div class=scores-section>
                     <h3>Scoreboard</h3>
                     <p>Round: &nbsp &nbsp {{ rounds["played"] }}/{{ rounds["total"] }}</p>
                     <table>
-                        <!--  pulling the names out of the original list rather than the 
-                        score dictionary to keep the order the same - an OrderedDict could be used for score dictionary
-                        but it's unnecessary as the there's already an ordered list with the data-->
                         {% for username in usernames %}
                         <tr>
                             {% if username == usernames[seq] %}
@@ -41,9 +37,9 @@
                         <p class="pCounter">{{ player["value"][0] }}</p>
                     {% endif %}
                 </div>
-                
-            <!--</div>-->
+
         </section>
+        
         
         <section class="house">
             <div  class="deck_house">
@@ -63,36 +59,39 @@
             </div>
         </section>
     </div>
-    <div>
-        <section class="player">
-            {% if player["value"][1] == "BUST" %}
-                <div class="player_banner"><p>BUST</p></div>
-            {% elif verdict == "PLAYER" %}
-                <div class="player_banner"><p>WINNER!</p></div>
-            {% elif verdict == "HOUSE" %}
-                <div class="player_banner"><p>LOST!</p></div>
-            {% elif verdict == "PUSH" %}
-                <div class="player_banner"><p>PUSH!</p></div>
-            {% endif %}
-            <div class="deck_player">
-                {% for card in player["hand"] %}
-                <img src="../static/img/cards/{{ card }}" alt="{{ card }}"></img>
-                {% endfor %}
-            </div>
-        </section>
-    </div>
     
-    <form method="POST" class="player_selections">
-        <input type="submit" class="console-btn" id="reset" name="reset" value="RESET GAME">
-        <div class="console">
-            <input type="submit" class="console-btn btn" id="stand" name="stand" value="STAND">
-            <div class="mini_counter">
-                <p>{{ player["value"][0] }}</p>
-            </div> 
-            <input type="submit" class="console-btn btn" id="hit" name="hit" value="HIT">
+    <div class="lower-half">
+        <div>
+            <section class="player">
+                {% if player["value"][1] == "BUST" %}
+                    <div class="player_banner"><p>BUST</p></div>
+                {% elif verdict == "PLAYER" %}
+                    <div class="player_banner"><p>WINNER!</p></div>
+                {% elif verdict == "HOUSE" %}
+                    <div class="player_banner"><p>LOST!</p></div>
+                {% elif verdict == "PUSH" %}
+                    <div class="player_banner"><p>PUSH!</p></div>
+                {% endif %}
+                <div class="deck_player">
+                    {% for card in player["hand"] %}
+                    <img src="../static/img/cards/{{ card }}" alt="{{ card }}"></img>
+                    {% endfor %}
+                </div>
+            </section>
         </div>
-        <input type="submit" class="console-btn-next" id="next" name="next" value="NEXT PLAYER">
-    </form>
+        
+        <form method="POST" class="player_selections">
+            <input type="submit" class="console-btn" id="reset" name="reset" value="RESET GAME">
+            <div class="console">
+                <input type="submit" class="console-btn btn" id="stand" name="stand" value="STAND">
+                <div class="mini_counter">
+                    <p>{{ player["value"][0] }}</p>
+                </div> 
+                <input type="submit" class="console-btn btn" id="hit" name="hit" value="HIT">
+            </div>
+            <input type="submit" class="console-btn-next" id="next" name="next" value="NEXT PLAYER">
+        </form>
+    </div>
 </div>
 {% endblock %}
 

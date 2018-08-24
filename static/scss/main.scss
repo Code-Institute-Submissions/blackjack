@@ -8,15 +8,15 @@
 @import "mediaQ";
 
 
-.intro {
-    display: flex;
-    align-items: flex-start;
-    img {
-        padding: 0 20px;
-    }
-}
+// .intro {
+//     display: flex;
+//     align-items: flex-start;
+//     img {
+//         padding: 0 20px;
+//     }
+// }
 
-.wrapper {
+.upper-half {
     display: flex;
     justify-content: space-between;
 
@@ -183,7 +183,9 @@ form {
 // ========================================= game.html
 .wrapper-game {
     padding: pix2Rem(10) pix2Rem(20); // display: flex;
-    // height: calc(100vh - 168px);
+    min-height: calc(100vh - 168px);
+    background-color: #500000;
+    color: white;
     .player_selections {
         display: flex;
         justify-content: space-between;
@@ -254,13 +256,18 @@ form {
 
 }
 
-
+// ===========================
 .wrapper-winner {
     padding: pix2Rem(20) pix2Rem(100);
     min-height: calc(100vh - 168px);
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    background-color: map-get($color, black2);
+    color: map-get($color, white);
+    @include mQ("maxW", 700px){
+        padding: 20px 36px;
+    }
 
 }
 
