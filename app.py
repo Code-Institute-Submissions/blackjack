@@ -102,7 +102,7 @@ def index():
 @app.route("/game", methods=["POST","GET"])
 def game():
 
-    # DEFENSIVE redirecting 
+    # DEFENSIVE redirecting - DOES NOT CAUSE ANY SLOWDOWNS
     try:
         if not session["score"]:
             # there is session but no score has not been defined yet. 

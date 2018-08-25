@@ -17,6 +17,7 @@ def convert_card_names(cards):
     if cards:
         conversions = list(card[1] + "_of_" + card[0] + ".png" for card in cards)
     else:
+        # if the cards is empty return 2 face down cards - used for the house before its turn
         conversions = ["back.png","back.png"]
     
     if jdebug > 0:  print("convert_card_names():    conversions = ", conversions)

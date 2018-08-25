@@ -27,7 +27,8 @@ class Deck:
 
 
     def __str__(self):
-        return "test"
+        return "Deck of cards"
+    
     
     def reset(self):
         """ restore the deck to its original state "52" cards """        
