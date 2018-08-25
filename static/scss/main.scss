@@ -1,27 +1,14 @@
-// @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Zilla+Slab+Highlight:400,700');
-// @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
 @import "globals";
 @import "colors";
 @import "mixins";
 @import "base";
 @import "elements";
+@import "animations";
 @import "mediaQ";
 
 
-// .intro {
-//     display: flex;
-//     align-items: flex-start;
-//     img {
-//         padding: 0 20px;
-//     }
-// }
-
-.upper-half {
-    display: flex;
-    justify-content: space-between;
-
-}
-
+// -------------------------------------------------------- Wrappers
 
 .wrapper-index {
     display: flex;
@@ -47,6 +34,42 @@
 
 }
 
+
+.wrapper-game {
+    padding: pix2Rem(10) pix2Rem(20); // display: flex;
+    min-height: calc(100vh - 168px);
+    background-color:  map-get($color, cyan2);
+    color: white;
+    .player_selections {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+.wrapper-winner {
+    padding: pix2Rem(20) pix2Rem(100);
+    min-height: calc(100vh - 168px);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    background-color: map-get($color, black2);
+    color: map-get($color, white);
+    @include mQ("maxW", 700px){
+        padding: 20px 36px;
+    }
+
+}
+
+
+// -------------------------------------------------------- Misc
+
+.upper-half {
+    display: flex;
+    justify-content: space-between;
+
+}
+
 .index-div {
     width: 100%;
     min-height: 700px;
@@ -68,11 +91,8 @@
 
 
 .index-2 {
-    // background-color: map-get($color, mustard);
     background-color: map-get($color, maroon);
     color: white;
-
-
 }
 
 .index-3 {
@@ -90,10 +110,6 @@
 
 .index-4 {
     background-color: map-get($color, orange);
-    
-    
-    
-    
     ul {
         font-size: 20px;
     }
@@ -107,15 +123,11 @@
         margin: 5px 20px 0 0;
     }
 
-    
     .qg-wrapper {
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
-        // margin-left: auto;
-        // margin-right: auto;
         margin: 20px auto;
-        // width: 90%;
         align-items: flex-start;
         
         p {
@@ -129,73 +141,8 @@
         margin-bottom: 20px;
     }
     
-    
 }
 
-
-form {
-    text-align: center; // targeting the form within index.html
-    &.index {
-        align-self: center; // background-color: map-get($color, red2);
-        background-color: rgba(128, 0, 0, 0.9);
-        padding: 10px;
-        border-radius: 10px;
-        color: map-get($color, mustard);
-        font-weight: 500;
-        width: 420px;
-        -webkit-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
-        box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75); // reduce the size of select input
-        .select-input {
-            width: 50px;
-        }
-        .select-round {
-            width: 55px;
-        } // target all inputs with type text
-        input[type="text"] {
-            width: 90px;
-        }
-        input[type="submit"] {
-            width: 200px;
-        }
-
-        @include mQ("maxW",
-        500px) {
-            width: 200px;
-            label {
-                margin-left: 20px !important;
-            }
-            input[type="submit"] {
-                width: 150px;
-            }
-            #extras {
-                flex-flow: column nowrap;
-                align-items: flex-end; // label {
-                label {
-                    margin-right: 30px;
-                }
-
-            }
-        }
-    }
-}
-
-// ========================================= game.html
-.wrapper-game {
-    padding: pix2Rem(10) pix2Rem(20); // display: flex;
-    min-height: calc(100vh - 168px);
-    background-color:  map-get($color, cyan2);
-    color: white;
-    .player_selections {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    // @include mQ("minH",
-    // 1300px) {
-    //     height: calc(100vh - 194px);
-    // }
-}
 
 #reset,
 #next {
@@ -206,95 +153,4 @@ form {
 #reset_winner {
     width: 240px;
     height: 60px;
-}
-
-
-// ==================================== button
-.console-btn {
-    @include consoleBtn() {
-        background: #fad900;
-        background: -webkit-gradient(linear, left top, left bottom, from(#fad900), to(#f5a316));
-        background: -moz-linear-gradient(top, #fad900, #f5a316);
-        background: linear-gradient(to bottom, #fad900, #f5a316);
-        width: 100px;
-    }
-
-    &:hover,
-    &:focus {
-        background: #ffff00;
-        background: -webkit-gradient(linear, left top, left bottom, from(#ffff00), to(#ffc41a));
-        background: -moz-linear-gradient(top, #ffff00, #ffc41a);
-        background: linear-gradient(to bottom, #ffff00, #ffc41a);
-        color: #000000;
-        text-decoration: none;
-    }
-}
-
-
-.console-btn-next {
-    @include consoleBtn() {
-        background: #0cf52f;
-        background: -webkit-gradient(linear, left top, left bottom, from(#0cf52f), to(#096109));
-        background: -moz-linear-gradient(top, #0cf52f, #096109);
-        background: linear-gradient(to bottom, #0cf52f, #096109);
-    }
-    &:hover,
-    &:focus {
-        background: #0eff38;
-        background: -webkit-gradient(linear, left top, left bottom, from(#0eff38), to(#0b740b));
-        background: -moz-linear-gradient(top, #0eff38, #0b740b);
-        background: linear-gradient(to bottom, #0eff38, #0b740b);
-        color: #000000;
-        text-decoration: none;
-    }
-    &:active {
-        background: #07931c;
-        background: -webkit-gradient(linear, left top, left bottom, from(#07931c), to(#096109));
-        background: -moz-linear-gradient(top, #07931c, #096109);
-        background: linear-gradient(to bottom, #07931c, #096109);
-    }
-
-}
-
-// ===========================
-.wrapper-winner {
-    padding: pix2Rem(20) pix2Rem(100);
-    min-height: calc(100vh - 168px);
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    background-color: map-get($color, black2);
-    color: map-get($color, white);
-    @include mQ("maxW", 700px){
-        padding: 20px 36px;
-    }
-
-}
-
-
-// ====== animation =======================
-
-
-.link-scroll {
-    color: #FF8C42;
-    font-size: 2rem;
-    -webkit-animation-name: scroll; /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
-    animation-name: scroll;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-
-}
-
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes scroll {
-    from {color: red;}
-    to {color: yellow;}
-}
-
-/* Standard syntax */
-@keyframes scroll {
-    from {color: red;}
-    to {color: yellow;}
 }

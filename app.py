@@ -101,8 +101,8 @@ def index():
 
 @app.route("/game", methods=["POST","GET"])
 def game():
-
-    # DEFENSIVE redirecting - DOES NOT CAUSE ANY SLOWDOWNS
+    
+    # DEFENSIVE redirecting
     try:
         if not session["score"]:
             # there is session but no score has not been defined yet. 
@@ -110,7 +110,6 @@ def game():
     except KeyError:
         # no session - redirect back to index view
         return redirect( url_for("index"))    
-        
     
         
     scores = session["score"]               # holds all the scores

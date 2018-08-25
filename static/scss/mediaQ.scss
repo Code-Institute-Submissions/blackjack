@@ -110,36 +110,6 @@
 
     }
 
-    #reset,
-    #next {
-        width: 200px;
-        height: 51px;
-    }
-
-
-
 
 }
 
-
-@include mQ("mixW", 701px) {
-    .upper-half {
-        display: flex;
-        flex-flow: column-reverse nowrap;
-    }
-
-    .lower-half {
-        // to add
-        .player {
-            flex: 1
-        }
-
-
-    }
-
-
-
-
-
-
-}

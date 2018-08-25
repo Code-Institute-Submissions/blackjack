@@ -1,5 +1,4 @@
 /*   scoreboard */
-
 .scoreboard {
     @include scoreBoard(300,
     450,
@@ -57,9 +56,7 @@
 
 
 /*   house */
-
 .house {
-    // background-color: map-get($color, orange);
     background-image: url(../img/theming/carpet.png);
     background-repeat: repeat;
     background-size: cover;
@@ -122,11 +119,7 @@
 }
 
 
-
-
-
 /*   house */
-
 .player {
     margin: 10px auto;
     position: relative;
@@ -138,6 +131,14 @@
     background-size: cover;
     border-radius: 10px;
     border: 5px black solid;
+    
+    @include mQ("minH", 1200px) {
+        height: 470px;
+    }  
+    
+    @include mQ("minH", 1330px) {
+        height: 530px;
+    }
 }
 
 
@@ -161,12 +162,14 @@
     }
 }
 
+
 .deck_player {
     img {
         margin: 5px 0px;
         width: 150px;
     }
 }
+
 
 .player_selections {
     margin: 20px 0;
@@ -193,6 +196,7 @@
         }
     }
 }
+
 
 .results {
     @include scoreBoard(100%,
@@ -240,7 +244,103 @@
     }
 
     table {
-        // align-self: normal;
         width: 140px;
+    }
+}
+
+
+/*   house */
+.console-btn {
+    @include consoleBtn() {
+        background: #fad900;
+        background: -webkit-gradient(linear, left top, left bottom, from(#fad900), to(#f5a316));
+        background: -moz-linear-gradient(top, #fad900, #f5a316);
+        background: linear-gradient(to bottom, #fad900, #f5a316);
+        width: 100px;
+    }
+
+    &:hover,
+    &:focus {
+        background: #ffff00;
+        background: -webkit-gradient(linear, left top, left bottom, from(#ffff00), to(#ffc41a));
+        background: -moz-linear-gradient(top, #ffff00, #ffc41a);
+        background: linear-gradient(to bottom, #ffff00, #ffc41a);
+        color: #000000;
+        text-decoration: none;
+    }
+}
+
+
+.console-btn-next {
+    @include consoleBtn() {
+        background: #0cf52f;
+        background: -webkit-gradient(linear, left top, left bottom, from(#0cf52f), to(#096109));
+        background: -moz-linear-gradient(top, #0cf52f, #096109);
+        background: linear-gradient(to bottom, #0cf52f, #096109);
+    }
+    &:hover,
+    &:focus {
+        background: #0eff38;
+        background: -webkit-gradient(linear, left top, left bottom, from(#0eff38), to(#0b740b));
+        background: -moz-linear-gradient(top, #0eff38, #0b740b);
+        background: linear-gradient(to bottom, #0eff38, #0b740b);
+        color: #000000;
+        text-decoration: none;
+    }
+    &:active {
+        background: #07931c;
+        background: -webkit-gradient(linear, left top, left bottom, from(#07931c), to(#096109));
+        background: -moz-linear-gradient(top, #07931c, #096109);
+        background: linear-gradient(to bottom, #07931c, #096109);
+    }
+
+}
+
+
+
+form {
+    text-align: center; // targeting the form within index.html
+    &.index {
+        align-self: center; // background-color: map-get($color, red2);
+        background-color: rgba(128, 0, 0, 0.9);
+        padding: 10px;
+        border-radius: 10px;
+        color: map-get($color, mustard);
+        font-weight: 500;
+        width: 420px;
+        -webkit-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
+        box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75); // reduce the size of select input
+        .select-input {
+            width: 50px;
+        }
+        .select-round {
+            width: 55px;
+        } // target all inputs with type text
+        input[type="text"] {
+            width: 90px;
+        }
+        input[type="submit"] {
+            width: 200px;
+        }
+
+        @include mQ("maxW",
+        500px) {
+            width: 200px;
+            label {
+                margin-left: 20px !important;
+            }
+            input[type="submit"] {
+                width: 150px;
+            }
+            #extras {
+                flex-flow: column nowrap;
+                align-items: flex-end; // label {
+                label {
+                    margin-right: 30px;
+                }
+
+            }
+        }
     }
 }
