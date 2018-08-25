@@ -5,10 +5,11 @@ from flask import Flask, render_template, request, redirect, flash, url_for, ren
 from flask_wtf import Form, FlaskForm
 from wtforms import StringField, IntegerField, IntegerField, SubmitField, SelectField   # http://wtforms.simplecodes.com/docs/0.6.2/fields.html
 from wtforms.validators import DataRequired
+from deck import Deck
 from game import *
 
 app = Flask(__name__)
-app.debug = True    # TAKE THIS OFF WHEN FINISHED
+app.debug = True    # TAKE THIS OFF WHEN FINISHED - ATTENTION!
 app.secret_key = os.urandom(24) # generate secret key randomly and safely
 
 
@@ -27,7 +28,7 @@ def reset_table(restart=False, increment_seq=False, increment_score=False):
         session["seq"] += 1
     
     deck.reset()    # restores a full deck of cards
-    session["houseHand"]  = [] # deck.deal(2)  # deal 2 new cards to house
+    session["houseHand"]  = []  # HOUSE starts with no cards since it has to wait for its turn
     session["playerHand"] = deck.deal(2)  # deal 2 new cards to player
 
 
@@ -44,12 +45,6 @@ def apply_verdict(verdict):
 
 # defining globals
 deck = Deck() # create deck initially with only 1 deck of cards
-
-
-#  ================= routes =====================
-@app.route("/base")
-def base():
-    return render_template("base.html")
 
 
 @app.route("/", methods=["POST","GET"])
@@ -71,8 +66,7 @@ def index():
             session[key] = request.form.getlist(key)
             
             if key == "decks":
-                # comes in as a list with only ONE value
-                # set how many how many decks to use
+                # comes in as a list with only ONE value - sets how many decks to use
                 global deck
                 deck = Deck(int(session[key][0]))
             
@@ -82,8 +76,7 @@ def index():
                 session["score"] = {username: 0 for username in session["username"]}
             
             if key == "rounds":
-                # sets how many rounds a single session would last.
-                # will be used as an integer from this point onwards
+                # sets how many rounds a single session would last - will be used as an integer from this point onwards
                 session["rounds"] = int(session["rounds"][0]) 
         
         # expanding on the uses data held in session
@@ -94,7 +87,7 @@ def index():
         # by this point all the basic player data is now stored in the session.
         # print("session = ", session) # uncomment to check session data
         
-        # crude duplication check!
+        # DEFENSIVE - crude duplication check!
         if len(session["username"]) != len(set(session["username"])):
             flash("please use unique names")
             return render_template("index.html")
@@ -108,9 +101,17 @@ def index():
 
 @app.route("/game", methods=["POST","GET"])
 def game():
+
+    # DEFENSIVE redirecting 
+    try:
+        if not session["score"]:
+            # there is session but no score has not been defined yet. 
+            return redirect( url_for("game"))
+    except KeyError:
+        # no session - redirect back to index view
+        return redirect( url_for("index"))    
+        
     
-    if not session:
-        return redirect( url_for("index"))
         
     scores = session["score"]               # holds all the scores
     seq = session["seq"]                    # assigned to a variable only for readability purposes
@@ -169,6 +170,17 @@ def game():
 @app.route("/winner", methods=["POST","GET"])
 def winner():
     """ select the winner if there is any """
+    
+    # DEFENSIVE redirecting 
+    try:
+        if session["won"] == "TBC":
+            # there is session but no winner has been appointed yet, meaning that the game 
+            # is still in session, so redirect back to game view
+            return redirect( url_for("game"))
+    except KeyError:
+        # no session (index view was skipped), so redirect back to index view
+        return redirect( url_for("index"))
+    
     
     if request.method == "POST":
     
