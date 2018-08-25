@@ -95,6 +95,9 @@
             color: map-get($color, mustard);
             padding: 0px;
             margin: 0px;
+            @include mQ("w", 701px, 1055px) {
+                font-size: 70px;
+            }
         }
     }
     // }

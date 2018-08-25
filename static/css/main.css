@@ -137,6 +137,9 @@ footer a {
       color: #ffc107;
       padding: 0px;
       margin: 0px; }
+      @media screen and (min-width: 701px) and (max-width: 1055px) {
+        .house .house_banner p {
+          font-size: 70px; } }
   .house .house_counter {
     background: black;
     color: yellow;
@@ -326,7 +329,7 @@ footer a {
   background-repeat: no-repeat;
   background-size: cover; }
   .wrapper-index a {
-    font-size: 25px;
+    font-size: 40px;
     align-self: center;
     color: #ffc107; }
   @media screen and (max-width: 500px) {
@@ -421,7 +424,7 @@ form {
 .wrapper-game {
   padding: 0.625rem 1.25rem;
   min-height: calc(100vh - 168px);
-  background-color: #500000;
+  background-color: #489e81;
   color: white; }
   .wrapper-game .player_selections {
     display: flex;

@@ -35,7 +35,7 @@
     background-size: cover;
 
     a {
-        font-size: 25px;
+        font-size: 40px;
         align-self: center;
         color: map-get($color, mustard);
     }
@@ -184,7 +184,7 @@ form {
 .wrapper-game {
     padding: pix2Rem(10) pix2Rem(20); // display: flex;
     min-height: calc(100vh - 168px);
-    background-color: #500000;
+    background-color:  map-get($color, cyan2);
     color: white;
     .player_selections {
         display: flex;

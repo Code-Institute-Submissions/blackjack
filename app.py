@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired
 from game import *
 
 app = Flask(__name__)
-app.debug = True
+app.debug = True    # TAKE THIS OFF WHEN FINISHED
 app.secret_key = os.urandom(24) # generate secret key randomly and safely
 
 
@@ -45,31 +45,6 @@ def apply_verdict(verdict):
 # defining globals
 deck = Deck() # create deck initially with only 1 deck of cards
 
-    # left to do:
-    #   if player.hand value is greater than 18, the STAND button should pulsate --DONE!
-    #   unittests
-    #   responsiveness 
-    #   theming and layout  -- DONE! still needs cleaning up
-    #   expanding on sass   -- DONE!
-    #   readme file
-    #   leave more comments -- DONE!
-
-# to ask/DO
-# couldnt deploy to heroku, app.py  could not be located --- DONE!!!!!!!
-# how do i start with the card faced down? --- DONE!!!!
-# how do i address multiple winners, house win, no winners and a winner --- DONE!!
-# what to do if the same name was entered repeatedly? should i switch to wtforms? jquery validate?
-# create fall back for session if expired ???
-# index:    
-#           stop submission when enter is pressed or at least check to see if everything was entered --- DONE!
-#           center the main input area on the index -- DONE!
-#           add more content if they scrol down 
-#           make it responsive -- DONE!
-#           animate scroll effects on all links https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll
-#                   Add hash (#) to URL when done scrolling (default click behavior) WHY??????
-#           make the navbar collapse with the hamburger-- DONE!!
-
-# unittesting?
 
 #  ================= routes =====================
 @app.route("/base")
@@ -119,6 +94,11 @@ def index():
         # by this point all the basic player data is now stored in the session.
         # print("session = ", session) # uncomment to check session data
         
+        # crude duplication check!
+        if len(session["username"]) != len(set(session["username"])):
+            flash("please use unique names")
+            return render_template("index.html")
+        
         # if POST then redirect to the first player in game view
         return redirect( url_for('game') )
         
@@ -128,7 +108,10 @@ def index():
 
 @app.route("/game", methods=["POST","GET"])
 def game():
-
+    
+    if not session:
+        return redirect( url_for("index"))
+        
     scores = session["score"]               # holds all the scores
     seq = session["seq"]                    # assigned to a variable only for readability purposes
     username = session["username"][seq]     # player whose turn it is to play

@@ -104,32 +104,9 @@
     var player_verdict = {{ player["value"][1]|tojson }};
     var player_count = {{ player["value"][0]|tojson }};
 
-    // disbale "HIT" and "STAND" if a verdict was passed
-    // if a verdict was passed Enable/Display "NEXT PLAYER" button 
-    if (game_verdict !== "UNDECIDED") { 
-        $("#hit").prop('disabled', true);
-        $("#stand").prop('disabled', true);
-        $('#next').removeAttr('disabled');
-    } else {
-        $('#hit').removeAttr('disabled');
-        $('#stand').removeAttr('disabled');
-        $("#next").prop('disabled', true);
-        $("#next").css('visibility', 'hidden')
-    }
-    
-    // guidance - user has blackjack, no need to hit!
-    if (player_verdict === "BLACKJACK") {
-        $(".mini_counter").css("background-color", "green")
-        $(".mini_counter").css("border", "3px solid #000000")
-        $(".mini_counter").css("border-radius", "5px")
-        $(".mini_counter > p").css("color", "black")
-    }
-    
-    // guidance - hand is good enough to "STAND"
-    if (player_count <= 21 && player_count > 17) {
-        $("#stand").addClass("console-btn-next")
-    }
-    
+    console_guidance(game_verdict) // disbale "HIT" and "STAND" if a verdict was passed 
+    miniCounterGuidance(player_verdict) // Guidance (change mini counter colour to green) - user has blackjack, no need to hit!
+    standGuidance(player_count)     // Guidance (change "STAND" colour to green) - hand is good enough to "STAND"
     
 </script>
 
