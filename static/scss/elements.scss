@@ -101,7 +101,7 @@
     
     .house_counter {
         background: black;
-        color: yellow; // width: 60px;
+        color: yellow; 
         margin: 0 5px;
         border-radius: 5px;
         border: 3px solid black;
@@ -299,9 +299,10 @@
 
 
 form {
-    text-align: center; // targeting the form within index.html
+    text-align: center; 
+    // targeting the form within index.html
     &.index {
-        align-self: center; // background-color: map-get($color, red2);
+        align-self: center; 
         background-color: rgba(128, 0, 0, 0.9);
         padding: 10px;
         border-radius: 10px;
@@ -310,13 +311,15 @@ form {
         width: 420px;
         -webkit-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
         -moz-box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75);
-        box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75); // reduce the size of select input
+        box-shadow: 2px 6px 42px 3px rgba(0, 0, 0, 0.75); 
+        // reduce the size of select input
         .select-input {
             width: 50px;
         }
         .select-round {
             width: 55px;
-        } // target all inputs with type text
+        } 
+        // target all inputs with type text
         input[type="text"] {
             width: 90px;
         }
@@ -335,7 +338,8 @@ form {
             }
             #extras {
                 flex-flow: column nowrap;
-                align-items: flex-end; // label {
+                align-items: flex-end; 
+                // label {
                 label {
                     margin-right: 30px;
                 }
