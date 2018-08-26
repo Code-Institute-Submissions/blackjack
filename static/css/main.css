@@ -502,6 +502,8 @@ form {
 .index-2 {
   background-color: #800000;
   color: white; }
+  .index-2 h2 {
+    margin-bottom: 50px; }
 
 .index-3 {
   background-image: url(../img/theming/bj2.jpg);

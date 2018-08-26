@@ -96,6 +96,10 @@
 .index-2 {
     background-color: map-get($color, maroon);
     color: white;
+    
+    h2 {
+        margin-bottom: 50px;
+    }
 }
 
 .index-3 {

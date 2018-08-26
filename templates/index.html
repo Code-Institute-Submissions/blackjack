@@ -20,13 +20,9 @@
                 <label class="ml-4">Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni" minlength="2" maxlength="7" required/></label><br>
             </div>
             <div class="row extend justify-content-between"></div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="small m-0 "><strong> * {{ message }} * </strong> </p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+            {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+            <p class="small m-0 "><strong> * {{ message }} * </strong> </p>
+            {% endfor %} {% endif %} {% endwith %}
             <input type="submit" class="btn btn-warning mt-2" value="Start!">
         </div>
     </form>
@@ -37,14 +33,24 @@
 
 <div class="index-div index-2">
 
-    <h2 class="mx-auto mt-3 mb-4">BLACKJACK</h2>
+    <h2 class="mx-auto mt-3">BLACKJACK</h2>
 
     <div class="my-auto">
         <p>
-            This is a Blackjack game made by using Flask, Python, JavaScript, jQueries, HTML, CSS, and SASS. The game is entirely based on points rather than actual money. Players will take turns to play against the house. If the player wins, he/she will be awarded
-            a point, otherwise the next player in line will take his/her turn. The scores can be tracked live on the dedicated scoreboard. By the end of the final round, the scores are counted and the player with the highest score will be declared as
-            the winner.
+            This is a recreation of the popular card game called “BLACKJACK”. The logic of the game is written primarily in Python and managed by Flask microframework Python module. The game’s aesthetics were completed using the conventional HTML/ CSS technologies,
+            the complete list of which is given <a target="_blank" href="https://github.com/damianism/blackjack">here</a>.
         </p>
+        <p>
+            The game is entirely based on points rather than actual money. Players will take turns to play against the house. If the player wins, he/she will be awarded a point, otherwise the next player in line will take his/her turn. The scores can be tracked live
+            on the dedicated scoreboard. By the end of the final round, the scores are counted and the player with the highest score will be declared as the winner.
+        </p>
+
+        <p>
+            In order to win, players take turns to beat the house by getting a hand value closer or equal to 21. At the start of the game each player is dealt two cards. Based on the value of those cards, the player can then request more cards by pressing “HIT” to
+            achieve a hand value closer to 21 (BLACKJACK). The player will lose if his/her hand value exceeds 21, commonly referred to as “BUST”. If both house and the player get BLACKJACK then a “PUSH” event has occurred which is equivalent of a DRAW
+            outcome in which the player is not awarded any points. A full guide to BLACKJACK can be found <a target="_blank" href="https://en.wikipedia.org/wiki/Blackjack">here</a>.
+        </p>
+
         <p>Before starting the game, please take a glance at the <a href="#guide">QUICK GUIDE</a> to this particular game to familiarise yourself with how the game functions.</p>
 
         <h3 class="mt-5">OPTIONS</h3>
@@ -79,8 +85,8 @@
                 <img src="../static/img/guide/mini_counter.png"></img>
             </div>
             <p>
-                The mini console is located at the button of the game and it continually shows the value of your current hand. If the your current hand value reaches 21 exactly, it will turn green indicating that you have "BLACKJACK".<br>
-                Upon finishing your turn by either winning or losing, the HIT and STAND buttons will no longer be active, indicating that you have indeed finished your turn.
+                The mini console is located at the button of the game and it continually shows the value of your current hand. If the your current hand value reaches 21 exactly, it will turn green indicating that you have "BLACKJACK".<br> Upon finishing
+                your turn by either winning or losing, the HIT and STAND buttons will no longer be active, indicating that you have indeed finished your turn.
             </p>
         </div>
 
@@ -117,20 +123,20 @@
         <h3> WINNING SCENARIOS </h3>
         <div class="qg-wrapper">
 
+            <ul>
+                <li>HOUSE WON</li>
                 <ul>
-                    <li>HOUSE WON</li>
-                    <ul>
-                        <li>None of the players scored any points.</li>
-                    </ul>
-                    <li>PLAYER WON</li>
-                    <ul>
-                        <li>A player managed to scores the heighest point.</li>
-                    </ul>
-                    <li>NO WINNERS</li>
-                    <ul>
-                        <li>More than one player managed to achieved the highest point.</li>
-                    </ul>
+                    <li>None of the players scored any points.</li>
                 </ul>
+                <li>PLAYER WON</li>
+                <ul>
+                    <li>A player managed to scores the heighest point.</li>
+                </ul>
+                <li>NO WINNERS</li>
+                <ul>
+                    <li>More than one player managed to achieved the highest point.</li>
+                </ul>
+            </ul>
 
         </div>
 
