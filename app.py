@@ -2,9 +2,6 @@ import os
 import time # use with time.sleep(5) 5 sec delay
 import sys
 from flask import Flask, render_template, request, redirect, flash, url_for, render_template_string, session
-from flask_wtf import Form, FlaskForm
-from wtforms import StringField, IntegerField, IntegerField, SubmitField, SelectField   # http://wtforms.simplecodes.com/docs/0.6.2/fields.html
-from wtforms.validators import DataRequired
 from deck import Deck
 from game import *
 
