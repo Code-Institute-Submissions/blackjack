@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Special+Elite");
+@import url("https://fonts.googleapis.com/css?family=Kosugi");
 html, body {
   height: 100%;
   width: 100%; }
@@ -204,13 +206,14 @@ footer a {
     .player_selections .console .mini_counter {
       background: black;
       color: yellow;
-      width: 60px;
       margin: 0 5px;
       border-radius: 5px;
-      border: 3px solid black; }
+      border: 3px solid black;
+      height: 50px;
+      padding: 3px; }
       .player_selections .console .mini_counter p {
         margin-bottom: 0;
-        font-size: 30px;
+        font-size: 33px;
         font-weight: bold; }
 
 .results {
@@ -328,7 +331,8 @@ form {
     form.index input[type="text"] {
       width: 90px; }
     form.index input[type="submit"] {
-      width: 200px; }
+      width: 200px;
+      font-weight: bold; }
     @media screen and (max-width: 500px) {
       form.index {
         width: 200px; }
@@ -429,8 +433,13 @@ form {
     .results .results-right p {
       font-size: 40px; }
     .results .results-left {
-      margin: 10px; } }
+      margin: 10px; }
+
+  #reset,
+  #next {
+    height: 50px; } }
 .wrapper-index {
+  font-family: 'Kosugi', sans-serif;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -449,6 +458,7 @@ form {
       background-image: url(../img/theming/bj-sm.jpg); } }
 
 .wrapper-game {
+  font-family: 'Special Elite', cursive;
   padding: 0.625rem 1.25rem;
   min-height: calc(100vh - 168px);
   background-color: #489e81;
@@ -506,6 +516,8 @@ form {
   background-color: #ff6600; }
   .index-4 ul {
     font-size: 20px; }
+  .index-4 h2 {
+    margin-bottom: 50px; }
   .index-4 h3 {
     margin-top: 50px; }
   .index-4 img {

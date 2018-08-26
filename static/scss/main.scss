@@ -1,4 +1,5 @@
-
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+@import url('https://fonts.googleapis.com/css?family=Kosugi');
 @import "globals";
 @import "colors";
 @import "mixins";
@@ -11,6 +12,7 @@
 // -------------------------------------------------------- Wrappers
 
 .wrapper-index {
+    font-family: 'Kosugi', sans-serif;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
@@ -36,6 +38,7 @@
 
 
 .wrapper-game {
+    font-family: 'Special Elite', cursive;
     padding: pix2Rem(10) pix2Rem(20); // display: flex;
     min-height: calc(100vh - 168px);
     background-color:  map-get($color, cyan2);
@@ -113,7 +116,9 @@
     ul {
         font-size: 20px;
     }
-
+    h2 {
+        margin-bottom: 50px;
+    }
     h3 {
         margin-top: 50px;
     }
