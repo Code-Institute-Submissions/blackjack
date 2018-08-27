@@ -1,5 +1,6 @@
 BlACKJACK
 =========
+
 <img src="static/img/extras/playing.png"/>
 
 ### Aim
@@ -35,7 +36,7 @@ EXTERNAL SOURCE:    For full guide on BLACKJACK rules please click
 Features
 ========
 
-<img src="static/img/extras/start.png"/>
+<p align="center"><img src="static/img/extras/start.png"/></p>
 
 The image above shows the options that are available to the user BEFORE the game
 starts. These features or options, will define the game itself in terms of its
@@ -88,7 +89,7 @@ house.reset() ).
 
 ### Scoreboard
 
-<img src="static/img/extras/scoreboard.png"/>
+<p align="center"><img src="static/img/extras/scoreboard.png"/></p>
 
 Dynamically shows the points the players have scored so far. It also shows whose
 turn it is to play both visually (an arrow) and textually, the current hand
@@ -109,20 +110,22 @@ Every time the HIT button is clicked, HOUSE will deal a card to the player. The
 player must be aware of the risk of going BUST (over 21).
 
 ##### STAND
-<img src="static/img/guide/stand.png"/>
+
+<p align="center"><img src="static/img/guide/stand.png"/></p>
 
 If you think you have a good chance of beating the house with the cards you
 currently hold (value close to 21), you can "STAND". The house will then take
 its turn and try to beat your current hand.
 
-<img src="static/img/guide/stand_green.png"/>
+<p align="center"><img src="static/img/guide/stand_green.png"/></p>
 
 If your current hand value exceeds 17, the "STAND" button will turn green,
 letting you know that you are at risk of going "BUST" if you keep hitting.
 
 ##### MINI COUNTER
-<img src="static/img/guide/hit_stand.png"/>
-<img src="static/img/guide/mini_counter.png"/>
+
+<p align="center"><img src="static/img/guide/hit_stand.png"/></p>
+<p align="center"><img src="static/img/guide/mini_counter.png"/></p>
 
 Located between the HIT and STAND buttons at the bottom of the game, it
 continually shows the current value of your hand. If your current hand value
@@ -130,7 +133,7 @@ reaches 21 exactly, it will turn green indicating that you have "BLACKJACK".
 
 ##### NEXT PLAYER
 
-<img src="static/img/guide/next_player.png"/>
+<p align="center"><img src="static/img/guide/next_player.png"/></p>
 
 As mentioned above, upon the end of your turn the "HIT" and "STAND" buttons will
 be disabled. However, in order to end your turn, the "NEXT PLAYER" button MUST
@@ -138,6 +141,8 @@ be clicked. The appearance of this button will indicate that your turn is over
 and you should let the next player to take its turn.
 
 ##### RESET GAME
+
+<p align="center"><img src="static/img/guide/reset_game.png"/></p>
 
 The game can also be reset at any time by the player. Be warned that doing so
 will erased all the current data held in session.
