@@ -11,7 +11,7 @@ Python module. The game’s aesthetics were completed using the conventional HTM
 CSS technologies, the complete list of which is given
 [here](#technologies-used).
 
-For the complete project approach please click [here](#_Project_approach).
+For the complete project approach please click [here](#project-approach).
 
 ### What it does
 
