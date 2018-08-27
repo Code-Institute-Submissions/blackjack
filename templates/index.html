@@ -16,8 +16,8 @@
                 <label class="">Rounds: &nbsp<input class="form-control-sm select-round" type="number" name="rounds" value="3" min="2"/></label><br>
             </div>
             <div class="row justify-content-between">
-                <label class="ml-3">Player 1: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" John" value="damian" minlength="2" maxlength="7" required/></label><br>
-                <label class="ml-4">Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" value="yoni" minlength="2" maxlength="7" required/></label><br>
+                <label class="ml-3">Player 1: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" John" minlength="2" maxlength="7" required/></label><br>
+                <label class="ml-4">Player 2: &nbsp<input class="form-control-sm" type="text" name="username" placeholder=" Jacob" minlength="2" maxlength="7" required/></label><br>
             </div>
             <div class="row extend justify-content-between"></div>
             {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}

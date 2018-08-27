@@ -5,7 +5,6 @@ from deck import Deck
 from game import *
 
 app = Flask(__name__)
-app.debug = True    # TAKE THIS OFF WHEN FINISHED - ATTENTION!
 app.secret_key = os.urandom(24) # generate secret key randomly and safely
 
 
@@ -191,8 +190,6 @@ def winner():
         scores=session["score"], rounds=round_dict)
 
 if __name__ == "__main__":
-    # host = os.getenv("IP", "0.0.0.0")
-    # port = os.getenv("PORT", "8080")
     port = int( os.getenv("PORT") )
     host = os.getenv("IP")
     app.run(host=host, port=port)
