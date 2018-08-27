@@ -618,3 +618,22 @@ slimmed down. The colours throughout the game were also categorised and applied
 further cosmetic textures to the game such as house card landing containers
 green blackjack carpets. The website was then made fully responsive and tests
 were carried out on variety of devices on multiple platforms and browsers.
+
+
+Deployment
+==========
+
+[Heroku](https://backjack-damianism.herokuapp.com/) was used as the PRIMARILY
+deployment platform for this project. Throughout the project, git was used to
+seamlessly and safely back up the code locally. Even though frequent git commits
+were carried out, the project was only pushed to Github towards the end of its
+completion. However, The project was pushed to Heroku at its early stages and
+was repeatedly done so with the addition of any feature, incremental or major.
+
+Most of the testing on the project was done locally through the cloud9 before
+being deployed to Heroku for final tests. There are no differences between the
+deployed version of the project found
+[here](https://backjack-damianism.herokuapp.com/) and its development version.
+
+Since the project was deployed at such an early stage, no major problems were
+encountered. The whole process was completely hassle free.
