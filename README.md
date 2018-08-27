@@ -29,19 +29,23 @@ lose if his/her hand value exceeds 21, commonly referred to as “BUST”. If bo
 house and the player get BLACKJACK then a “PUSH” event has occurred which is
 equivalent of a DRAW outcome in which the player is not awarded any points.
 
-For full guide on BLACKJACK rules please click
+EXTERNAL SOURCE:    For full guide on BLACKJACK rules please click
 [here](https://en.wikipedia.org/wiki/Blackjack).
 
 Features
 ========
 
-\<img src="source/img/md/debug_testing.png"/\>
+<img src="static/img/extras/start.png"/>
 
 The image above shows the options that are available to the user BEFORE the game
 starts. These features or options, will define the game itself in terms of its
 duration and difficulty. There are more features to explore while the game is in
 session, which will be discussed further down within this section and in detail
 within the “Project Approach” section.
+
+The features are briefly covered within the website as well.
+
+<img src="static/img/extras/quick_guide.png"/>
 
 ### Point system
 
@@ -57,9 +61,9 @@ Increasing the number of decks will make card counting more difficult.
 
 ### Players
 
-\<img src="source/img/md/debug_testing.png"/\>
+<img src="static/img/extras/dynamic.png"/>
 
-The number of players can be dynamically changed
+The number of players can be dynamically changed.
 
 Up to 4 players (2 by default) can play against the house at the same time. Each
 player will take a turn to play against the house, regardless of the outcome,
@@ -84,7 +88,7 @@ house.reset() ).
 
 ### Scoreboard
 
-\<img src="source/img/md/debug_testing.png"/\>
+<img src="static/img/extras/scoreboard.png"/>
 
 Dynamically shows the points the players have scored so far. It also shows whose
 turn it is to play both visually (an arrow) and textually, the current hand
@@ -94,42 +98,50 @@ console as well.
 
 ### Player console
 
-\<img src="source/img/md/full_player_console.png"/\>
+<img src="static/img/extras/full_player_console.png"/>
 
 Upon finishing your turn by either winning or losing, the HIT and STAND buttons
 will no longer be active, indicating that you have indeed finished your turn.
 
-###### HIT
+##### HIT
 
->   Every time the HIT button is clicked, HOUSE will deal a card to the player.
->   The player must be aware of the risk of going BUST (over 21).
+Every time the HIT button is clicked, HOUSE will deal a card to the player. The
+player must be aware of the risk of going BUST (over 21).
 
-###### STAND
+##### STAND
+<img src="static/img/guide/stand.png"/>
 
-###### If you think you have a good chance of beating the house with the cards you currently hold (value close to 21), you can "STAND". The house will then take its turn and try to beat your current hand.
+If you think you have a good chance of beating the house with the cards you
+currently hold (value close to 21), you can "STAND". The house will then take
+its turn and try to beat your current hand.
 
->   If your current hand value exceeds 17, the "STAND" button will turn green,
->   letting you know that you are at risk of going "BUST" if you keep hitting.
+<img src="static/img/guide/stand_green.png"/>
 
-###### MINI COUNTER
+If your current hand value exceeds 17, the "STAND" button will turn green,
+letting you know that you are at risk of going "BUST" if you keep hitting.
 
->   Located between the HIT and STAND buttons at the bottom of the game, it
->   continually shows the current value of your hand. If your current hand value
->   reaches 21 exactly, it will turn green indicating that you have "BLACKJACK".
+##### MINI COUNTER
+<img src="static/img/guide/hit_stand.png"/>
+<img src="static/img/guide/mini_counter.png"/>
 
-###### NEXT PLAYER
+Located between the HIT and STAND buttons at the bottom of the game, it
+continually shows the current value of your hand. If your current hand value
+reaches 21 exactly, it will turn green indicating that you have "BLACKJACK".
 
->   \<img src="source/img/md/full_player_console.png"/\>
+##### NEXT PLAYER
 
->   As mentioned above, upon the end of your turn the "HIT" and "STAND" buttons
->   will be disabled. However, in order to end your turn, the "NEXT PLAYER"
->   button MUST be clicked. The appearance of this button will indicate that
->   your turn is over and you should let the next player to take its turn.
+<img src="static/img/guide/next_player.png"/>
 
-###### RESET GAME
+As mentioned above, upon the end of your turn the "HIT" and "STAND" buttons will
+be disabled. However, in order to end your turn, the "NEXT PLAYER" button MUST
+be clicked. The appearance of this button will indicate that your turn is over
+and you should let the next player to take its turn.
 
->   The game can also be reset at any time by the player. Be warned that doing
->   so will erased all the current data held in session.
+##### RESET GAME
+
+The game can also be reset at any time by the player. Be warned that doing so
+will erased all the current data held in session.
+
 
 Technologies Used
 =================
