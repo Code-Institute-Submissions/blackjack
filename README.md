@@ -1,124 +1,339 @@
-**Your Project's Name**
+BlACKJACK
+=========
+<img src="static/img/extras/playing.png"/>
 
-One or two paragraphs providing an overview of your project.
+### Aim
 
-Essentially, this part is your sales pitch.
+This is a recreation of the popular card game called “BLACKJACK”. The logic of
+the game is written primarily in Python and managed by Flask microframework
+Python module. The game’s aesthetics were completed using the conventional HTML/
+CSS technologies, the complete list of which is given
+[here](#technologies-used).
 
-**UX**
+For the complete project approach please click [here](#_Project_approach).
 
-Use this section to provide insight into your UX process, focusing on who this
-website is for, what it is that they want to achieve and how your project is the
-best way to help them achieve these things.
+### What it does
 
-In particular, as part of this section we recommend that you provide a list of
-User Stories, with the following general structure:
+The game is entirely based on points rather than actual money. Players will take
+turns to play against the house. If the player wins, he/she will be awarded a
+point, otherwise the next player in line will take his/her turn. The scores can
+be tracked live on the dedicated scoreboard. By the end of the final round, the
+scores are counted and the player with the highest score will be declared as the
+winner.
 
--   As a user type, I want to perform an action, so that I can achieve a goal.
+In order to win, players take turns to beat the house by getting a hand value
+closer or equal to 21. At the start of the game each player is dealt two cards.
+Based on the value of those cards, the player can then request more cards by
+pressing “HIT” to achieve a hand value closer to 21 (BLACKJACK). The player will
+lose if his/her hand value exceeds 21, commonly referred to as “BUST”. If both
+house and the player get BLACKJACK then a “PUSH” event has occurred which is
+equivalent of a DRAW outcome in which the player is not awarded any points.
 
-This section is also where you would share links to any wireframes, mockups,
-diagrams etc. that you created as part of the design process. These files should
-themselves either be included in the project itself (in an separate directory),
-or just hosted elsewhere online and can be in any format that is viewable inside
-the browser.
+For full guide on BLACKJACK rules please click
+[here](https://en.wikipedia.org/wiki/Blackjack).
 
-**Features**
+Features
+========
 
-In this section, you should go over the different parts of your project, and
-describe each in a sentence or so.
+\<img src="source/img/md/debug_testing.png"/\>
 
-**Existing Features**
+The image above shows the options that are available to the user BEFORE the game
+starts. These features or options, will define the game itself in terms of its
+duration and difficulty. There are more features to explore while the game is in
+session, which will be discussed further down within this section and in detail
+within the “Project Approach” section.
 
--   Feature 1 - allows users X to achieve Y, by having them fill out Z
+### Point system
 
--   ...
+Your average BLACKJACK game is currency based. However, in this version of the
+game, the winning players are rewarded with a point for every win against the
+house. Depending on the number of rounds set by the user, at the final round,
+the player with the highest points will be declared the winner.
 
-For some/all of your features, you may choose to reference the specific project
-files that implement them, although this is entirely optional.
+### Decks
 
-In addition, you may also use this section to discuss plans for additional
-features to be implemented in the future:
+The game can be played with up to 5 decks, each deck holding 52 cards.
+Increasing the number of decks will make card counting more difficult.
 
-**Features Left to Implement**
+### Players
 
--   Another feature idea
+\<img src="source/img/md/debug_testing.png"/\>
 
-**Technologies Used**
+The number of players can be dynamically changed
 
-In this section, you should mention all of the languages, frameworks, libraries,
-and any other tools that you have used to construct this project. For each,
-provide its name, a link to its official site and a short sentence of why it was
-used.
+Up to 4 players (2 by default) can play against the house at the same time. Each
+player will take a turn to play against the house, regardless of the outcome,
+win or lose, the next player will start its turn as soon as the current ends its
+turn.
 
--   [JQuery](https://jquery.com)
+### Rounds
 
-    -   The project uses **JQuery** to simplify DOM manipulation.
+Rounds refer to the number of times the game has to cycle through all the
+players to take their turns each. One full cycle in which all the players have
+taken their turns, is referred to as one “round”. Increasing the number of
+rounds will inevitably increase the duration of the game. There is no limit on
+the rounds, it could be set to any integer greater than 2. The current round is
+displayed on the scoreboard.
 
-**Testing**
+### House
 
-In this section, you need to convince the assessor that you have conducted
-enough testing to legitimately believe that the site works well. Essentially, in
-this part you will want to go over all of your user stories from the UX section
-and ensure that they all work as intended, with the project providing an easy
-and straightforward way for the users to achieve their goals.
+House is the entity all the players play against. Depending on the number of
+decks selected by the user (1-5), it creates the deck. It is also in charge of
+dealing cards to the players ( house.deal() ) and resetting the deck (
+house.reset() ).
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so,
-provide a brief explanation of your approach, link to the test file(s) and
-explain how to run them.
+### Scoreboard
 
-For any scenarios that have not been automated, test the user stories manually
-and provide as much detail as is relevant. A particularly useful form for
-describing your testing process is via scenarios, such as:
+\<img src="source/img/md/debug_testing.png"/\>
 
-1.  Contact form:
+Dynamically shows the points the players have scored so far. It also shows whose
+turn it is to play both visually (an arrow) and textually, the current hand
+value of the player and the how the number of rounds left to play. The user can
+keep track of its hand value via the mini counter located within the player
+console as well.
 
-    1.  Go to the "Contact Us" page
+### Player console
 
-    2.  Try to submit the empty form and verify that an error message about the
-        required fields appears
+\<img src="source/img/md/full_player_console.png"/\>
 
-    3.  Try to submit the form with an invalid email address and verify that a
-        relevant error message appears
+Upon finishing your turn by either winning or losing, the HIT and STAND buttons
+will no longer be active, indicating that you have indeed finished your turn.
 
-    4.  Try to submit the form with all inputs valid and verify that a success
-        message appears.
+###### HIT
 
-In addition, you should mention in this section how your project looks and works
-on different browsers and screen sizes.
+>   Every time the HIT button is clicked, HOUSE will deal a card to the player.
+>   The player must be aware of the risk of going BUST (over 21).
 
-You should also mention in this section any interesting bugs or problems you
-discovered during your testing, even if you haven't addressed them yet.
+###### STAND
 
-If this section grows too long, you may want to split it off into a separate
-file and link to it from here.
+###### If you think you have a good chance of beating the house with the cards you currently hold (value close to 21), you can "STAND". The house will then take its turn and try to beat your current hand.
 
-**Deployment**
+>   If your current hand value exceeds 17, the "STAND" button will turn green,
+>   letting you know that you are at risk of going "BUST" if you keep hitting.
 
-This section should describe the process you went through to deploy the project
-to a hosting platform (e.g. GitHub Pages or Heroku).
+###### MINI COUNTER
 
-In particular, you should provide all details of the differences between the
-deployed version and the development version, if any, including:
+>   Located between the HIT and STAND buttons at the bottom of the game, it
+>   continually shows the current value of your hand. If your current hand value
+>   reaches 21 exactly, it will turn green indicating that you have "BLACKJACK".
 
--   Different values for environment variables (Heroku Config Vars)?
+###### NEXT PLAYER
 
--   Different configuration files?
+>   \<img src="source/img/md/full_player_console.png"/\>
 
--   Separate git branch?
+>   As mentioned above, upon the end of your turn the "HIT" and "STAND" buttons
+>   will be disabled. However, in order to end your turn, the "NEXT PLAYER"
+>   button MUST be clicked. The appearance of this button will indicate that
+>   your turn is over and you should let the next player to take its turn.
 
-In addition, if it is not obvious, you should also describe how to run your code
-locally.
+###### RESET GAME
 
-**Credits**
+>   The game can also be reset at any time by the player. Be warned that doing
+>   so will erased all the current data held in session.
 
-**Content**
+Technologies Used
+=================
 
--   The text for section Y was copied from the [Wikipedia article
-    Z](https://en.wikipedia.org/wiki/Z)
+1.  [Python](https://www.python.org/downloads/) v3.4.3
 
-**Media**
+    -   [FLASK](http://flask.pocoo.org/) v1.0.2
 
--   The photos used in this site were obtained from ...
+    -   Unittest module for Test Driven Development
 
-**Acknowledgements**
+2.  JavaScript and [jQuery](https://jquery.com/) v3.3.1
 
--   I received inspiration for this project from X
+    -   Debugging
+
+    -   Smooth scroll applied to all links.
+
+    -   Disabling the “ENTER” key on the index page form.
+
+    -   Conversion of Flask template variables to JavaScript variables.
+
+    -   Dynamically increase/decrease the number of text inputs for players
+        based on selection.
+
+    -   Player rotation functionalities
+
+        -   Disable/Enable “HIT” and “STAND” buttons.
+
+        -   Display/Hide “NEXT PLAYER” button.
+
+        -   Apply theming of the “STAND” button.
+
+        -   Apply theming to the mini counter.
+
+3.  [SASS](https://sass-lang.com/)
+
+    -   Adopted main method of styling. Used with combination of SASS variables,
+        mixins and functions in total of 8 scss files.
+
+4.  HTML5
+
+5.  CSS
+
+    -   Used with SASS.
+
+6.  Flexbox
+
+    -   Primary tool for centring item.
+
+    -   Primary layout tool.
+
+7.  [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+    v4.0
+
+    -   Used for general aesthetics of a few item.
+
+    -   Collapsible Navigation bar
+
+    -   Responsive design the home page.
+
+8.  [Font Awesome](https://fontawesome.com/) v5.0.13
+
+    -   Footer icons
+
+    -   Link to quick guide icon.
+
+9.  [Google fonts](https://fonts.google.com/)
+
+    -   Two fonts used in total
+
+        -   [Special
+            Elite](https://fonts.google.com/specimen/Special+Elite?selection.family=Special+Elite)
+            – applied to the game page and scoreboard.
+
+        -   [Kosugi](https://fonts.google.com/specimen/Kosugi) – applied the
+            index page and everything else.
+
+10. [Gimp](https://www.gimp.org/)
+
+    -   Rescale background images – created two sets of images to be used on
+        multiple devices with different screen resolutions.
+
+    -   Card PNGs, rescaled and transparency applied using the “colour to alpha”
+        feature.
+
+11. Microsoft Word
+
+    -   To write up the content of the README.md file before deployment.
+
+12. Chrome and Firefox developer tools
+
+    -   Used extensively for live-testing and running numerous different tasks.
+        To name a few:
+
+        -   Testing JavaScript functions.
+
+        -   Individual elements loading times.
+
+        -   Website/grid responsiveness.
+
+        -   Element Colours, style, opacity and etc.
+
+        -   Aligning and centring.
+
+        -   Attribute value search.
+
+        -   Fluidity and core functionality of the website.
+
+13. [Git/Github](https://github.com/damianism)
+
+    -   Kept track of the project’s evolution with frequent commits and
+        informative messages.
+
+    -   Secondary platform for deployment.
+
+    -   GitHub was also used to access bootstrap’s source code.
+
+14. [Heroku](https://www.heroku.com/)
+
+    -   Used to as the primary deployment platform.
+
+15. Cloud9
+
+    -   Used as the main editor.
+
+Content and File Management
+===========================
+
+The file management has been split into three sections all together. As a Flask
+requirement, everything that is considered to be static should be placed inside
+the static folder. Also, the templates MUST be placed inside the templates
+folder.
+
+### Static
+
+-   Scss – SASS files
+
+    -   mixins.scss – houses all the mixins and functions
+
+    -   base.scss – targets the base elements such as footer and navbar.
+
+    -   colors.scss – a collection of all colours to be used throughout the
+        project.
+
+    -   elements.scss – responsible for all the elements, buttons, house and …
+
+    -   main.scss – complies all the scss files together, also addresses
+        induvial wrappers.
+
+    -   mediaQ.scss – media query for small screens
+
+    -   animations.scss – animation for the link to quick guide
+
+-   css – contains the converted SASS file
+
+-   img – houses all the images used throughout the project
+
+    -   extras – houses all the images to be used on the markdown file, such
+        wireframe, logic basis and so on.
+
+    -   Cards – houses the all the cards in a typical deck, and a back face.
+
+    -   Guide – includes all the images in the quick guide section.
+
+    -   Theming – includes all the images used to theme the website such as
+        background images for the div in the index page.
+
+-   js – JavaScript files
+
+    -   main.js – script that’s applied globally (base template).
+
+    -   game.js – used with the game page only.
+
+-   Vendors
+
+    -   Bootstrap
+
+        -   css – CSS package supplied by vendor (bootstrap).
+
+        -   js – JavaScript package supplied by vendor(bootstrap).
+
+### Templates
+
+-   base.html – used at the main template for the other views to expand on.
+
+-   game.html – where the actual game takes place.
+
+-   index.html – initial landing page which fetches user(s) data through a form.
+
+-   winner.html – the page at which the final winner (if there is any) is
+    declared.
+
+### Other
+
+-   app.py – main file to be included in the Proc file.
+
+-   game.py – houses most of the logic (functions) for the game.
+
+-   deck.py – houses the deck class which is responsible for the creation of the
+    deck, dealing and etc.
+
+-   test_app.py – Test Driven Development file
+
+-   Procfile
+
+-   Readme.md
+
+-   Requirements.txt
