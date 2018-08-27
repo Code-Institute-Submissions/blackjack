@@ -357,6 +357,7 @@ folder.
 
 -   Requirements.txt
 
+
 Testing
 =======
 
@@ -380,12 +381,12 @@ beneficial when it comes to debugging and testing.
 
 The practicality of all critical functions within the game.py file was tested
 via the Python “unittest” module. This module came in very handy in resolving a
-number of unforeseen problems throughout the project. These automated tets can
+number of unforeseen problems throughout the project. These automated tests can
 be found in the
 [test_app.py](https://github.com/damianism/blackjack/blob/master/test_app.py)
 file.
 
-### Defensive design and Bugs
+### Defensive design and Challenges
 
 -   Aliasing issues with session
 
@@ -474,6 +475,34 @@ file.
         the screen (I believe the data within the session is still intact).
         These effects seem to be random and I haven’t been able to find a way
         around this issue yet.
+
+-   Multiple winners
+
+    -   After the end of the final round, typically the player with the highest
+        point is the declared the winner. However, multiple players could end up
+        with the same winning score or we could even end up in a situation where
+        none of the players had scored any points. To resolve this issue, three
+        basic rules were devised in order to declare the winner of the game
+        consistently and reliably.
+
+        -   HOUSE WON - None of the players scored any points.
+
+        -   PLAYER WON - A player managed to scores the highest point.
+
+        -   NO WINNERS - More than one player managed to achieved the highest point.
+
+-   Aces having two values (1 and 11)
+
+    -   The get_hand_value() function returns the numerical value of the hand
+        (list of cards) and its status. The status of the hand is directly
+        affected by the numerical value of the hand. For instance, if the hand
+        value exceeds 21, the status will change to “BUST”. However, the logic
+        of this function had to be smart enough to treat aces differently since
+        their value can change between 11 and 1. Even if an ace was taken in
+        with the value of 11, its value MUST be able to dynamically and
+        seamlessly change to 1, as having its value fixed to 11 would cause the
+        player or the house to go BUST depending on the cards they’re dealt.
+
 
 ### Responsiveness/Aesthetics/Functionality Testing
 
