@@ -113,7 +113,7 @@ def get_verdict(player_hand, house_hand):
         print("get_verdict():   player_status   = ", player_status)
         print("get_verdict():   house_status    = ", house_status)
     
-    # player stands or no bust/blackjack occurs
+    # player stands and no bust/blackjack occurs
     if player_status == "active" and house_status == "active":
         
         # house matches the player hand
