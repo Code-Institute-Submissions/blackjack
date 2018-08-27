@@ -545,3 +545,76 @@ The following browsers were used to test the final version of the website with.
 -   Firefox Mobile on Android Pie
 
 -   Safari Mobile iOS 11
+
+
+Project Approach
+================
+
+### FLASK
+
+The project was started with reading about fundamentals of Flask, and how it
+could be used to deploy a website. This was done by studying the notes provided
+by the code institute, online videos and following official Flask examples and
+tutorials online.
+
+### BLACKJACK Rules
+
+A quick research into the rules of the game made me realised that I actually
+need to play the game to fully understand it, so a mobile version of the game
+was downloaded, installed, played and studied until I managed to fully grasp the
+essential features of this game.
+
+### Ideas
+
+Having studied the game for a while, I quickly realised that I could not create
+the game using actual currency. So, I started to toy with the idea of replacing
+the monetary reward system of the game into a point-based system.
+
+### Game Features
+
+Having encapsulated all the features of the game that I could implement to my
+own game, I then decided that porting in all the features would make the project
+far more complex than it needs to be and takes even longer to do. So, “SPLIT”
+and “DOUBLE” functionalities of the game were left out.
+
+### Crude Layout 
+
+A very basic version of the possible layout of the actual game was then drawn
+which can be seen below.
+
+<p align="center"><img src="static/img/extras/wireframe.png"/></p>
+
+### Logic
+
+Having tested different approaches and failed repeatedly, upon further
+discussions with my mentor, I devised the following path for the logic to take.
+
+<p align="center"><img src="static/img/extras/logic_basis.jpg"/></p>
+
+### Initial Deployment
+
+After putting in place the logic proposed above and getting the game working
+partially, the project was then deployed to Heroku with its limited
+functionality to check for the possible unforeseen issues that might rise while
+deploying the full project, as these issues would be a lot easier to address at
+earlier stages of the project.
+
+### Refactoring
+
+Having convinced myself that it is indeed FULLY functional by running different
+tests, trying to get it go wrong on different platforms and pushing it to do the
+expected. The final version of the code was then refactored thoroughly and lost
+2/3 of its volume. The repeated code was converted into functions and moved into
+a separate file
+([game.py](https://github.com/damianism/blackjack/blob/master/game.py)), the
+class “Deck” was moved into its own dedicated file and comments were left
+accordingly.
+
+### Aesthetics and responsiveness
+
+Once the logic of the game was out of the way, I concentrated all my efforts on
+the aesthetics of the game. Navbar was tweaked to collapse and footer was
+slimmed down. The colours throughout the game were also categorised and applied
+further cosmetic textures to the game such as house card landing containers
+green blackjack carpets. The website was then made fully responsive and tests
+were carried out on variety of devices on multiple platforms and browsers.
