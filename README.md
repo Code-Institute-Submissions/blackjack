@@ -589,7 +589,7 @@ which can be seen below.
 Having tested different approaches and failed repeatedly, upon further
 discussions with my mentor, I devised the following path for the logic to take.
 
-<p align="center"><img src="static/img/extras/logic_basis.jpg"/></p>
+<p align="center"><img src="static/img/extras/logic_basis.JPG"/></p>
 
 ### Initial Deployment
 
