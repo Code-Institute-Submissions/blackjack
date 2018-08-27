@@ -106,6 +106,8 @@ will no longer be active, indicating that you have indeed finished your turn.
 
 ##### HIT
 
+<p align="center"><img src="static/img/guide/hit.png"/></p>
+
 Every time the HIT button is clicked, HOUSE will deal a card to the player. The
 player must be aware of the risk of going BUST (over 21).
 
